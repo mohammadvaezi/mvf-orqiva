@@ -1,0 +1,72 @@
+{
+  "subscriptionId": "00000000-0000-0000-0000-000000000000",
+  "notificationId": 4,
+  "id": "2ab4e3d3-b7a6-425e-92b1-5a9982c1269e",
+  "eventType": "git.pullrequest.merged",
+  "publisherId": "tfs",
+  "message": {
+    "text": "Grace Hopper has completed pull request 7 (SHOP-2 Checkout asks for the address once) in shop-web"
+  },
+  "resource": {
+    "repository": {
+      "id": "7f2d3b6a-1c4e-4f9b-9a2d-5e8c1b0a7d33",
+      "name": "shop-web",
+      "url": "https://dev.azure.com/contoso/_apis/git/repositories/7f2d3b6a-1c4e-4f9b-9a2d-5e8c1b0a7d33",
+      "project": {
+        "id": "a7573007-bbb3-4341-b726-0c4148a07853",
+        "name": "Shop",
+        "state": "wellFormed"
+      },
+      "defaultBranch": "refs/heads/main",
+      "remoteUrl": "https://contoso@dev.azure.com/contoso/Shop/_git/shop-web"
+    },
+    "pullRequestId": 7,
+    "status": "completed",
+    "createdBy": {
+      "displayName": "Grace Hopper",
+      "id": "00ca946b-2fe9-4f2a-ae2f-40d5c48001bc",
+      "uniqueName": "grace@contoso.example"
+    },
+    "creationDate": "2026-10-12T08:41:00Z",
+    "closedDate": "2026-10-12T10:02:30Z",
+    "title": "SHOP-2 Checkout asks for the address once",
+    "description": "One form for shipping and billing.",
+    "sourceRefName": "refs/heads/feature/shop-2-checkout",
+    "targetRefName": "refs/heads/main",
+    "mergeStatus": "succeeded",
+    "isDraft": false,
+    "mergeId": "a10bb228-6ba6-4362-abd7-49ea21333dbd",
+    "lastMergeSourceCommit": {
+      "commitId": "33b55f7cb7e7e245323987634f960cf4a6e6bc74",
+      "url": "https://dev.azure.com/contoso/_apis/git/repositories/7f2d3b6a-1c4e-4f9b-9a2d-5e8c1b0a7d33/commits/33b55f7cb7e7e245323987634f960cf4a6e6bc74"
+    },
+    "lastMergeTargetCommit": {
+      "commitId": "a6f2e1d0c9b8a7f6e5d4c3b2a1f0e9d8c7b6a5f4"
+    },
+    "lastMergeCommit": {
+      "commitId": "eef717f69257a6333f221566c1c987dc94cc0d72"
+    },
+    "reviewers": [
+      {
+        "reviewerUrl": "https://dev.azure.com/contoso/_apis/git/repositories/7f2d3b6a-1c4e-4f9b-9a2d-5e8c1b0a7d33/pullRequests/7/reviewers/9b1a",
+        "vote": 10,
+        "displayName": "Ada Lovelace",
+        "uniqueName": "ada@contoso.example",
+        "id": "9b1a"
+      },
+      {
+        "vote": -5,
+        "displayName": "Shop Team",
+        "uniqueName": "vstfs:///Classification/TeamProject/a7573007",
+        "isContainer": true,
+        "id": "2ea2"
+      }
+    ],
+    "url": "https://dev.azure.com/contoso/_apis/git/repositories/7f2d3b6a-1c4e-4f9b-9a2d-5e8c1b0a7d33/pullRequests/7"
+  },
+  "resourceVersion": "1.0",
+  "resourceContainers": {
+    "project": { "id": "a7573007-bbb3-4341-b726-0c4148a07853" }
+  },
+  "createdDate": "2026-10-12T10:02:31.1Z"
+}

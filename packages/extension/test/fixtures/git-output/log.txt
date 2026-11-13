@@ -1,0 +1,4 @@
+3a37930	PCODE-44 Add an e2e test generating docs in the fixture workspace
+4929bed	PCODE-43 Post the documentation link as a Plane comment on each task via plane note
+2c4058e	PCODE-42 Add the Generate code documentation command with progress and Docs tree entries
+1a2b3c4	chore(plane): version 0.1.0

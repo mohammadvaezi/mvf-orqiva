@@ -1,0 +1,8 @@
+Active: SBX-2 Add goodbye endpoint  [Planned -> In Progress]
+Fingerprint for every file/block you write: [SBX-2 | S01 | v0.1.0] Add goodbye endpoint
+Description:
+A GET /bye endpoint that returns a farewell so the second route exists for routing tests.
+
+Acceptance
+
+- ☐ GET /bye returns 200

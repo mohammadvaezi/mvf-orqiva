@@ -1,0 +1,42 @@
+<!doctype html>
+<!-- [PCODE-320 | S15 | v0.1.0] T32.5b The bug-capture browser extension for Chrome and Firefox -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>File a bug to Orqiva</title>
+    <link rel="stylesheet" href="capture.css" />
+  </head>
+  <body class="popup">
+    <h1>File a bug</h1>
+    <section id="setup" hidden>
+      <p>Connect the extension to your Orqiva server first.</p>
+    </section>
+    <form id="form">
+      <label
+        >Project
+        <select id="project" required></select
+      ></label>
+      <label>Title <input id="title" required maxlength="255" /></label>
+      <label>What happened <textarea id="note" rows="3"></textarea></label>
+      <fieldset>
+        <legend>Send with it</legend>
+        <label class="check"
+          ><input type="checkbox" id="with-screenshot" checked /> Screenshot</label
+        >
+        <label class="check"><input type="checkbox" id="with-console" checked /> Console</label>
+        <label class="check"><input type="checkbox" id="with-network" checked /> Network</label>
+        <label class="check"
+          ><input type="checkbox" id="with-actions" checked /> Steps before</label
+        >
+      </fieldset>
+      <p class="muted" id="recording"></p>
+      <div class="row">
+        <button type="button" id="record" class="ghost">Record the screen</button>
+        <button type="submit" id="send">File the bug</button>
+      </div>
+    </form>
+    <p id="status" role="status"></p>
+    <button type="button" id="options" class="link">Options</button>
+    <script src="popup.js"></script>
+  </body>
+</html>

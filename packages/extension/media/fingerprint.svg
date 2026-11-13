@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#8a8a8a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- [PCODE-37 | S07 | v0.1.0] gutter icon for fingerprint lines: three concentric arcs -->
+  <path d="M3 9.5a5 5 0 0 1 10 0"/>
+  <path d="M5 10.5a3 3 0 0 1 6 0v2"/>
+  <path d="M7 11a1 1 0 0 1 2 0v3"/>
+</svg>

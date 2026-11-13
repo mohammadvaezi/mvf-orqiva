@@ -1,0 +1,29 @@
+.vscode/**
+.github/**
+.plane/**
+src/**
+test/**
+node_modules/**
+media/**
+# [PCODE-64 | S12 | v0.1.0] the walkthrough reads these from the installed extension, not from dist/
+!media/walkthrough/**
+# [PCODE-70 | S14 | v0.1.0] the Extensions view reads the icon from the package, not from dist/
+!media/icon.png
+out/**
+dist/test/**
+**/*.map
+esbuild.mjs
+eslint.config.mjs
+vitest.config.ts
+tsconfig.json
+.prettierrc
+.editorconfig
+.prettierignore
+*.vsix
+CLAUDE.md
+# [PCODE-453 | S15 | v0.1.0] the developer docs are not opened from the extension; the user docs are the docs site
+docs/**
+# [PCODE-75 | S14 | v0.1.0] build tooling is not part of the extension; CHANGELOG.md is (its own tab)
+installer/**
+tools/**
+dist-installer/**

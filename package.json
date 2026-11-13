@@ -1,0 +1,42 @@
+{
+  "name": "orqiva-platform",
+  "version": "0.1.0",
+  "license": "SEE LICENSE IN LICENSE",
+  "private": true,
+  "description": "Orqiva: the engineering command center. npm workspaces root.",
+  "workspaces": [
+    "packages/shared",
+    "packages/server",
+    "packages/cli",
+    "packages/web",
+    "packages/extension",
+    "packages/site",
+    "packages/capture"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm test --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present && eslint . && prettier --check .",
+    "format": "prettier --write .",
+    "check": "npm run lint && npm test && npm run build && npm run mobile && npm run licences",
+    "licences": "node packages/cli/dist/main.js licences",
+    "mobile": "npm run lint --prefix packages/mobile && npm test --prefix packages/mobile && npm run export --prefix packages/mobile",
+    "release": "node deploy/release.mjs",
+    "package:v1": "node deploy/package-v1.mjs",
+    "site:up": "docker compose -f deploy/site/compose.yaml up -d",
+    "site:down": "docker compose -f deploy/site/compose.yaml down"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.4",
+    "esbuild": "0.28.2",
+    "eslint": "10.11.0",
+    "eslint-config-prettier": "10.1.8",
+    "prettier": "3.9.8",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.70.1",
+    "vitest": "5.0.1"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "GET /repos/acme/shop/pulls/7": {
+    "number": 7,
+    "state": "open",
+    "head": { "ref": "feature/cart", "sha": "a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7" },
+    "base": { "ref": "main" },
+    "mergeable": true,
+    "mergeable_state": "clean",
+    "merged": false
+  },
+  "GET /repos/acme/shop/pulls/8": {
+    "number": 8,
+    "state": "open",
+    "head": { "ref": "feature/totals", "sha": "a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7" },
+    "base": { "ref": "main" },
+    "mergeable": false,
+    "mergeable_state": "dirty",
+    "merged": false
+  },
+  "GET /repos/acme/shop/pulls/9": {
+    "number": 9,
+    "state": "open",
+    "head": { "ref": "feature/coupons", "sha": "a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7" },
+    "base": { "ref": "main" },
+    "mergeable": true,
+    "mergeable_state": "clean",
+    "merged": false
+  },
+  "PUT /repos/acme/shop/pulls/7/merge": {
+    "sha": "6dcb09b5b57875f334f61aebed695e2e4193db5e",
+    "merged": true,
+    "message": "Pull Request successfully merged"
+  },
+  "PUT /repos/acme/shop/pulls/9/merge": {
+    "__status": 405,
+    "message": "Base branch was modified. Review and try the merge again.",
+    "documentation_url": "https://docs.github.com/rest/pulls/pulls#merge-a-pull-request",
+    "status": "405"
+  }
+}

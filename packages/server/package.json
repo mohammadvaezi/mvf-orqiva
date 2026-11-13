@@ -1,0 +1,26 @@
+{
+  "name": "@orqiva/server",
+  "version": "0.1.0",
+  "license": "SEE LICENSE IN LICENSE",
+  "private": true,
+  "description": "The Orqiva server. Node.js built-ins only; the one third-party runtime dependency allowed is pg.",
+  "type": "module",
+  "main": "./dist/main.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "lint": "tsc -p tsconfig.json && tsc -p test/e2e/tsconfig.json",
+    "test": "vitest run",
+    "start": "node dist/main.js",
+    "latency": "vitest run --config vitest.perf.config.ts test/db/latency.test.ts",
+    "scale": "vitest run --config vitest.perf.config.ts test/db/scale.test.ts",
+    "perf": "vitest run --config vitest.perf.config.ts",
+    "e2e": "vitest run --config vitest.browser.config.ts"
+  },
+  "dependencies": {
+    "@orqiva/shared": "0.1.0",
+    "pg": "8.23.1"
+  },
+  "devDependencies": {
+    "@types/pg": "8.23.1"
+  }
+}

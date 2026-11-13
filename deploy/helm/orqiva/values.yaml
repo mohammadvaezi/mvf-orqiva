@@ -1,0 +1,58 @@
+# ── [PCODE-214 | S15 | v0.1.0] T19.3 Several server nodes (events, presence and migrations across nodes) and a Helm chart ──
+# Orqiva on Kubernetes. The server nodes share one PostgreSQL (events and presence travel through it,
+# migrations take an advisory lock) and one volume for uploaded files.
+
+replicaCount: 2
+
+image:
+  repository: prodengine/server
+  tag: '0.1.0'
+  pullPolicy: IfNotPresent
+  # for an air-gapped cluster: the pull secret of the registry the bundle's image was pushed to
+  pullSecrets: []
+
+# where people reach Orqiva; SAML, OIDC, cookies and links are built from it
+publicUrl: https://orqiva.example.com
+
+# the database URL and the server's secret key (64 hex characters; never change it after the first start)
+secrets:
+  # or name a Secret you manage, with the keys DATABASE_URL and ORQIVA_SECRET_KEY
+  existingSecret: ''
+  databaseUrl: ''
+  secretKey: ''
+
+# more environment, e.g. ORQIVA_OIDC_ISSUER, ORQIVA_LICENCE, ORQIVA_RATE_REQUESTS
+env: {}
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  className: ''
+  annotations: {}
+  host: orqiva.example.com
+  tlsSecret: ''
+
+# uploaded files; with more than one replica the volume must be ReadWriteMany (NFS, CephFS, EFS, Azure Files)
+persistence:
+  enabled: true
+  existingClaim: ''
+  storageClass: ''
+  accessMode: ReadWriteMany
+  size: 20Gi
+
+resources:
+  requests:
+    cpu: 250m
+    memory: 384Mi
+  limits:
+    memory: 1Gi
+
+podDisruptionBudget:
+  minAvailable: 1
+
+nodeSelector: {}
+tolerations: []
+affinity: {}

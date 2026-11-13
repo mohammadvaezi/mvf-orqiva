@@ -1,0 +1,17 @@
+{
+  "POST /repos/acme/shop/pulls/7/reviews": {
+    "id": 57,
+    "user": { "id": 3, "login": "orqiva-bot", "full_name": "" },
+    "team": null,
+    "state": "REQUEST_CHANGES",
+    "body": "",
+    "commit_id": "a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7",
+    "stale": false,
+    "official": true,
+    "dismissed": false,
+    "comments_count": 2,
+    "submitted_at": "2026-10-14T11:12:44+02:00",
+    "html_url": "https://git.example.com/acme/shop/pulls/7#issuecomment-57",
+    "pull_request_url": "https://git.example.com/acme/shop/pulls/7"
+  }
+}

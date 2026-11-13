@@ -1,0 +1,34 @@
+.plane/state/
+node_modules/
+dist/
+dist-single/
+out/
+*.vsix
+.vscode-test/
+packages/extension/test/fixtures/workspace/.plane/state/queue.jsonl
+packages/extension/test/fixtures/workspace/.plane/state/session.json
+packages/extension/test/fixtures/fake-engine/*calls.jsonl
+
+# [PCODE-75 | S14 | v0.1.0] the built bundle is an artifact, not source
+dist-installer/
+
+# [PCODE-442 | S15 | v0.1.0] the V1 test package is built, never committed
+/V1/
+# [PCODE-453 | S15 | v0.1.0] the IDE fix package is built, never committed
+/V1-IDE-FIX/
+/V1-IDE-FIX.zip
+
+# Local and sensitive files
+.DS_Store
+**/.DS_Store
+node_modules/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+.orqiva/
+.claude/
+.vscode/

@@ -1,0 +1,21 @@
+{
+  "GET /contoso/Shop/_apis/git/repositories/shop-web/pullRequests/7": {
+    "pullRequestId": 7,
+    "status": "active",
+    "title": "SHOP-1 Cart keeps items",
+    "sourceRefName": "refs/heads/feature/cart",
+    "targetRefName": "refs/heads/main",
+    "mergeStatus": "succeeded",
+    "isDraft": false,
+    "lastMergeSourceCommit": { "commitId": "a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7" }
+  },
+  "POST /contoso/Shop/_apis/git/repositories/shop-web/pullRequests/7/statuses": {
+    "id": 4,
+    "state": "failed",
+    "description": "",
+    "context": { "name": "policy", "genre": "orqiva" },
+    "creationDate": "2026-10-14T12:40:01.39Z",
+    "updatedDate": "2026-10-14T12:40:01.39Z",
+    "createdBy": { "displayName": "Orqiva Bot", "id": "5c1e2d0a-7b2f-4c6e-9a51-3f0d9e8b7a61" }
+  }
+}

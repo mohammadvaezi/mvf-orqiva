@@ -1,0 +1,320 @@
+/* ── [PCODE-208 | S15 | v0.1.0] Enterprise density: compact, professional UI across the app (no hero tiles, 13 px base, tighter shell) ──
+   Why:  the owner found the app oversized and toy-like: hero tiles in four colours, 30 px titles, 60 px
+         table rows, 40 px inputs, 20 px radii and soft shadows everywhere. An engineering tool shows
+         more on one screen and lets colour mean something. This layer comes last and only tightens: a
+         13 px base, smaller headings, 6 px radii, quiet borders instead of shadows, a narrower shell, and
+         compact neutral KPI tiles whose colour is a small marker. Classic (pe-*) pages inside the app and
+         the v2 (pv-*) pages, the live app and the design preview, follow the same scale. */
+
+/* ══ tokens ═══════════════════════════════════════════════════════════════════════════════════════════════ */
+/* html in front: the base sheets are bundled after this one, so the tokens need the stronger selector */
+html .pv-app,
+html .v2-app {
+  --pv-radius: 6px;
+  --pv-radius-sm: 4px;
+  --pv-row: 30px;
+  --pv-side: 224px;
+  --pv-top: 48px;
+  --pe-radius: 6px;
+  --pe-radius-lg: 6px;
+  --pe-space-6: 18px;
+  --pe-space-8: 24px;
+  --pe-font-size: 13px;
+  --pe-shadow-1: 0 1px 2px rgba(23, 32, 48, 0.05);
+  --pe-shadow-2: 0 2px 8px rgba(23, 32, 48, 0.08);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* ══ shell ════════════════════════════════════════════════════════════════════════════════════════════════ */
+.v2-app .pv-sidebar,
+.v2-app .pv-topbar {
+  font-size: 13px;
+}
+.pv-app .pv-nav-item {
+  height: 28px;
+  gap: 8px;
+  padding: 0 8px;
+  border-radius: 4px;
+  font-size: 13px;
+}
+.pv-app .pv-nav-heading {
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+}
+.pv-app .pv-topbar {
+  gap: 10px;
+  padding: 0 16px;
+}
+.pv-app .pv-tab {
+  height: 34px;
+  padding: 0 10px;
+  font-size: 13px;
+}
+.pv-app .pv-tabs {
+  gap: 0;
+}
+.pv-app .pv-subtab {
+  height: 28px;
+  padding: 0 10px;
+  font-size: 12.5px;
+}
+
+/* ══ page ═════════════════════════════════════════════════════════════════════════════════════════════════ */
+.pv-app .pv-page {
+  padding: 16px 20px 32px;
+}
+.pv-app .pv-page-head h1,
+.pv-app .pv-page-title {
+  font-size: 18px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+.pv-app .pv-page-head-icon,
+.pv-app .pv-page-icon {
+  width: 32px;
+  height: 32px;
+}
+.pv-app .pv-stack {
+  gap: 12px;
+}
+
+/* ══ cards, stats, rows ═══════════════════════════════════════════════════════════════════════════════════ */
+.pv-app .pv-card {
+  padding: 12px 14px;
+  box-shadow: none;
+}
+.pv-app .pv-card--flush {
+  padding: 0;
+}
+.pv-app .pv-card-head {
+  min-height: 36px;
+}
+.pv-app .pv-card-title {
+  font-size: 13px;
+  font-weight: 650;
+}
+.pv-app .pv-stat {
+  padding: 10px 12px;
+  box-shadow: none;
+}
+.pv-app .pv-stat-value {
+  font-size: 20px;
+}
+.pv-app .pv-row {
+  padding: 6px 14px;
+  gap: 10px;
+}
+.pv-app .pv-btn {
+  height: 30px;
+  padding: 0 12px;
+  border-radius: 5px;
+  font-size: 13px;
+}
+.pv-app .pv-btn--sm {
+  height: 26px;
+  padding: 0 8px;
+  font-size: 12px;
+}
+.pv-app .pv-chip {
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 4px;
+  font-size: 11.5px;
+}
+.pv-app .v2-input {
+  min-height: 30px;
+  padding: 4px 8px;
+}
+.pv-app .pv-table th {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  font-size: 11px;
+}
+.pv-app .pv-table td {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+/* ══ classic pages inside the app (pe-*) ══════════════════════════════════════════════════════════════════ */
+.v2-app .pe-page {
+  padding: 12px 20px 32px;
+}
+.v2-app .pe-page-title {
+  font-size: 20px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+.v2-app .pe-page-header {
+  margin-bottom: 12px;
+}
+.v2-app .pe-eyebrow {
+  font-size: 12px;
+}
+.v2-app .pe-panel {
+  border-radius: 6px;
+  box-shadow: none;
+  padding: 12px 14px 14px;
+}
+.v2-app .pe-panel--flush {
+  padding: 0;
+}
+.v2-app .pe-panel-title {
+  font-size: 13.5px;
+  font-weight: 650;
+}
+.v2-app .pe-columns,
+.v2-app .pe-stack {
+  gap: 12px;
+}
+.v2-app .pe-btn {
+  min-height: 30px;
+  padding: 0 12px;
+  border-radius: 5px;
+  font-size: 13px;
+}
+.v2-app .pe-input,
+.v2-app .pe-select {
+  min-height: 30px;
+  font-size: 13px;
+}
+.v2-app .pe-filters {
+  border-radius: 6px;
+  box-shadow: none;
+  padding: 8px;
+  gap: 8px;
+}
+.v2-app .pe-quick-add .pe-input {
+  box-shadow: none;
+  border-color: var(--pe-border);
+}
+.v2-app .pe-project-card {
+  border-radius: 6px;
+}
+.v2-app .pe-table th,
+.v2-app .pe-grid-table th {
+  padding: 6px 12px;
+  font-size: 11px;
+}
+.v2-app .pe-table td,
+.v2-app .pe-grid-table td {
+  padding: 4px 12px;
+}
+/* a state picker inside a table row is a compact control, not a form field */
+.v2-app .pe-table td .pe-select,
+.v2-app .pe-table td .pe-input {
+  min-height: 26px;
+  height: 26px;
+  padding: 0 6px;
+  font-size: 12.5px;
+}
+
+/* KPI tiles: neutral, compact; the colour is a small marker, not the whole tile */
+.v2-app .pe-stats {
+  gap: 10px;
+}
+.v2-app .pe-stat,
+.v2-app .pe-stat:nth-child(4n + 1),
+.v2-app .pe-stat:nth-child(4n + 2),
+.v2-app .pe-stat:nth-child(4n + 3),
+.v2-app .pe-stat:nth-child(4n + 4) {
+  min-height: 0;
+  padding: 10px 12px 10px 14px;
+  border: 1px solid var(--pe-border);
+  border-radius: 6px;
+  background: var(--pe-surface);
+  background-image: none;
+  box-shadow: none;
+  color: var(--pe-text);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    'icon label'
+    'icon value'
+    'icon hint';
+  column-gap: 10px;
+  align-items: center;
+}
+.v2-app .pe-stat-icon {
+  grid-area: icon;
+  width: 28px;
+  height: 28px;
+  margin: 0;
+  border-radius: 6px;
+  background: var(--pe-surface-2);
+  color: var(--pe-text-2);
+}
+.v2-app .pe-stat:nth-child(4n + 1) .pe-stat-icon {
+  color: var(--pe-tone-teal);
+}
+.v2-app .pe-stat:nth-child(4n + 2) .pe-stat-icon {
+  color: var(--pe-tone-coral);
+}
+.v2-app .pe-stat:nth-child(4n + 3) .pe-stat-icon {
+  color: var(--pe-tone-blue);
+}
+.v2-app .pe-stat:nth-child(4n + 4) .pe-stat-icon {
+  color: var(--pe-tone-violet);
+}
+.v2-app .pe-stat-value {
+  grid-area: value;
+  font-size: 20px;
+  font-weight: 650;
+  line-height: 1.15;
+}
+.v2-app .pe-stat-label {
+  grid-area: label;
+  order: -1;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--pe-text-2);
+  opacity: 1;
+}
+.v2-app .pe-stat-hint {
+  grid-area: hint;
+  font-size: 11.5px;
+  color: var(--pe-text-2);
+  opacity: 1;
+}
+.v2-app .v2-classic .pe-stat {
+  min-height: 0;
+}
+
+/* activity lists: small markers, tight rows */
+.v2-app .pe-activity-row {
+  grid-template-columns: 24px minmax(0, 1fr) auto;
+  padding: 5px 0;
+  gap: 10px;
+}
+.v2-app .pe-activity-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 5px;
+}
+.v2-app .pe-activity-icon svg {
+  width: 13px;
+  height: 13px;
+}
+
+/* KPI strip under the tiles: smaller numbers */
+.v2-app .pe-kpis {
+  gap: 20px;
+  padding: 12px 0;
+}
+.v2-app .pe-kpi-value {
+  font-size: 20px;
+}
+
+/* cards in a grid keep their own height: the rows of a short card no longer spread to the tallest one's */
+.pv-app .pv-agent-card {
+  align-content: start;
+  gap: 8px;
+  padding: 12px;
+}
+.pv-app .pv-agent-grid {
+  gap: 10px;
+}
+.pv-app .pv-agent-live {
+  border-radius: 5px;
+  padding: 6px 8px;
+}

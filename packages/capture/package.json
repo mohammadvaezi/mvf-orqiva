@@ -1,0 +1,13 @@
+{
+  "name": "@orqiva/capture",
+  "version": "0.1.0",
+  "license": "SEE LICENSE IN LICENSE",
+  "private": true,
+  "description": "Orqiva bug capture: a browser extension for Chrome and Firefox that files bugs with a screenshot, the console, the network and the steps before.",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "lint": "tsc -p tsconfig.json",
+    "test": "vitest run"
+  }
+}

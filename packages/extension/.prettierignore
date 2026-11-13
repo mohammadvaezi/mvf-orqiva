@@ -1,0 +1,8 @@
+dist
+out
+node_modules
+test/fixtures
+.plane
+*.vsix
+CHANGELOG.md
+.vscode-test

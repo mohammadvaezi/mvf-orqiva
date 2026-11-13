@@ -1,0 +1,175 @@
+## Sprint 01 - Foundation (2026-09-23)
+- LTR-2 [Review] (urgent) Bootstrap FastAPI backend with uv, ruff, mypy, pytest
+- LTR-1 [Review] (urgent) Create monorepo layout, Makefile and env example
+- LTR-5 [Todo] (high) Add GitHub Actions CI running lint and tests for both packages
+- LTR-4 [Todo] (high) Add docker-compose dev stack: postgres+pgvector, redis, minio, mailpit
+- LTR-3 [Review] (high) Bootstrap React + TypeScript + Vite + Tailwind frontend
+## Sprint 02 - Core data model and tenant scoping (2026-09-24)
+- LTR-8 [Todo] (urgent) Build tenant-scoped session that refuses unscoped queries
+- LTR-7 [Todo] (urgent) Implement SQLAlchemy models with TenantMixin and UUIDv7 ids
+- LTR-6 [Todo] (urgent) Set up Alembic with async engine and first migration for core tables
+- LTR-9 [Todo] (high) Add letters, scan_batches, files, pages and processing_jobs tables
+- LTR-10 [Todo] (medium) Write seed command creating a demo tenant with two users and folders
+## Sprint 03 - Authentication and roles (2026-09-25)
+- LTR-11 [Backlog] (urgent) Implement e-mail/password auth with argon2 and revocable sessions
+- LTR-15 [Backlog] (high) Add tenant isolation test harness covering every registered route
+- LTR-14 [Backlog] (high) Build login, register and 2FA screens in the SPA
+- LTR-13 [Backlog] (high) Add role dependencies and permission matrix tests
+- LTR-12 [Backlog] (high) Add TOTP two-factor enrolment and enforcement
+## Sprint 04 - Capture: storage and upload (2026-09-28)
+- LTR-17 [Backlog] (urgent) Add upload endpoint with type, size validation and batch metadata
+- LTR-16 [Backlog] (urgent) Implement storage service over S3 API with application-level encryption
+- LTR-19 [Backlog] (high) Build UploadDropzone with drag/drop, picker and camera capture
+- LTR-18 [Backlog] (high) Create synthetic fixture scans for tests
+## Sprint 05 - Worker and image clean-up (2026-09-29)
+- LTR-20 [Backlog] (urgent) Set up arq worker with job table, retries and state endpoint
+- LTR-21 [Backlog] (high) Implement page clean-up: deskew, crop, contrast, orientation
+- LTR-23 [Backlog] (medium) Show processing progress in the SPA with polling and live region
+- LTR-22 [Backlog] (medium) Add page reorder and rotate endpoints and viewer thumbnails
+## Sprint 06 - OCR and scan viewer (2026-09-30)
+- LTR-24 [Backlog] (urgent) Implement OCR step with Tesseract and per-page confidence
+- LTR-26 [Backlog] (high) Build ScanViewer with zoom, page thumbnails and OCR text overlay
+- LTR-25 [Backlog] (high) Expose page text and word boxes through the letters API
+- LTR-27 [Backlog] (medium) Add inbox list showing letters with OCR status
+## Sprint 07 - Batch splitting into letters (2026-10-01)
+- LTR-28 [Backlog] (urgent) Implement heuristic batch splitting into letters
+- LTR-29 [Backlog] (high) Add manual split and merge endpoints with activity log entries
+- LTR-31 [Backlog] (medium) Add content hash and exact-duplicate warning at batch level
+- LTR-30 [Backlog] (medium) Add split/merge handles to the batch review screen
+## Sprint 08 - Provider-agnostic AI layer (2026-10-02)
+- LTR-32 [Backlog] (urgent) Define AIProvider protocol, capability registry and model catalogue
+- LTR-35 [Backlog] (high) Add FakeProvider with recorded responses for tests
+- LTR-34 [Backlog] (high) Implement Anthropic and Gemini adapters
+- LTR-33 [Backlog] (high) Implement OpenAI, DeepSeek and Ollama adapters (OpenAI-compatible)
+- LTR-36 [Backlog] (low) Add `make eval` script running fixtures against real providers
+## Sprint 09 - Bring your own key, routing and usage (2026-10-05)
+- LTR-38 [Backlog] (urgent) Implement AI router: key precedence, routes, policy, region guard, failover
+- LTR-37 [Backlog] (urgent) Store provider keys encrypted with scope precedence and revocation
+- LTR-40 [Backlog] (high) Build AI settings screens: keys, routes, policies
+- LTR-39 [Backlog] (high) Add admin endpoints for task routes and provider policies
+- LTR-41 [Backlog] (medium) Add log redaction filter for keys, e-mails, IBANs and letter text
+## Sprint 10 - Understanding pipeline I: summary, sender, importance, type (2026-10-06)
+- LTR-43 [Backlog] (urgent) Write extraction prompt v1 and the extract job
+- LTR-42 [Backlog] (urgent) Define LetterExtraction schema with per-field confidence
+- LTR-44 [Backlog] (high) Implement confidence gating when writing extracted fields
+- LTR-46 [Backlog] (medium) Show extracted header fields on LetterCard and LetterPage
+- LTR-45 [Backlog] (medium) Refine batch splitting with an LLM boundary check
+## Sprint 11 - Understanding pipeline II: deadlines, money, invoices, actions (2026-10-07)
+- LTR-47 [Backlog] (urgent) Store deadlines and financial effect from extraction
+- LTR-50 [Backlog] (high) Generate suggested actions checklist from extraction
+- LTR-49 [Backlog] (high) Add invoice duplicate detection by issuer and invoice number
+- LTR-48 [Backlog] (high) Extract invoice details and line items for invoice, bill and reminder types
+- LTR-51 [Backlog] (medium) Show deadlines, money, invoice and actions on LetterPage
+## Sprint 12 - Translation and user corrections (2026-10-08)
+- LTR-53 [Backlog] (urgent) Implement field overrides that survive re-extraction
+- LTR-52 [Backlog] (urgent) Implement translation step into the tenant or user language
+- LTR-55 [Backlog] (high) Build EditableField editing and the Translation pane
+- LTR-54 [Backlog] (medium) Add reprocess endpoint and extraction versioning
+## Sprint 13 - Inbox and letter detail experience (2026-10-09)
+- LTR-58 [Backlog] (high) Build FilterBar, DataTable and inbox views
+- LTR-57 [Backlog] (high) Implement folders, labels and locations CRUD with folder access
+- LTR-56 [Backlog] (high) Add structured filters and sorting to GET /letters
+- LTR-59 [Backlog] (medium) Complete LetterPage layout with mobile tabs and quick actions
+## Sprint 14 - Workflow: status, assignment, comments, activity (2026-10-12)
+- LTR-60 [Backlog] (urgent) Implement status transitions with activity log
+- LTR-63 [Backlog] (high) Build status control, assign dialog, comments and Timeline in the SPA
+- LTR-61 [Backlog] (high) Add assignment to user or team and in-app notifications
+- LTR-64 [Backlog] (medium) Add teams management UI and invite members by e-mail
+- LTR-62 [Backlog] (medium) Add comments and internal notes per letter
+## Sprint 15 - Tasks (2026-10-13)
+- LTR-65 [Backlog] (urgent) Create tasks automatically from suggested actions and deadlines, idempotently
+- LTR-67 [Backlog] (high) Build the task list and TaskItem in the SPA
+- LTR-66 [Backlog] (high) Add task API: list views, manual tasks, complete and reopen
+- LTR-68 [Backlog] (medium) Show tasks and 'Mark as paid' on the letter page
+## Sprint 16 - Calendar and ICS (2026-10-14)
+- LTR-69 [Backlog] (urgent) Create calendar events from deadlines, one per deadline
+- LTR-71 [Backlog] (high) Build CalendarMonth and CalendarAgenda views
+- LTR-70 [Backlog] (high) Add calendar API and per-user ICS feed
+- LTR-72 [Backlog] (low) Add dashboard widgets: next deadlines and open amounts
+## Sprint 17 - E-mail and reminders (2026-10-15)
+- LTR-74 [Backlog] (urgent) Implement reminder scheduler with lead times, idempotent per deadline
+- LTR-73 [Backlog] (high) Implement SMTP sender with Jinja2 templates in de and en
+- LTR-75 [Backlog] (medium) Add notification settings API and UI
+- LTR-76 [Backlog] (low) Send daily digest e-mail of due and overdue items
+## Sprint 18 - Google Calendar two-way sync (2026-10-16)
+- LTR-78 [Backlog] (high) Push Letterman events to Google and store external ids
+- LTR-77 [Backlog] (high) Implement Google OAuth connection with encrypted tokens
+- LTR-80 [Backlog] (medium) Add calendar connections settings UI
+- LTR-79 [Backlog] (medium) Pull changes from Google via incremental sync and webhook channel
+## Sprint 19 - Microsoft 365 calendar sync (2026-10-19)
+- LTR-82 [Backlog] (high) Implement Microsoft Graph OAuth and outbound events
+- LTR-81 [Backlog] (high) Refactor sync core into a CalendarBackend protocol
+- LTR-84 [Backlog] (medium) Extend calendar settings UI for Microsoft and document setup
+- LTR-83 [Backlog] (medium) Implement Graph delta query pull and change subscription
+## Sprint 20 - Embeddings and hybrid semantic search (2026-10-20)
+- LTR-86 [Backlog] (urgent) Implement hybrid search service with reciprocal rank fusion and filters
+- LTR-85 [Backlog] (urgent) Chunk and embed letters into letter_chunks with pgvector
+- LTR-87 [Backlog] (high) Add search API with pagination and snippet highlighting
+- LTR-88 [Backlog] (medium) Seed script generating 10k synthetic letters for benchmarks
+## Sprint 21 - Search UI (2026-10-21)
+- LTR-89 [Backlog] (high) Build SearchPage with query box, FilterBar and result list
+- LTR-92 [Backlog] (medium) Write search relevance regression test set
+- LTR-90 [Backlog] (medium) Add global search box in the top bar with keyboard shortcut
+- LTR-91 [Backlog] (low) Add saved searches per user
+## Sprint 22 - Archive assistant agent (2026-10-22)
+- LTR-94 [Backlog] (urgent) Implement the archive agent loop with citations and unknown handling
+- LTR-93 [Backlog] (urgent) Implement agent tools over search, letters and aggregates
+- LTR-96 [Backlog] (high) Build ChatPanel and Assistant page with CitationChips
+- LTR-95 [Backlog] (high) Add assistant API with streaming responses
+## Sprint 23 - Chat about one letter and reply drafting (2026-10-23)
+- LTR-99 [Backlog] (high) Build the Chat tab on LetterPage with quick prompts and draft editor
+- LTR-98 [Backlog] (high) Add letter chat API and reply drafts storage
+- LTR-97 [Backlog] (high) Implement single-letter agent grounded in the letter text
+- LTR-100 [Backlog] (medium) Add per-provider prompt regression tests for agents
+## Sprint 24 - Voice input and spoken answers (2026-10-26)
+- LTR-101 [Backlog] (high) Implement browser voice input and output with transcript
+- LTR-103 [Backlog] (medium) Test voice UI states and accessibility
+- LTR-102 [Backlog] (medium) Add server STT/TTS fallback through the AI interface
+## Sprint 25 - Single sign-on (OIDC) (2026-10-27)
+- LTR-104 [Backlog] (high) Implement generic OIDC login with authlib
+- LTR-106 [Backlog] (medium) Add session management and security hardening
+- LTR-105 [Backlog] (medium) Add SSO settings UI and login button by domain
+- LTR-107 [Backlog] (low) Document SSO setup for Entra ID, Google Workspace and Keycloak
+## Sprint 26 - GDPR: audit, retention, export, delete, key rotation (2026-10-28)
+- LTR-110 [Backlog] (urgent) Implement data-subject export and complete delete
+- LTR-109 [Backlog] (high) Implement retention policies with archive or delete actions
+- LTR-108 [Backlog] (high) Add append-only audit log for reads and changes
+- LTR-112 [Backlog] (medium) Build Privacy settings UI: retention, export, delete, audit view
+- LTR-111 [Backlog] (medium) Implement tenant data-key rotation and region guard tests
+## Sprint 27 - Admin settings and organisation defaults (2026-10-29)
+- LTR-114 [Backlog] (high) Add tenant settings: default language, thresholds, upload limits, region
+- LTR-113 [Backlog] (high) Add user profile and preferences API and page
+- LTR-116 [Backlog] (medium) Add platform admin area for tenants and platform defaults
+- LTR-115 [Backlog] (medium) Build folders, departments, locations and labels management UI
+## Sprint 28 - Usage dashboard and cost visibility (2026-10-30)
+- LTR-118 [Backlog] (high) Build the usage dashboard with charts
+- LTR-117 [Backlog] (high) Implement usage aggregation service and API
+- LTR-120 [Backlog] (medium) Add processing error queue for admins with retry
+- LTR-119 [Backlog] (medium) Add usage export and per-key spend view in AI settings
+## Sprint 29 - Scale, performance and on-prem deployment (2026-11-02)
+- LTR-123 [Backlog] (high) Add Hetzner production overlay, Caddy TLS, backups and restore
+- LTR-122 [Backlog] (high) Add on-prem compose overlay with Ollama and local defaults
+- LTR-121 [Backlog] (high) Run 100k-letter benchmark and tune indexes and queries
+- LTR-124 [Backlog] (medium) Add rate limits, request size limits and worker concurrency settings
+## Sprint 30 - Mobile polish, accessibility and i18n completeness (2026-11-03)
+- LTR-128 [Backlog] (high) Add Playwright end-to-end smoke: login, upload, letter, task, search, chat
+- LTR-126 [Backlog] (high) Run accessibility audit and fix violations
+- LTR-125 [Backlog] (high) Audit and fix responsive layouts on phone and tablet
+- LTR-127 [Backlog] (medium) Complete and review de/en copy, e-mail templates and server messages
+## Sprint 31 - Nice to have: mailroom mode and accounting export (2026-11-04)
+- LTR-131 [Backlog] (medium) Export invoices as CSV and DATEV-compatible Buchungsstapel
+- LTR-130 [Backlog] (medium) Add routing rules to folders and assignees
+- LTR-129 [Backlog] (medium) Add watched-folder and IMAP ingestion sources
+- LTR-132 [Backlog] (low) Add public API tokens and outgoing webhooks
+## Sprint 32 - Nice to have: sender knowledge base, anomalies, learning from corrections (2026-11-05)
+- LTR-134 [Backlog] (medium) Add anomaly alerts for amounts, IBANs and suspicious reminders
+- LTR-133 [Backlog] (medium) Build sender profiles with history and typical amounts
+- LTR-136 [Backlog] (low) Add Plane, Jira and Microsoft To Do task connectors behind one interface
+- LTR-135 [Backlog] (low) Use per-tenant corrections as few-shot examples in extraction
+## Sprint 33 - Release readiness (2026-11-06)
+- LTR-138 [Backlog] (urgent) Run full smoke test on a clean host and fix blockers
+- LTR-137 [Backlog] (urgent) Finish install, admin, on-prem and API documentation
+- LTR-139 [Backlog] (high) Tag v0.1.0, publish images and write the changelog
+- LTR-140 [Backlog] (medium) Handover: open questions, risks and next-cycle backlog
+
+Active: none - use start <ID> or new

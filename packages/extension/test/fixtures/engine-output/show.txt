@@ -1,0 +1,47 @@
+# LTR-1 Create monorepo layout, Makefile and env example
+State: Review | Priority: urgent | https://plan.broszio.com/prodsystem/projects/82be4761-aa94-4567-b7b9-c91e9da25449/issues/f0bb5f35-1c79-4b24-ac3c-09ce364ff612/
+
+Create the folder layout from architecture.md 'App structure': backend/, frontend/, infra/, docs/, .github/workflows/.
+
+Add Makefile targets dev, test, lint, migrate, seed, e2e, eval (stubs allowed where the tool does not exist yet).
+
+Add .env.example listing every variable named in architecture.md 'Environments, config, secrets'.
+
+Extend .gitignore for Python, Node, Docker and local env files.
+
+Acceptance
+
+
+- ☐ make lint and make test run without error on the empty project
+
+- ☐ .env.example contains DATABASE_URL, REDIS_URL, S3_*, LETTERMAN_MASTER_KEY, SESSION_SECRET, DATA_REGION
+
+- ☐ README.md explains how to start dev in three commands
+
+
+
+Files (hint)
+
+
+- Makefile
+
+- .env.example
+
+- .gitignore
+
+- README.md
+
+- backend/
+
+- frontend/
+
+- infra/
+
+## Comments (7, latest last)
+- 2026-09-22: Review by Claude Code — v0.1.0, commit 12870d9  Files fingerprinted for LTR-1:
+- 2026-09-22: Working — edited: .env.example, .gitignore, README.md
+- 2026-09-22: Fingerprints are in Makefile, .env.example, .gitignore and README.md headers, but fingerprint.py only indexes known code extensions (no extension-less Makefile, dotfiles or .md), so done is run with --force. Suggest adding 'makefile' to fingerprint.py ext_of/COMMENT like 'dockerfile'.
+- 2026-09-22: Working — edited: .env.example, .gitignore, README.md
+- 2026-09-22: Working — edited: Makefile
+- 2026-09-22: Toolchain: installed GNU make 4.4.1 (ezwinports.make) and uv 0.12.17 (astral-sh.uv) via winget on the dev machine; both were missing. Makefile uses .RECIPEPREFIX '>' and shell-neutral recipes so it runs identically from Git Bash and PowerShell; targets whose tool is not yet present (LTR-2/3/4/6/10) 
+- 2026-09-22: Started by Claude Code on Amazon-Service (session 9bc4455c). Version v0.1.0, Sprint 01 - Foundation.

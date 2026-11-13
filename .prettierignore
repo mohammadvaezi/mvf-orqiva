@@ -1,0 +1,18 @@
+dist
+out
+node_modules
+packages/extension/test/fixtures
+.plane
+*.vsix
+CHANGELOG.md
+.vscode-test
+
+# [PCODE-109 | S15 | v0.1.0] the pe loop's machine-local state (git-ignored)
+.orqiva/state/
+.orqiva/fingerprints.md
+
+# [PCODE-214 | S15 | v0.1.0] Helm templates are Go templates, not YAML
+deploy/helm/*/templates
+
+# [PCODE-226 | S15 | v0.1.0] the phone app's Expo state
+packages/mobile/.expo

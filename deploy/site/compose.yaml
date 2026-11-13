@@ -1,0 +1,22 @@
+# ── [PCODE-447 | S15 | v0.1.0] Serve the public site from Docker Desktop for outside review ──
+#    Why:  the built public site (landing page and docs) on port 8088 of this machine, reachable from
+#          outside it. The site is mounted read-only from out/site, so `npm run build -w @orqiva/site`
+#          shows at once, without restarting the container.
+#    Use:  npm run site:up   (build the site first)   ·   npm run site:down
+name: orqiva-site
+
+services:
+  site:
+    image: nginx:1.27-alpine
+    container_name: orqiva-site
+    restart: unless-stopped
+    ports:
+      - '${ORQIVA_SITE_PORT:-8088}:80'
+    volumes:
+      - ../../out/site:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    healthcheck:
+      test: ['CMD', 'wget', '-q', '-O', '/dev/null', 'http://127.0.0.1/']
+      interval: 30s
+      timeout: 5s
+      retries: 3

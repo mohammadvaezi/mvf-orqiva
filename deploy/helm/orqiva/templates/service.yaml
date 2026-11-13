@@ -1,0 +1,13 @@
+{{/* ── [PCODE-214 | S15 | v0.1.0] T19.3 Several server nodes (events, presence and migrations across nodes) and a Helm chart ── */}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "orqiva.name" . }}
+  labels: {{- include "orqiva.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  selector: {{- include "orqiva.selector" . | nindent 4 }}
+  ports:
+    - name: http
+      port: {{ .Values.service.port }}
+      targetPort: http

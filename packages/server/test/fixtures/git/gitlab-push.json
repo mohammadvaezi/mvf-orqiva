@@ -1,0 +1,50 @@
+{
+  "object_kind": "push",
+  "event_name": "push",
+  "before": "0000000000000000000000000000000000000000",
+  "after": "c5feabde2d8cd023215af4d2ceeb7a64839fc428",
+  "ref": "refs/heads/feature/shop-1-cart",
+  "ref_protected": false,
+  "checkout_sha": "c5feabde2d8cd023215af4d2ceeb7a64839fc428",
+  "user_id": 4,
+  "user_name": "Ada Lovelace",
+  "user_username": "ada",
+  "user_email": "",
+  "user_avatar": "https://gitlab.example.com/uploads/-/system/user/avatar/4/avatar.png",
+  "project_id": 15,
+  "project": {
+    "id": 15,
+    "name": "shop",
+    "description": "The shop",
+    "web_url": "https://gitlab.example.com/acme/web/shop",
+    "git_ssh_url": "git@gitlab.example.com:acme/web/shop.git",
+    "git_http_url": "https://gitlab.example.com/acme/web/shop.git",
+    "namespace": "web",
+    "visibility_level": 0,
+    "path_with_namespace": "acme/web/shop",
+    "default_branch": "main"
+  },
+  "commits": [
+    {
+      "id": "c5feabde2d8cd023215af4d2ceeb7a64839fc428",
+      "message": "SHOP-1 Cart keeps items between visits\n\nStored in local storage.",
+      "title": "SHOP-1 Cart keeps items between visits",
+      "timestamp": "2026-10-12T09:15:31+02:00",
+      "url": "https://gitlab.example.com/acme/web/shop/-/commit/c5feabde2d8cd023215af4d2ceeb7a64839fc428",
+      "author": { "name": "Ada Lovelace", "email": "ada@example.com" },
+      "added": ["src/cart/store.ts"],
+      "modified": ["src/cart/Cart.tsx"],
+      "removed": []
+    }
+  ],
+  "total_commits_count": 1,
+  "repository": {
+    "name": "shop",
+    "url": "git@gitlab.example.com:acme/web/shop.git",
+    "description": "The shop",
+    "homepage": "https://gitlab.example.com/acme/web/shop",
+    "git_http_url": "https://gitlab.example.com/acme/web/shop.git",
+    "git_ssh_url": "git@gitlab.example.com:acme/web/shop.git",
+    "visibility_level": 0
+  }
+}

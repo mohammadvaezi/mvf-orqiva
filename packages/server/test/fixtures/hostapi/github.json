@@ -1,0 +1,88 @@
+{
+  "/repos/acme/shop": {
+    "id": 708211,
+    "name": "shop",
+    "full_name": "acme/shop",
+    "private": true,
+    "html_url": "https://github.com/acme/shop",
+    "default_branch": "main",
+    "visibility": "private"
+  },
+  "/repos/acme/shop/branches": [
+    {
+      "name": "feature/shop-3-search",
+      "commit": {
+        "sha": "3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c",
+        "url": "https://api.github.com/repos/acme/shop/commits/3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c"
+      },
+      "protected": false
+    },
+    {
+      "name": "main",
+      "commit": {
+        "sha": "2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b",
+        "url": "https://api.github.com/repos/acme/shop/commits/2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b"
+      },
+      "protected": true
+    }
+  ],
+  "/repos/acme/shop/tags": [
+    {
+      "name": "v1.0.0",
+      "zipball_url": "https://api.github.com/repos/acme/shop/zipball/refs/tags/v1.0.0",
+      "tarball_url": "https://api.github.com/repos/acme/shop/tarball/refs/tags/v1.0.0",
+      "commit": {
+        "sha": "1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a",
+        "url": "https://api.github.com/repos/acme/shop/commits/1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a"
+      },
+      "node_id": "MDM6UmVmcmVmcy90YWdzL3YxLjAuMA=="
+    }
+  ],
+  "/repos/acme/shop/commits": [
+    {
+      "sha": "2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b",
+      "html_url": "https://github.com/acme/shop/commit/2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b",
+      "commit": {
+        "message": "Merge pull request #4 from acme/feature/shop-2\n\nSHOP-2 Totals round to cents",
+        "author": {
+          "name": "Ada Lovelace",
+          "email": "ada@example.com",
+          "date": "2026-10-11T15:02:00Z"
+        }
+      },
+      "author": { "login": "ada" },
+      "parents": [{ "sha": "1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a" }]
+    },
+    {
+      "sha": "1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a",
+      "html_url": "https://github.com/acme/shop/commit/1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a",
+      "commit": {
+        "message": "SHOP-1 Cart keeps items between visits",
+        "author": {
+          "name": "Ada Lovelace",
+          "email": "ada@example.com",
+          "date": "2026-10-10T09:15:31Z"
+        }
+      },
+      "author": { "login": "ada" },
+      "parents": []
+    }
+  ],
+  "/repos/acme/shop/pulls": [
+    {
+      "number": 4,
+      "title": "SHOP-2 Totals round to cents",
+      "body": "Closes SHOP-2.",
+      "html_url": "https://github.com/acme/shop/pull/4",
+      "state": "closed",
+      "merged_at": "2026-10-11T15:02:00Z",
+      "draft": false,
+      "user": { "login": "ada" },
+      "head": { "ref": "feature/shop-2", "sha": "4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d" },
+      "base": { "ref": "main", "sha": "1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a" },
+      "created_at": "2026-10-10T16:00:00Z",
+      "updated_at": "2026-10-11T15:02:00Z",
+      "closed_at": "2026-10-11T15:02:00Z"
+    }
+  ]
+}

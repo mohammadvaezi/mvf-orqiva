@@ -1,0 +1,7 @@
+# [PCODE-226 | S15 | v0.1.0] the app's own install and build output
+node_modules/
+dist/
+out/
+.expo/
+android/
+ios/

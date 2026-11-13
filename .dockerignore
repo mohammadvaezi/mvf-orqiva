@@ -1,0 +1,16 @@
+# [PCODE-91 | S15 | v0.1.0] only what the image build reads; never local builds, secrets or history
+**/node_modules
+**/dist
+**/out
+**/coverage
+.git
+.plane
+.vscode
+.vscode-test
+dev
+docs
+**/*.vsix
+**/dist-installer
+packages/extension/*
+!packages/extension/package.json
+**/.env

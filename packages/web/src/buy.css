@@ -1,0 +1,102 @@
+/* ── [PCODE-219 | S15 | v0.1.0] T20.2 Pricing and self-serve purchase for self-hosted customers (offers, buy flow, licence orders, plan enforcement) ──
+   Why:  the public purchase pages at the compact scale: a wider card than sign-in (four plans side by
+         side), 13 px text, 6 px radii, quiet borders; one column of plans on a phone. */
+.pe-auth.pe-buy-page {
+  font-size: 13px;
+  line-height: 1.45;
+}
+.pe-auth .pe-card.pe-buy {
+  max-width: 760px;
+  border-radius: 8px;
+  padding: 24px;
+}
+.pe-buy h1 {
+  font-size: 18px;
+  margin: 12px 0 4px;
+}
+.pe-buy-plans {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin: 16px 0 8px;
+}
+.pe-buy-plan {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 10px;
+  border: 1px solid var(--pe-border);
+  border-radius: 6px;
+  background: var(--pe-surface);
+  color: var(--pe-text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.pe-buy-plan:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+.pe-buy-plan.is-on {
+  border-color: var(--pe-accent);
+  box-shadow: 0 0 0 1px var(--pe-accent);
+}
+.pe-buy-plan-name {
+  font-weight: 600;
+}
+.pe-buy-plan-price {
+  font-size: 16px;
+  font-weight: 600;
+}
+.pe-buy-plan-price small {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--pe-text-2);
+}
+.pe-buy-includes {
+  margin: 0 0 16px;
+  padding-left: 18px;
+  color: var(--pe-text-2);
+  columns: 2;
+}
+.pe-buy-form {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 8px 12px;
+}
+.pe-buy-form .pe-field {
+  margin: 0;
+}
+.pe-buy-wide {
+  grid-column: 1 / -1;
+}
+.pe-buy-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 8px 0;
+  border-top: 1px solid var(--pe-border);
+}
+.pe-buy-total strong {
+  font-size: 16px;
+}
+.pe-buy-steps {
+  margin: 16px 0 0;
+  padding-left: 18px;
+  color: var(--pe-text-2);
+}
+@media (max-width: 700px) {
+  .pe-auth .pe-card.pe-buy {
+    padding: 16px;
+  }
+  .pe-buy-plans {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .pe-buy-includes {
+    columns: 1;
+  }
+  .pe-buy-form {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

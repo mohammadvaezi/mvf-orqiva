@@ -1,0 +1,27 @@
+{
+  "GET /repos/acme/shop/pulls/7": {
+    "number": 7,
+    "state": "open",
+    "title": "SHOP-1 Cart keeps items",
+    "head": { "ref": "feature/cart", "sha": "a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7" },
+    "base": { "ref": "main" },
+    "draft": false,
+    "merged": false,
+    "mergeable": false,
+    "rebaseable": false,
+    "mergeable_state": "dirty",
+    "html_url": "https://github.com/acme/shop/pull/7"
+  },
+  "POST /repos/acme/shop/statuses/a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7": {
+    "url": "https://api.github.com/repos/acme/shop/statuses/a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7",
+    "id": 31188421907,
+    "node_id": "SC_kwDOLx7c3c8AAAAHQ5mdEw",
+    "state": "failure",
+    "description": "",
+    "target_url": null,
+    "context": "orqiva/policy",
+    "created_at": "2026-10-14T12:40:01Z",
+    "updated_at": "2026-10-14T12:40:01Z",
+    "creator": { "login": "orqiva-bot", "id": 181818, "type": "User" }
+  }
+}

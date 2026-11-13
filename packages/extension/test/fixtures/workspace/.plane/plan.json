@@ -1,0 +1,40 @@
+{
+  "version": "0.1.0",
+  "sprints": [
+    {
+      "name": "Sprint 01 - Foundation",
+      "date": "2026-01-01",
+      "goal": "A fixture with one function.",
+      "items": [
+        {
+          "title": "Add the greeting function",
+          "label": "feature",
+          "priority": "medium",
+          "description_md": "Add greet(name) to src/sample.ts so the fixture has one function.",
+          "acceptance": ["greet('x') returns 'Hello x'"]
+        },
+        {
+          "title": "Add a farewell function",
+          "label": "feature",
+          "priority": "low",
+          "description_md": "Add farewell(name) next to greet.",
+          "acceptance": ["farewell('x') returns 'Bye x'"]
+        }
+      ]
+    },
+    {
+      "name": "Sprint 02 - Board",
+      "date": "2026-01-02",
+      "goal": "Show the fixture on a board.",
+      "items": [
+        {
+          "title": "Render the board",
+          "label": "feature",
+          "priority": "high",
+          "description_md": "One tree with one sprint.",
+          "acceptance": ["the tree shows Sprint 01"]
+        }
+      ]
+    }
+  ]
+}

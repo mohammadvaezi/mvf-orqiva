@@ -1,0 +1,186 @@
+/* ── [PCODE-408 | S15 | v0.1.0] T36.3 Click-through of every screen in light and dark, desktop and phone ── */
+/* ── [PCODE-164 | S15 | v0.1.0] B1.3 The v2 shell live in the web app: Home per role, Inbox, Clients, portal mode, settings ── */
+/* ── [PCODE-159 | S15 | v0.1.0] D7 preview: full click-through, fixes and the gate A1 package ──
+   Why:  fixes from the click-through: the page never gets wider than the screen, and on a phone the
+         sections open from a menu button. Wide content (tables, board, Gantt, VS Code) scrolls inside
+         its own card instead of pushing the page. */
+
+/* [PCODE-164 | S15 | v0.1.0] the live app's shell too */
+.pv-app,
+.v2-app {
+  max-width: 100vw;
+  overflow-x: clip;
+}
+
+.pv-main,
+.pv-content,
+.pv-page {
+  min-width: 0;
+}
+
+.pv-card {
+  overflow-x: auto;
+}
+
+.pv-menu-btn {
+  display: none;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  cursor: pointer;
+  flex: none;
+}
+
+.pv-menu-btn:hover {
+  background: var(--pe-hover);
+}
+
+.pv-menu-scrim {
+  display: none;
+}
+
+@media (max-width: 820px) {
+  .pv-menu-btn {
+    display: grid;
+  }
+
+  .pv-sidebar.pv-sidebar--open {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 60;
+    width: min(300px, 86vw);
+    height: 100vh;
+    box-shadow: var(--pe-shadow-3);
+  }
+
+  .pv-menu-scrim {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 55;
+    background: color-mix(in srgb, var(--pe-text) 35%, transparent);
+  }
+
+  .pv-banner {
+    height: auto;
+    min-height: 36px;
+    padding: 6px 10px;
+    flex-wrap: wrap;
+    row-gap: 6px;
+  }
+
+  .pv-banner-roles {
+    margin-left: 0;
+    overflow-x: auto;
+    max-width: 100%;
+  }
+
+  .pv-banner-label {
+    display: none;
+  }
+
+  .pv-topbar {
+    gap: 8px;
+    padding: 0 10px;
+  }
+
+  .pv-topbar-right {
+    flex: none;
+  }
+
+  .pv-page-head {
+    align-items: flex-start;
+  }
+
+  .pv-page-title {
+    font-size: 19px;
+  }
+
+  .pv-tabs {
+    margin: 12px 0;
+  }
+
+  .pv-tiles {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pv-sprint-figures {
+    flex-wrap: wrap;
+    gap: 12px 20px;
+  }
+
+  .pv-board {
+    grid-template-columns: repeat(6, 78vw);
+  }
+
+  .pv-gantt {
+    grid-template-columns: 200px minmax(0, 1fr);
+  }
+
+  .pv-lifecycle {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pv-personas,
+  .pv-moscow,
+  .pv-retro,
+  .pv-form-grid,
+  .pv-rice,
+  .pv-split--even,
+  .pv-env-row,
+  .pv-compare {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pv-sync {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pv-vsc {
+    overflow-x: auto;
+  }
+
+  .pv-vsc-body {
+    min-width: 640px;
+  }
+
+  .pv-trace-row {
+    grid-template-columns: 140px minmax(0, 1fr) 50px;
+  }
+
+  .pv-activity,
+  .pv-activity--detail {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* [PCODE-408 | S15 | v0.1.0] one column: Tab goes down the facets as they read */
+  .pv-facets {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pv-ev {
+    grid-template-columns: 44px 22px minmax(0, 1fr);
+  }
+
+  .pv-ev .pv-ev-kind,
+  .pv-ev > .pv-mono {
+    display: none;
+  }
+
+  .pv-approval {
+    align-items: flex-start;
+  }
+
+  .pv-req-steps {
+    flex-wrap: wrap;
+  }
+
+  .pv-rota {
+    min-width: 640px;
+  }
+}

@@ -1,0 +1,185 @@
+{
+  "status": 200,
+  "error": false,
+  "meta": {
+    "variableCollections": {
+      "VariableCollectionId:1:2": {
+        "id": "VariableCollectionId:1:2",
+        "name": "Tokens",
+        "key": "6e5a1f4c0b2d9e7a3c8f1b0d4e6a2c9f7b1d3e5a",
+        "modes": [
+          { "modeId": "1:0", "name": "Light" },
+          { "modeId": "1:1", "name": "Dark" },
+          { "modeId": "1:2", "name": "High contrast" }
+        ],
+        "defaultModeId": "1:0",
+        "remote": false,
+        "hiddenFromPublishing": false,
+        "variableIds": ["VariableID:1:10", "VariableID:1:11", "VariableID:1:12", "VariableID:1:15"]
+      },
+      "VariableCollectionId:2:1": {
+        "id": "VariableCollectionId:2:1",
+        "name": "Spacing and type",
+        "key": "0c4d9a2e7f1b3c5d8e0a6f2b4c7d9e1a3f5b7c9d",
+        "modes": [{ "modeId": "2:0", "name": "Mode 1" }],
+        "defaultModeId": "2:0",
+        "remote": false,
+        "hiddenFromPublishing": false,
+        "variableIds": ["VariableID:2:20", "VariableID:2:21", "VariableID:2:22"]
+      },
+      "VariableCollectionId:9:9": {
+        "id": "VariableCollectionId:9:9",
+        "name": "Library colours",
+        "key": "9f8e7d6c5b4a39281706f5e4d3c2b1a098765432",
+        "modes": [{ "modeId": "9:0", "name": "Value" }],
+        "defaultModeId": "9:0",
+        "remote": true,
+        "hiddenFromPublishing": false,
+        "variableIds": ["VariableID:9:90"]
+      }
+    },
+    "variables": {
+      "VariableID:1:10": {
+        "id": "VariableID:1:10",
+        "name": "Color/Primary",
+        "key": "a1b2c3d4e5f60718293a4b5c6d7e8f9001122334",
+        "variableCollectionId": "VariableCollectionId:1:2",
+        "resolvedType": "COLOR",
+        "valuesByMode": {
+          "1:0": {
+            "r": 0.30980393290519714,
+            "g": 0.27450981736183167,
+            "b": 0.8980392217636108,
+            "a": 1
+          },
+          "1:1": {
+            "r": 0.5058823823928833,
+            "g": 0.5490196347236633,
+            "b": 0.9725490212440491,
+            "a": 1
+          },
+          "1:2": {
+            "r": 0.21568627655506134,
+            "g": 0.1882352977991104,
+            "b": 0.6392157077789307,
+            "a": 1
+          }
+        },
+        "remote": false,
+        "description": "Actions and links",
+        "hiddenFromPublishing": false,
+        "scopes": ["ALL_FILLS", "STROKE_COLOR"],
+        "codeSyntax": {}
+      },
+      "VariableID:1:11": {
+        "id": "VariableID:1:11",
+        "name": "Color/Text",
+        "key": "b2c3d4e5f60718293a4b5c6d7e8f900112233445",
+        "variableCollectionId": "VariableCollectionId:1:2",
+        "resolvedType": "COLOR",
+        "valuesByMode": {
+          "1:0": {
+            "r": 0.06666667014360428,
+            "g": 0.0941176488995552,
+            "b": 0.15294118225574493,
+            "a": 1
+          },
+          "1:1": {
+            "r": 0.9529411792755127,
+            "g": 0.95686274766922,
+            "b": 0.9647058844566345,
+            "a": 1
+          },
+          "1:2": { "r": 0, "g": 0, "b": 0, "a": 1 }
+        },
+        "remote": false,
+        "description": "",
+        "hiddenFromPublishing": false,
+        "scopes": ["TEXT_FILL"],
+        "codeSyntax": {}
+      },
+      "VariableID:1:12": {
+        "id": "VariableID:1:12",
+        "name": "Color/Brand",
+        "key": "c3d4e5f60718293a4b5c6d7e8f90011223344556",
+        "variableCollectionId": "VariableCollectionId:1:2",
+        "resolvedType": "COLOR",
+        "valuesByMode": {
+          "1:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:1:10" },
+          "1:1": { "type": "VARIABLE_ALIAS", "id": "VariableID:1:10" },
+          "1:2": { "type": "VARIABLE_ALIAS", "id": "VariableID:1:10" }
+        },
+        "remote": false,
+        "description": "The brand colour, the primary one",
+        "hiddenFromPublishing": false,
+        "scopes": ["ALL_SCOPES"],
+        "codeSyntax": {}
+      },
+      "VariableID:1:15": {
+        "id": "VariableID:1:15",
+        "name": "Flags/Beta banner",
+        "key": "d4e5f60718293a4b5c6d7e8f9001122334455667",
+        "variableCollectionId": "VariableCollectionId:1:2",
+        "resolvedType": "BOOLEAN",
+        "valuesByMode": { "1:0": true, "1:1": true, "1:2": false },
+        "remote": false,
+        "description": "",
+        "hiddenFromPublishing": true,
+        "scopes": ["ALL_SCOPES"],
+        "codeSyntax": {}
+      },
+      "VariableID:2:20": {
+        "id": "VariableID:2:20",
+        "name": "Space/4",
+        "key": "e5f60718293a4b5c6d7e8f900112233445566778",
+        "variableCollectionId": "VariableCollectionId:2:1",
+        "resolvedType": "FLOAT",
+        "valuesByMode": { "2:0": 16 },
+        "remote": false,
+        "description": "",
+        "hiddenFromPublishing": false,
+        "scopes": ["GAP", "WIDTH_HEIGHT"],
+        "codeSyntax": {}
+      },
+      "VariableID:2:21": {
+        "id": "VariableID:2:21",
+        "name": "Font/Weight/Bold",
+        "key": "f60718293a4b5c6d7e8f90011223344556677889",
+        "variableCollectionId": "VariableCollectionId:2:1",
+        "resolvedType": "FLOAT",
+        "valuesByMode": { "2:0": 700 },
+        "remote": false,
+        "description": "",
+        "hiddenFromPublishing": false,
+        "scopes": ["FONT_WEIGHT"],
+        "codeSyntax": {}
+      },
+      "VariableID:2:22": {
+        "id": "VariableID:2:22",
+        "name": "Font/Family/Body",
+        "key": "0718293a4b5c6d7e8f9001122334455667788990",
+        "variableCollectionId": "VariableCollectionId:2:1",
+        "resolvedType": "STRING",
+        "valuesByMode": { "2:0": "Inter" },
+        "remote": false,
+        "description": "",
+        "hiddenFromPublishing": false,
+        "scopes": ["FONT_FAMILY"],
+        "codeSyntax": {}
+      },
+      "VariableID:9:90": {
+        "id": "VariableID:9:90",
+        "name": "Library/Red",
+        "key": "18293a4b5c6d7e8f900112233445566778899001",
+        "variableCollectionId": "VariableCollectionId:9:9",
+        "resolvedType": "COLOR",
+        "valuesByMode": { "9:0": { "r": 1, "g": 0, "b": 0, "a": 1 } },
+        "remote": true,
+        "description": "",
+        "hiddenFromPublishing": false,
+        "scopes": ["ALL_SCOPES"],
+        "codeSyntax": {}
+      }
+    }
+  }
+}

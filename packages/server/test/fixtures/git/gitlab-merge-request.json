@@ -1,0 +1,53 @@
+{
+  "object_kind": "merge_request",
+  "event_type": "merge_request",
+  "user": {
+    "id": 4,
+    "name": "Ada Lovelace",
+    "username": "ada",
+    "avatar_url": "https://gitlab.example.com/uploads/-/system/user/avatar/4/avatar.png",
+    "email": "[REDACTED]"
+  },
+  "project": {
+    "id": 15,
+    "name": "shop",
+    "web_url": "https://gitlab.example.com/acme/web/shop",
+    "path_with_namespace": "acme/web/shop",
+    "default_branch": "main"
+  },
+  "object_attributes": {
+    "id": 9001,
+    "iid": 42,
+    "target_branch": "main",
+    "source_branch": "feature/shop-1-cart",
+    "source_project_id": 15,
+    "author_id": 4,
+    "assignee_ids": [],
+    "title": "Draft: SHOP-1 Cart keeps items between visits",
+    "created_at": "2026-10-12 07:20:00 UTC",
+    "updated_at": "2026-10-12 07:20:00 UTC",
+    "state": "opened",
+    "merge_status": "can_be_merged",
+    "detailed_merge_status": "mergeable",
+    "target_project_id": 15,
+    "description": "Keeps the cart. Closes SHOP-1.",
+    "url": "https://gitlab.example.com/acme/web/shop/-/merge_requests/42",
+    "last_commit": {
+      "id": "c5feabde2d8cd023215af4d2ceeb7a64839fc428",
+      "message": "SHOP-1 Cart keeps items between visits",
+      "timestamp": "2026-10-12T09:15:31+02:00",
+      "url": "https://gitlab.example.com/acme/web/shop/-/commit/c5feabde2d8cd023215af4d2ceeb7a64839fc428",
+      "author": { "name": "Ada Lovelace", "email": "ada@example.com" }
+    },
+    "work_in_progress": true,
+    "draft": true,
+    "action": "open"
+  },
+  "labels": [],
+  "changes": {},
+  "repository": {
+    "name": "shop",
+    "url": "git@gitlab.example.com:acme/web/shop.git",
+    "homepage": "https://gitlab.example.com/acme/web/shop"
+  }
+}

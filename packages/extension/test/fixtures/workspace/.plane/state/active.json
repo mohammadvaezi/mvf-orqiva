@@ -1,0 +1,15 @@
+{
+  "task": "FIX-2",
+  "issue_id": "00000000-0000-4000-8000-000000000002",
+  "title": "Add the greeting function",
+  "sprint": "S01",
+  "sprint_name": "Sprint 01 - Foundation",
+  "version": "0.1.0",
+  "session_id": "fixture-session",
+  "host": "fixture-host",
+  "started_at": "2026-01-01T09:00:00",
+  "files": [
+    "src/sample.ts"
+  ],
+  "url": "https://plane.example.test/ws/projects/00000000-0000-4000-8000-000000000000/issues/00000000-0000-4000-8000-000000000002/"
+}

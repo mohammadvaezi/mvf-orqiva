@@ -1,0 +1,25 @@
+{
+  "expo": {
+    "name": "Orqiva",
+    "slug": "orqiva",
+    "version": "0.1.0",
+    "scheme": "orqiva",
+    "orientation": "default",
+    "userInterfaceStyle": "automatic",
+    "backgroundColor": "#ffffff",
+    "ios": { "supportsTablet": true },
+    "android": {},
+    "plugins": [
+      "expo-secure-store",
+      "expo-status-bar",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Orqiva uses the camera only to scan the pairing code shown in the web app.",
+          "microphonePermission": false,
+          "recordAudioAndroid": false
+        }
+      ]
+    ]
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "subscriptionId": "00000000-0000-0000-0000-000000000000",
+  "notificationId": 5,
+  "id": "4a5d99d6-1c75-4e53-91b9-ee80057d4ce3",
+  "eventType": "build.complete",
+  "publisherId": "tfs",
+  "message": { "text": "Build 20261012.4 succeeded" },
+  "resource": {
+    "id": 4,
+    "buildNumber": "20261012.4",
+    "status": "completed",
+    "result": "succeeded",
+    "queueTime": "2026-10-12T08:41:10Z",
+    "startTime": "2026-10-12T08:41:20Z",
+    "finishTime": "2026-10-12T08:44:58Z",
+    "url": "https://dev.azure.com/contoso/a7573007-bbb3-4341-b726-0c4148a07853/_apis/build/Builds/4",
+    "definition": { "id": 2, "name": "shop-web CI" },
+    "sourceBranch": "refs/heads/feature/shop-2-checkout",
+    "sourceVersion": "33b55f7cb7e7e245323987634f960cf4a6e6bc74",
+    "reason": "pullRequest",
+    "repository": { "id": "7f2d3b6a-1c4e-4f9b-9a2d-5e8c1b0a7d33", "type": "TfsGit" },
+    "requestedFor": { "displayName": "Grace Hopper", "uniqueName": "grace@contoso.example" }
+  },
+  "resourceVersion": "2.0",
+  "resourceContainers": {
+    "project": { "id": "a7573007-bbb3-4341-b726-0c4148a07853" }
+  },
+  "createdDate": "2026-10-12T08:45:00.4Z"
+}

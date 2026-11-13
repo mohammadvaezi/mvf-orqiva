@@ -1,0 +1,36 @@
+{
+  "name": "@orqiva/mobile",
+  "version": "0.1.0",
+  "license": "SEE LICENSE IN LICENSE",
+  "private": true,
+  "description": "Orqiva for iOS and Android: the live feed of a workspace (React Native with Expo). Its own install, not a workspace of the root: React Native pins its own React.",
+  "main": "index.ts",
+  "scripts": {
+    "start": "expo start",
+    "lint": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "export": "expo export --platform android --platform ios --source-maps --no-bytecode --output-dir dist",
+    "export:web": "expo export --platform web --output-dir out/web"
+  },
+  "dependencies": {
+    "@orqiva/shared": "file:../shared",
+    "@react-native-async-storage/async-storage": "2.2.0",
+    "expo": "57.0.27",
+    "expo-camera": "57.0.6",
+    "expo-device": "57.0.2",
+    "expo-linking": "57.0.12",
+    "expo-secure-store": "57.0.4",
+    "expo-status-bar": "57.0.1",
+    "react": "19.2.3",
+    "react-native": "0.86.3",
+    "react-native-safe-area-context": "5.7.0"
+  },
+  "devDependencies": {
+    "@expo/metro-runtime": "57.0.16",
+    "@types/react": "19.2.7",
+    "react-dom": "19.2.3",
+    "react-native-web": "0.21.4",
+    "typescript": "5.9.3",
+    "vitest": "5.0.1"
+  }
+}

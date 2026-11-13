@@ -1,0 +1,585 @@
+/* ── [PCODE-158 | S15 | v0.1.0] D6 preview: Clients and portal, Incidents, Time, web and VS Code side by side ──
+   Why:  the styles of the D6 pages on the v2 tokens. The VS Code window keeps its own dark palette in
+         both themes (it shows VS Code's default dark theme), declared once as tokens on .pv-vsc. */
+
+/* ══ portal ═════════════════════════════════════════════════════════════════════════════════════════════ */
+.pv-portal-split {
+  display: grid;
+  grid-template-columns: 340px minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.pv-req-list {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pv-req {
+  display: grid;
+  gap: 4px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--pv-line);
+  border-radius: 10px;
+  background: var(--pv-card);
+  text-align: left;
+  cursor: pointer;
+}
+
+.pv-req[aria-current='true'] {
+  border-color: var(--pe-primary);
+  box-shadow: 0 0 0 3px var(--pv-accent-bg);
+}
+
+.pv-attach {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.pv-req-steps {
+  display: flex;
+  gap: 4px;
+  margin: 0 0 14px;
+  padding: 0;
+  list-style: none;
+}
+
+.pv-req-step {
+  flex: 1;
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: var(--pv-bg);
+  color: var(--pv-text-2);
+  font-size: 12px;
+  text-align: center;
+}
+
+.pv-req-step--done {
+  background: var(--pv-ok-bg);
+  color: var(--pv-ok);
+  font-weight: 600;
+}
+
+.pv-chat--flat {
+  max-height: none;
+  padding: 0;
+}
+
+.pv-composer--flat {
+  margin-top: 14px;
+  padding: 12px 0 0;
+}
+
+.pv-road {
+  fill: var(--pe-surface-3);
+}
+
+.pv-road--done {
+  fill: color-mix(in srgb, var(--pv-ok) 45%, var(--pv-card));
+}
+
+.pv-road--now {
+  fill: var(--pe-primary);
+}
+
+.pv-road--next {
+  fill: color-mix(in srgb, var(--pe-primary) 35%, var(--pv-card));
+}
+
+.pv-road--later {
+  fill: var(--pe-surface-3);
+  stroke: var(--pv-line-strong);
+  stroke-dasharray: 4 3;
+}
+
+.pv-approval {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.pv-approval .pv-row-main {
+  gap: 6px;
+}
+
+.pv-approval-title {
+  font-size: 15px;
+}
+
+.pv-sign {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: var(--pv-accent-bg);
+}
+
+.pv-sign p {
+  margin: 0 0 10px;
+}
+
+.pv-stars {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.pv-star {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--pv-line);
+  border-radius: 8px;
+  background: var(--pv-card);
+  color: var(--pv-line-strong);
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.pv-star--on {
+  color: var(--pe-tone-amber);
+  border-color: var(--pe-tone-amber);
+}
+
+.pv-slots {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.pv-slot {
+  height: 34px;
+  padding: 0 12px;
+  border: 1px solid var(--pv-line-strong);
+  border-radius: 8px;
+  background: var(--pv-card);
+  cursor: pointer;
+}
+
+.pv-slot[aria-pressed='true'] {
+  border-color: var(--pe-primary);
+  background: var(--pe-primary);
+  color: var(--pe-primary-text);
+}
+
+.pv-status-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.pv-status-row strong {
+  flex: 1;
+}
+
+.pv-uptime {
+  display: block;
+  width: 100%;
+  height: 22px;
+}
+
+.pv-up--ok {
+  fill: var(--pv-ok);
+}
+
+.pv-up--slow {
+  fill: var(--pv-warn);
+}
+
+.pv-up--down {
+  fill: var(--pv-bad);
+}
+
+/* ══ clients (team side) ════════════════════════════════════════════════════════════════════════════════ */
+.pv-client-h {
+  margin: 0;
+  font-size: 18px;
+}
+
+.pv-row--top {
+  align-items: flex-start;
+}
+
+.pv-internal {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: var(--pv-warn-bg);
+  font-size: 12px;
+  white-space: normal;
+}
+
+/* ══ incidents ══════════════════════════════════════════════════════════════════════════════════════════ */
+.pv-inc-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.pv-inc-title {
+  font-size: 16px;
+}
+
+.pv-inc-roles {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.pv-inc-timeline {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pv-inc-timeline li {
+  display: grid;
+  grid-template-columns: 44px 22px minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  font-size: 13px;
+}
+
+.pv-kind--sm {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+}
+
+.pv-rota {
+  display: grid;
+  grid-template-columns: 90px repeat(7, minmax(0, 1fr));
+}
+
+.pv-rota-label,
+.pv-rota-head,
+.pv-rota-cell {
+  padding: 10px;
+  border-bottom: 1px solid var(--pv-line);
+  font-size: 13px;
+}
+
+.pv-rota-label {
+  color: var(--pv-text-2);
+  font-weight: 600;
+}
+
+.pv-rota-head {
+  font-weight: 650;
+}
+
+.pv-rota-cell {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--pv-accent-bg);
+}
+
+.pv-rota-cell--backup {
+  background: transparent;
+  color: var(--pv-text-2);
+}
+
+/* ══ time ═══════════════════════════════════════════════════════════════════════════════════════════════ */
+.pv-timer {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.pv-timer-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--pv-line-strong);
+}
+
+.pv-timer-dot--on {
+  background: var(--pv-bad);
+  box-shadow: 0 0 0 4px var(--pv-bad-bg);
+}
+
+.pv-timer-clock {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+/* ══ web and VS Code ════════════════════════════════════════════════════════════════════════════════════ */
+.pv-sync {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(340px, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.pv-vsc {
+  --vsc-bg: #1e1e1e;
+  --vsc-side: #252526;
+  --vsc-bar: #333333;
+  --vsc-line: #3c3c3c;
+  --vsc-text: #d4d4d4;
+  --vsc-dim: #8b8b8b;
+  --vsc-blue: #007acc;
+  --vsc-lens: #a0a0a0;
+  --vsc-fp: #6a9955;
+  --vsc-sel: #04395e;
+  --vsc-warn: #cca700;
+
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--vsc-bg);
+  color: var(--vsc-text);
+  box-shadow: var(--pe-shadow-3);
+  font-size: 12.5px;
+}
+
+.pv-vsc-title {
+  padding: 6px 12px;
+  background: var(--vsc-bar);
+  color: var(--vsc-dim);
+  font-size: 12px;
+  text-align: center;
+}
+
+.pv-vsc-body {
+  display: grid;
+  grid-template-columns: 40px 260px minmax(0, 1fr);
+  min-height: 520px;
+}
+
+.pv-vsc-activity {
+  display: grid;
+  align-content: start;
+  justify-items: center;
+  gap: 18px;
+  padding-top: 12px;
+  background: var(--vsc-bar);
+  color: var(--vsc-dim);
+}
+
+.pv-vsc-pe {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: var(--pe-primary);
+  color: #fff;
+  font-weight: 800;
+  font-size: 12px;
+}
+
+.pv-vsc-side {
+  padding: 8px 0;
+  background: var(--vsc-side);
+  border-right: 1px solid var(--vsc-line);
+}
+
+.pv-vsc-head {
+  padding: 4px 14px 8px;
+  color: var(--vsc-dim);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+}
+
+.pv-vsc-group {
+  padding: 8px 14px 4px;
+  color: var(--vsc-dim);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.pv-vsc-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pv-vsc-item--active {
+  background: var(--vsc-sel);
+}
+
+.pv-vsc-item--warn {
+  color: var(--vsc-warn);
+}
+
+.pv-vsc-item--wrap {
+  white-space: normal;
+}
+
+.pv-vsc-state {
+  width: 9px;
+  height: 9px;
+  flex: none;
+  border-radius: 50%;
+  border: 2px solid var(--vsc-dim);
+}
+
+.pv-vsc-state--progress {
+  border-color: var(--pe-state-progress);
+}
+
+.pv-vsc-state--review {
+  border-color: var(--pe-state-review);
+  background: var(--pe-state-review);
+}
+
+.pv-vsc-state--todo {
+  border-color: var(--pe-state-todo);
+}
+
+.pv-vsc-actions {
+  padding: 4px 14px 6px 29px;
+}
+
+.pv-vsc-btn {
+  height: 24px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 3px;
+  background: var(--vsc-blue);
+  color: #fff !important;
+  font: 12px var(--pe-font-mono);
+  cursor: pointer;
+}
+
+.pv-vsc-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.pv-vsc-editor {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.pv-vsc-tabs {
+  display: flex;
+  background: var(--vsc-side);
+}
+
+.pv-vsc-tab {
+  padding: 7px 14px;
+  color: var(--vsc-dim);
+  border-right: 1px solid var(--vsc-line);
+}
+
+.pv-vsc-tab--on {
+  background: var(--vsc-bg);
+  color: var(--vsc-text);
+}
+
+.pv-vsc-lens {
+  padding: 8px 14px 0 66px;
+  color: var(--vsc-lens);
+  font-size: 11.5px;
+}
+
+.pv-vsc-link {
+  text-decoration: underline;
+}
+
+.pv-vsc-code {
+  flex: 1;
+  margin: 0;
+  padding: 2px 0 10px;
+  font: 12.5px/1.6 var(--pe-font-mono);
+  overflow-x: auto;
+}
+
+.pv-vsc-line {
+  display: grid;
+  grid-template-columns: 40px 6px minmax(0, 1fr);
+  gap: 10px;
+  white-space: pre;
+}
+
+.pv-vsc-n {
+  color: var(--vsc-dim);
+  text-align: right;
+}
+
+.pv-vsc-line--covered .pv-vsc-gutter {
+  background: var(--pe-state-done);
+}
+
+.pv-vsc-line--uncovered .pv-vsc-gutter {
+  background: var(--pe-state-blocked);
+}
+
+.pv-vsc-line--fp {
+  color: var(--vsc-fp);
+}
+
+.pv-vsc-panel {
+  display: grid;
+  gap: 2px;
+  padding: 8px 14px 10px;
+  border-top: 1px solid var(--vsc-line);
+  font: 12px/1.6 var(--pe-font-mono);
+}
+
+.pv-vsc-panel-head {
+  color: var(--vsc-dim);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.pv-vsc-run {
+  color: var(--vsc-warn);
+}
+
+.pv-vsc-status {
+  display: flex;
+  gap: 18px;
+  padding: 4px 12px;
+  background: var(--vsc-blue);
+  color: #fff;
+  font-size: 12px;
+}
+
+.pv-sync-task {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 1280px) {
+  .pv-sync {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 1100px) {
+  .pv-portal-split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pv-vsc-body {
+    grid-template-columns: 0 220px minmax(0, 1fr);
+  }
+
+  .pv-vsc-activity {
+    display: none;
+  }
+}

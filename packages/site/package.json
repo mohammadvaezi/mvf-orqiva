@@ -1,0 +1,16 @@
+{
+  "name": "@orqiva/site",
+  "version": "0.1.0",
+  "license": "SEE LICENSE IN LICENSE",
+  "private": true,
+  "description": "The public site, built from the repository: the landing page with its 3D stage, own Markdown renderer, CLI and API reference, link check.",
+  "type": "module",
+  "scripts": {
+    "build": "node build-client.mjs && tsc -p tsconfig.build.json && node dist/main.js",
+    "lint": "tsc -p tsconfig.json && tsc -p client/tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@orqiva/shared": "0.1.0"
+  }
+}

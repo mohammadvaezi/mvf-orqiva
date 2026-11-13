@@ -1,0 +1,36 @@
+{
+  "POST /contoso/Shop/_apis/git/repositories/shop-web/pullRequests/7/threads": {
+    "id": 148,
+    "publishedDate": "2026-10-14T09:12:44.27Z",
+    "lastUpdatedDate": "2026-10-14T09:12:44.27Z",
+    "comments": [
+      {
+        "id": 1,
+        "parentCommentId": 0,
+        "author": { "displayName": "Orqiva Bot", "id": "5c1e2d0a-7b2f-4c6e-9a51-3f0d9e8b7a61" },
+        "content": "",
+        "commentType": "text"
+      }
+    ],
+    "status": "active",
+    "isDeleted": false
+  },
+  "GET /contoso/_apis/connectionData": {
+    "authenticatedUser": {
+      "id": "5c1e2d0a-7b2f-4c6e-9a51-3f0d9e8b7a61",
+      "descriptor": "Microsoft.IdentityModel.Claims.ClaimsIdentity;orqiva-bot@contoso.example",
+      "providerDisplayName": "Orqiva Bot",
+      "isActive": true
+    },
+    "instanceId": "e2f3a4b5-c6d7-4e8f-9a0b-1c2d3e4f5a6b",
+    "locationServiceData": { "serviceOwner": "00025394-6065-48ca-87d9-7f5672854ef7" }
+  },
+  "PUT /contoso/Shop/_apis/git/repositories/shop-web/pullRequests/7/reviewers/5c1e2d0a-7b2f-4c6e-9a51-3f0d9e8b7a61": {
+    "reviewerUrl": "https://dev.azure.com/contoso/Shop/_apis/git/repositories/shop-web/pullRequests/7/reviewers/5c1e2d0a-7b2f-4c6e-9a51-3f0d9e8b7a61",
+    "vote": -5,
+    "hasDeclined": false,
+    "isFlagged": false,
+    "displayName": "Orqiva Bot",
+    "id": "5c1e2d0a-7b2f-4c6e-9a51-3f0d9e8b7a61"
+  }
+}

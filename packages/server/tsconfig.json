@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "rootDir": ".."
+  },
+  "include": [
+    "src",
+    "test",
+    "vitest.config.ts",
+    "vitest.perf.config.ts",
+    "vitest.browser.config.ts"
+  ],
+  "exclude": ["test/e2e"]
+}

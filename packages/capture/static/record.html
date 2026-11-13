@@ -1,0 +1,22 @@
+<!doctype html>
+<!-- [PCODE-320 | S15 | v0.1.0] T32.5b The bug-capture browser extension for Chrome and Firefox -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Record the screen for a bug</title>
+    <link rel="stylesheet" href="capture.css" />
+  </head>
+  <body class="page">
+    <h1>Record the screen</h1>
+    <p>
+      Pick the tab, window or screen to record and show the bug. The recording (at most two minutes)
+      goes with your next bug.
+    </p>
+    <div class="row">
+      <button type="button" id="start">Start recording</button>
+      <button type="button" id="stop" class="ghost" disabled>Stop</button>
+    </div>
+    <p id="status" role="status"></p>
+    <script src="record.js"></script>
+  </body>
+</html>

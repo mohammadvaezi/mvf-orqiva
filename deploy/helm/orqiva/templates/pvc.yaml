@@ -1,0 +1,19 @@
+{{/* ── [PCODE-214 | S15 | v0.1.0] T19.3 Several server nodes (events, presence and migrations across nodes) and a Helm chart ── */}}
+{{- if and .Values.persistence.enabled (not .Values.persistence.existingClaim) }}
+{{- if and (gt (int .Values.replicaCount) 1) (ne .Values.persistence.accessMode "ReadWriteMany") }}
+{{- fail "With more than one replica the uploads volume must be ReadWriteMany" }}
+{{- end }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "orqiva.name" . }}
+  labels: {{- include "orqiva.labels" . | nindent 4 }}
+spec:
+  accessModes: [{{ .Values.persistence.accessMode }}]
+  {{- if .Values.persistence.storageClass }}
+  storageClassName: {{ .Values.persistence.storageClass }}
+  {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.persistence.size }}
+{{- end }}

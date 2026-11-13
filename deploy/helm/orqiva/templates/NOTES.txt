@@ -1,0 +1,4 @@
+{{/* ── [PCODE-214 | S15 | v0.1.0] T19.3 Several server nodes (events, presence and migrations across nodes) and a Helm chart ── */}}
+Orqiva is starting with {{ .Values.replicaCount }} server node(s) at {{ .Values.publicUrl }}.
+The first node to start migrates the database; the others wait for it (advisory lock).
+Check: kubectl rollout status deployment/{{ include "orqiva.name" . }}

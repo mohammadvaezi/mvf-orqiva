@@ -1,0 +1,69 @@
+# ── [PCODE-458 | S15 | v0.1.0] VS Code extension updates itself from GitHub: CI publishes the build, Update button installs it ──
+#    Why:  testers update the extension with one button instead of a fix package. Every push that changes the
+#          extension, the orq command or the shared code is built here, on Windows like the testers' PCs, and
+#          published to the rolling release `ide-latest`: orqiva.vsix, orq.mjs and build.json (commit and build
+#          time, which the Update button compares with its own). The unit tests gate the release. build.json
+#          is uploaded last, so a check never sees a new build.json next to an old .vsix.
+name: ide-release
+
+on:
+  push:
+    branches: [Orqiva-v1.2, main]
+    paths:
+      - 'packages/extension/**'
+      - 'packages/cli/**'
+      - 'packages/shared/**'
+      - 'package-lock.json'
+      - '.github/workflows/ide-release.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ide-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    # only the repository's default branch publishes, so a side branch never replaces the testers' build
+    if: github.ref_name == github.event.repository.default_branch
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: orq command (single file)
+        run: |
+          npm run build -w @orqiva/shared
+          npm run build -w @orqiva/cli
+      - name: extension unit tests
+        run: npm test -w packages/extension
+      - name: build and package the extension
+        shell: bash
+        working-directory: packages/extension
+        run: |
+          # each build its own version, so VS Code always takes it as an update
+          npm pkg set version="0.1.${{ github.run_number }}"
+          node esbuild.mjs --production
+          npx vsce package --no-dependencies --out orqiva.vsix
+          cp dist/build.json build.json
+          cp ../cli/dist-single/orq.mjs orq.mjs
+          cat build.json
+      - name: publish to the ide-latest release
+        shell: bash
+        working-directory: packages/extension
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git tag -f ide-latest "$GITHUB_SHA"
+          git push -f origin refs/tags/ide-latest
+          gh release view ide-latest >/dev/null 2>&1 || gh release create ide-latest --prerelease \
+            --title "Orqiva IDE (latest build)" \
+            --notes "The newest build of the Orqiva VS Code extension. Installed by the Update button in the Orqiva tab."
+          gh release upload ide-latest orqiva.vsix orq.mjs --clobber
+          gh release upload ide-latest build.json --clobber
+          gh release edit ide-latest --notes "The newest build of the Orqiva VS Code extension: commit ${GITHUB_SHA::7}, built $(node -p "require('./build.json').builtAt"). Installed by the Update button in the Orqiva tab."

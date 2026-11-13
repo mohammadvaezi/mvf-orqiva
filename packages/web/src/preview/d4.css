@@ -1,0 +1,466 @@
+/* ── [PCODE-156 | S15 | v0.1.0] D4 preview: Versions, Security, Code map and Releases ──
+   Why:  the styles of the D4 tabs and the Releases page, on the v2 tokens of preview.css. */
+
+/* ══ versions ═══════════════════════════════════════════════════════════════════════════════════════════ */
+.pv-pr {
+  flex-wrap: wrap;
+}
+
+.pv-pr-size {
+  white-space: nowrap;
+}
+
+.pv-golive {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.pv-golive-score {
+  display: grid;
+  justify-items: start;
+  min-width: 120px;
+}
+
+.pv-checks {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pv-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.pv-check > .pv-icon {
+  margin-top: 2px;
+  flex: none;
+}
+
+.pv-check--ok > .pv-icon {
+  color: var(--pv-ok);
+}
+
+.pv-check--no > .pv-icon {
+  color: var(--pv-bad);
+}
+
+.pv-env-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+}
+
+.pv-env-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.pv-env-wrap > .pv-card {
+  flex: 1;
+}
+
+.pv-env {
+  border-top: 3px solid var(--pv-ok);
+}
+
+.pv-env--degraded {
+  border-top-color: var(--pv-warn);
+}
+
+.pv-env-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.pv-env-version {
+  margin: 10px 0 2px;
+  font-size: 15px;
+  font-weight: 650;
+}
+
+.pv-env-arrow {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  flex: none;
+  color: var(--pv-text-2);
+}
+
+.pv-bar-fail {
+  fill: var(--pv-bad);
+}
+
+/* ══ security ═══════════════════════════════════════════════════════════════════════════════════════════ */
+.pv-posture {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.pv-posture .pv-stack {
+  flex: 1;
+}
+
+.pv-posture p {
+  margin: 0;
+}
+
+.pv-risk-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.pv-risk-head > div {
+  flex: 1;
+}
+
+.pv-risk-score {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: var(--pv-bad-bg);
+  color: var(--pv-bad);
+  font-size: 22px;
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+}
+
+.pv-factors {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pv-factor {
+  display: grid;
+  gap: 2px;
+  padding: 8px 10px;
+  border: 1px solid var(--pv-line);
+  border-radius: 8px;
+  font-size: 12px;
+  color: var(--pv-text-2);
+}
+
+.pv-factor strong {
+  color: var(--pv-text);
+  font-size: 14px;
+}
+
+.pv-factor--on {
+  border-color: color-mix(in srgb, var(--pv-bad) 40%, transparent);
+  background: var(--pv-bad-bg);
+}
+
+.pv-risk-pill {
+  display: inline-grid;
+  place-items: center;
+  min-width: 34px;
+  height: 22px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.pv-risk-pill--high {
+  background: var(--pv-bad);
+  color: #fff;
+}
+
+.pv-risk-pill--mid {
+  background: var(--pv-warn-bg);
+  color: color-mix(in srgb, var(--pv-warn) 70%, var(--pe-text));
+}
+
+.pv-risk-pill--low {
+  background: var(--pe-surface-3);
+  color: var(--pv-text-2);
+}
+
+.pv-signals {
+  display: inline-flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.pv-accept {
+  display: grid;
+  grid-template-columns: 1fr 160px auto;
+  gap: 10px;
+  align-items: end;
+  margin-top: 12px;
+}
+
+/* ══ code map ═══════════════════════════════════════════════════════════════════════════════════════════ */
+.pv-code-search {
+  width: 340px;
+}
+
+.pv-treemap {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.pv-tm-cell {
+  cursor: pointer;
+}
+
+.pv-tm {
+  stroke: var(--pv-card);
+  stroke-width: 2;
+  transition: opacity 0.2s;
+}
+
+.pv-tm--sel {
+  stroke: var(--pe-text);
+  stroke-width: 2.5;
+}
+
+.pv-tm--future {
+  opacity: 0.18;
+}
+
+.pv-tm--tone1 {
+  fill: color-mix(in srgb, var(--pe-avatar-1) 30%, var(--pv-card));
+}
+
+.pv-tm--tone2 {
+  fill: color-mix(in srgb, var(--pe-avatar-2) 25%, var(--pv-card));
+}
+
+.pv-tm--tone3 {
+  fill: color-mix(in srgb, var(--pe-avatar-3) 30%, var(--pv-card));
+}
+
+.pv-tm--tone4 {
+  fill: color-mix(in srgb, var(--pe-avatar-4) 30%, var(--pv-card));
+}
+
+.pv-tm--tone5 {
+  fill: color-mix(in srgb, var(--pe-avatar-5) 30%, var(--pv-card));
+}
+
+.pv-tm--tone6 {
+  fill: var(--pe-surface-3);
+}
+
+.pv-tm--agent0 {
+  fill: var(--pe-surface-3);
+}
+
+.pv-tm--agent1 {
+  fill: color-mix(in srgb, var(--pv-agent) 18%, var(--pv-card));
+}
+
+.pv-tm--agent2 {
+  fill: color-mix(in srgb, var(--pv-agent) 34%, var(--pv-card));
+}
+
+.pv-tm--agent3 {
+  fill: color-mix(in srgb, var(--pv-agent) 52%, var(--pv-card));
+}
+
+.pv-tm--agent4 {
+  fill: color-mix(in srgb, var(--pv-agent) 70%, var(--pv-card));
+}
+
+.pv-tm--healthgood {
+  fill: color-mix(in srgb, var(--pv-ok) 28%, var(--pv-card));
+}
+
+.pv-tm--healthmid {
+  fill: color-mix(in srgb, var(--pv-warn) 30%, var(--pv-card));
+}
+
+.pv-tm--healthbad {
+  fill: color-mix(in srgb, var(--pv-bad) 30%, var(--pv-card));
+}
+
+.pv-tm--sprint0,
+.pv-tm--sprint1 {
+  fill: color-mix(in srgb, var(--pe-primary) 12%, var(--pv-card));
+}
+
+.pv-tm--sprint2,
+.pv-tm--sprint3 {
+  fill: color-mix(in srgb, var(--pe-primary) 26%, var(--pv-card));
+}
+
+.pv-tm--sprint4 {
+  fill: color-mix(in srgb, var(--pe-primary) 40%, var(--pv-card));
+}
+
+.pv-tm--sprint5 {
+  fill: color-mix(in srgb, var(--pe-primary) 58%, var(--pv-card));
+}
+
+.pv-tm-label {
+  fill: var(--pv-text);
+  font-size: 14px;
+  font-weight: 650;
+  pointer-events: none;
+}
+
+.pv-tm-sub {
+  fill: var(--pv-text-2);
+  font-size: 11.5px;
+  pointer-events: none;
+}
+
+.pv-lapse {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.pv-lapse input {
+  flex: 1;
+  accent-color: var(--pe-primary);
+}
+
+.pv-files {
+  display: grid;
+  gap: 6px;
+  margin: 12px 0;
+  padding: 0;
+  list-style: none;
+  font-size: 12.5px;
+}
+
+.pv-files li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pv-method {
+  display: inline-block;
+  min-width: 46px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font: 700 11px var(--pe-font-mono);
+  text-align: center;
+  background: var(--pe-surface-3);
+}
+
+.pv-method--get {
+  background: var(--pv-info-bg);
+  color: var(--pv-info);
+}
+
+.pv-method--post {
+  background: var(--pv-ok-bg);
+  color: var(--pv-ok);
+}
+
+.pv-method--patch {
+  background: var(--pv-warn-bg);
+  color: color-mix(in srgb, var(--pv-warn) 70%, var(--pe-text));
+}
+
+.pv-method--ws {
+  background: var(--pv-agent-bg);
+  color: var(--pv-agent);
+}
+
+.pv-hot-zone {
+  fill: var(--pv-bad-bg);
+}
+
+.pv-hot-dot {
+  fill: color-mix(in srgb, var(--pe-primary) 45%, transparent);
+  stroke: var(--pe-primary);
+}
+
+.pv-hot-dot--bad {
+  fill: color-mix(in srgb, var(--pv-bad) 45%, transparent);
+  stroke: var(--pv-bad);
+}
+
+.pv-diff-table {
+  display: grid;
+  border: 1px solid var(--pv-line);
+  border-radius: 8px;
+  overflow: hidden;
+  font: 12px/1.6 var(--pe-font-mono);
+}
+
+.pv-diff-row {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.pv-diff-n {
+  padding: 2px 6px;
+  color: var(--pv-text-2);
+  text-align: right;
+  background: var(--pv-bg);
+}
+
+.pv-diff-old,
+.pv-diff-new {
+  padding: 2px 8px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  border-left: 1px solid var(--pv-line);
+}
+
+.pv-diff-old--del {
+  background: var(--pv-bad-bg);
+}
+
+.pv-diff-new--add,
+.pv-diff-new--change {
+  background: var(--pv-ok-bg);
+}
+
+.pv-ai-comment {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--pv-agent-bg);
+}
+
+.pv-ai-comment p {
+  margin: 6px 0 10px;
+}
+
+@media (max-width: 1280px) {
+  .pv-env-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .pv-env-arrow {
+    display: none;
+  }
+}
+
+@media (max-width: 1100px) {
+  .pv-golive {
+    flex-direction: column;
+  }
+
+  .pv-accept {
+    grid-template-columns: 1fr;
+  }
+
+  .pv-code-search {
+    width: 100%;
+  }
+}

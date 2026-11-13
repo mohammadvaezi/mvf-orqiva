@@ -1,0 +1,115 @@
+[
+  {
+    "uuid": "1c3a7f1e-0f5e-4a8f-9b5a-7a1f0e2d3c41",
+    "historyId": "4f2a9c1d8e7b6a5f",
+    "testCaseId": "9a8b7c6d5e4f3a2b",
+    "fullName": "tests.test_cart.TestCart#test_keeps_items",
+    "labels": [
+      { "name": "parentSuite", "value": "tests" },
+      { "name": "suite", "value": "test_cart" },
+      { "name": "subSuite", "value": "TestCart" },
+      { "name": "host", "value": "ci-runner-3" },
+      { "name": "framework", "value": "pytest" },
+      { "name": "language", "value": "cpython3" }
+    ],
+    "links": [],
+    "name": "test_keeps_items",
+    "status": "passed",
+    "statusDetails": {},
+    "stage": "finished",
+    "start": 1760428800000,
+    "stop": 1760428801500,
+    "steps": [],
+    "attachments": [],
+    "parameters": []
+  },
+  {
+    "uuid": "2d4b8a2f-1a6f-4b90-8c6b-8b2a1f3e4d52",
+    "historyId": "5a3b0d2e9f8c7b6a",
+    "testCaseId": "0b9c8d7e6f5a4b3c",
+    "fullName": "tests.test_cart.TestCart#test_rounds_totals",
+    "labels": [
+      { "name": "parentSuite", "value": "tests" },
+      { "name": "suite", "value": "test_cart" },
+      { "name": "subSuite", "value": "TestCart" },
+      { "name": "framework", "value": "pytest" }
+    ],
+    "links": [],
+    "name": "test_rounds_totals",
+    "status": "failed",
+    "statusDetails": {
+      "message": "AssertionError: assert Decimal('0.33') == Decimal('0.34')",
+      "trace": "self = <tests.test_cart.TestCart object>\n    def test_rounds_totals(self):\n>       assert total([0.335]) == Decimal('0.34')\nE       AssertionError"
+    },
+    "stage": "finished",
+    "start": 1760428801600,
+    "stop": 1760428801700,
+    "steps": [],
+    "attachments": [],
+    "parameters": []
+  },
+  {
+    "uuid": "3e5c9b3a-2b7a-4ca1-9d7c-9c3b2a4f5e63",
+    "historyId": "5a3b0d2e9f8c7b6a",
+    "testCaseId": "0b9c8d7e6f5a4b3c",
+    "fullName": "tests.test_cart.TestCart#test_rounds_totals",
+    "labels": [
+      { "name": "parentSuite", "value": "tests" },
+      { "name": "suite", "value": "test_cart" },
+      { "name": "subSuite", "value": "TestCart" },
+      { "name": "framework", "value": "pytest" }
+    ],
+    "links": [],
+    "name": "test_rounds_totals",
+    "status": "passed",
+    "statusDetails": { "flaky": true },
+    "stage": "finished",
+    "start": 1760428802000,
+    "stop": 1760428802120,
+    "steps": [],
+    "attachments": [],
+    "parameters": []
+  },
+  {
+    "uuid": "4f6d0c4b-3c8b-4db2-ae8d-ad4c3b5a6f74",
+    "historyId": "6b4c1e3f0a9d8c7b",
+    "testCaseId": "1c0d9e8f7a6b5c4d",
+    "fullName": "tests.test_checkout#test_pays_by_card",
+    "labels": [
+      { "name": "parentSuite", "value": "tests" },
+      { "name": "suite", "value": "test_checkout" },
+      { "name": "framework", "value": "pytest" }
+    ],
+    "links": [],
+    "name": "test_pays_by_card",
+    "status": "broken",
+    "statusDetails": { "message": "ConnectionError: payment sandbox not reachable" },
+    "stage": "finished",
+    "start": 1760428803000,
+    "stop": 1760428806000,
+    "steps": [],
+    "attachments": [],
+    "parameters": []
+  },
+  {
+    "uuid": "5a7e1d5c-4d9c-4ec3-bf9e-be5d4c6b7a85",
+    "historyId": "7c5d2f4a1b0e9d8c",
+    "testCaseId": "2d1e0f9a8b7c6d5e",
+    "fullName": "tests.test_checkout#test_invoice_pdf",
+    "labels": [
+      { "name": "parentSuite", "value": "tests" },
+      { "name": "suite", "value": "test_checkout" },
+      { "name": "framework", "value": "pytest" }
+    ],
+    "links": [],
+    "name": "test_invoice_pdf",
+    "status": "skipped",
+    "statusDetails": { "message": "Skipped: needs the PDF service" },
+    "stage": "finished",
+    "start": 1760428806100,
+    "stop": 1760428806100,
+    "steps": [],
+    "attachments": [],
+    "parameters": []
+  }
+]

@@ -1,0 +1,4260 @@
+/* ── [PCODE-431 | S15 | v0.1.0] T37 low: The Time page fits a phone ── */
+/* ── [PCODE-430 | S15 | v0.1.0] T37 low: The board works on a phone ── */
+/* ── [PCODE-425 | S15 | v0.1.0] T37 low: Settings > Policies rows fit without sideways scrolling ── */
+/* ── [PCODE-408 | S15 | v0.1.0] T36.3 Click-through of every screen in light and dark, desktop and phone ── */
+/* ── [PCODE-358 | S15 | v0.1.0] T35.6 Accessibility to WCAG 2.2 AA ── */
+/* ── [PCODE-309 | S15 | v0.1.0] T31.8b Architecture graph, change coupling and bus factor on the code map ── */
+/* ── [PCODE-308 | S15 | v0.1.0] T31.8a Code map by feature, sprint and version, and its time-lapse ── */
+/* ── [PCODE-307 | S15 | v0.1.0] T31.7 Environment config diff: variables, secrets, settings, flags and versions side by side ── */
+/* ── [PCODE-306 | S15 | v0.1.0] T31.6 Versions from commits: conventional commits, tags and components per path ── */
+/* ── [PCODE-305 | S15 | v0.1.0] T31.5b The merge queue: in order per branch, merged through the host when the policy passes ── */
+/* ── [PCODE-304 | S15 | v0.1.0] T31.5a Conflicts, stacked pull requests, and merge policies the host enforces through a commit status ── */
+/* ── [PCODE-303 | S15 | v0.1.0] T31.4 Line comments from people and the AI, posted to the host with approve or request changes ── */
+/* ── [PCODE-270 | S15 | v0.1.0] Documents page squeezed to 400 px between 1200 and 1280 px window width ── */
+/* ── [PCODE-269 | S15 | v0.1.0] UX check fixes: no service accounts in people pickers, search leaves on opening a conversation, epic chips open the epic ── */
+/* ── [PCODE-268 | S15 | v0.1.0] Planning fixes from the UX check: sprint dates in the screen, link hint, bulk bar under the top bar ── */
+/* ── [PCODE-266 | S15 | v0.1.0] Canvas fixes from the T27 browser walkthrough: drop jump-back, grid start width, Enter above a summary, picture menu closing ── */
+/* ── [PCODE-264 | S15 | v0.1.0] T27.6 Canvas pictures and sharing: PNG and PDF with page fitting, read-only share link with iCal subscription ── */
+/* ── [PCODE-263 | S15 | v0.1.0] T27.5 Plan files: MS Project XML and CSV export and import, iCal of the plan ── */
+/* ── [PCODE-262 | S15 | v0.1.0] T27.4 Canvas views: timeline, mind map, portfolio; agents as resources and heat map; scenario diff; commits on bars ── */
+/* ── [PCODE-261 | S15 | v0.1.0] T27.3 Canvas grid: fill down, paste from Excel, formulas and roll-ups, indent and outdent, typed predecessors ── */
+/* ── [PCODE-260 | S15 | v0.1.0] T27.2 Interactive Gantt: drag, resize, link, shift-drag, split, zoom, colour rules, outline levels ── */
+/* ── [PCODE-257 | S15 | v0.1.0] T26.6 Hierarchy: initiatives, custom item types, custom fields ── */
+/* ── [PCODE-256 | S15 | v0.1.0] T26.5 Planning charts: burndown and burnup in points, cumulative flow, control chart, lead time ── */
+/* ── [PCODE-255 | S15 | v0.1.0] T26.4 Planning details: keys, bulk edit, undo, shared views, item history, Git moves, bug SLAs ── */
+/* ── [PCODE-254 | S15 | v0.1.0] T26.3 Flow and backlog: links, WIP limits, warnings, definition of done, triage, templates, recurring tasks ── */
+/* ── [PCODE-252 | S15 | v0.1.0] T26.1 Estimation: units, async planning poker, suggestions from similar tasks, estimate vs actual ── */
+/* ── [PCODE-247 | S15 | v0.1.0] T25.2 Agent scopes enforced: files, branches, network, trace redaction ── */
+/* ── [PCODE-246 | S15 | v0.1.0] T25.1 Agent triggers act: assignment, label, mention, CI failure, schedule, webhook ── */
+/* ── [PCODE-210 | S15 | v0.1.0] T18.2 Command center screen: lanes with people and agents, heatmap, alerts, 24 h replay slider (design preview and live) ── */
+/* ── [PCODE-202 | S15 | v0.1.0] Fix project pages: duplicated tab bars, visible scrollbars, cut-off sidebar, narrow widths ── */
+/* ── [PCODE-200 | S15 | v0.1.0] T16.4 Handover screens: design preview, team Handover tab, portal Handover section with signature ── */
+/* ── [PCODE-164 | S15 | v0.1.0] B1.3 The v2 shell live in the web app: Home per role, Inbox, Clients, portal mode, settings ──
+   Why:  the approved shell around the signed-in app. The frame carries the v2 tokens (.v2-app); the v2
+         parts (sidebar, top bar, the new pages) take the v2 resets through a box-less wrapper, so the pages
+         built before keep their own links, buttons and type size inside the shell. */
+
+.pv-app.v2-part {
+  display: contents;
+}
+
+.v2-app .pv-sidebar,
+.v2-app .pv-topbar {
+  font-size: 13.5px;
+}
+
+.v2-classic {
+  min-width: 0;
+  font-size: var(--pe-font-size);
+  line-height: 1.4;
+}
+
+.v2-band {
+  padding-bottom: 0;
+}
+
+.v2-band + .v2-classic > .pe-page {
+  padding-top: 8px;
+}
+
+/* ── top bar: offline, account menu ── */
+.v2-pill--offline {
+  background: var(--pv-warn-bg);
+  color: var(--pv-warn);
+}
+
+.v2-account {
+  position: relative;
+}
+
+.v2-account-btn {
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.v2-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 40;
+  min-width: 220px;
+  padding: 6px;
+  border: 1px solid var(--pv-line);
+  border-radius: var(--pv-radius);
+  background: var(--pv-card);
+  box-shadow: var(--pe-shadow-2);
+}
+
+.v2-menu-head {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 10px 10px;
+  border-bottom: 1px solid var(--pv-line);
+  margin-bottom: 4px;
+}
+
+.v2-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: var(--pv-radius-sm);
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.v2-menu-item:hover {
+  background: var(--pe-hover);
+}
+
+/* ── forms of the v2 pages ── */
+.v2-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  align-items: end;
+}
+
+.v2-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12.5px;
+  color: var(--pv-text-2);
+}
+
+.v2-input {
+  min-height: 32px;
+  padding: 5px 10px;
+  border: 1px solid var(--pv-line-strong);
+  border-radius: var(--pv-radius-sm);
+  background: var(--pv-card);
+  color: var(--pv-text);
+  font: inherit;
+}
+
+textarea.v2-input {
+  resize: vertical;
+}
+
+.v2-mono {
+  font-family: var(--pe-font-mono);
+}
+
+.v2-actions,
+.v2-inline,
+.v2-editor {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.v2-editor {
+  margin-top: 6px;
+}
+
+.v2-pad {
+  margin: 0;
+  padding: 12px 16px;
+}
+
+.v2-error {
+  margin: 0 0 12px;
+  padding: 8px 12px;
+  border-radius: var(--pv-radius-sm);
+  background: var(--pv-bad-bg);
+  color: var(--pv-bad);
+}
+
+.v2-undo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 12px;
+  padding: 6px 12px;
+  border-radius: var(--pv-radius-sm);
+  background: var(--pe-surface-3);
+}
+
+.v2-break {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+/* ── clients ── */
+.v2-split {
+  grid-template-columns: minmax(240px, 1fr) minmax(0, 2fr);
+  align-items: start;
+}
+
+.v2-row-btn {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.v2-row-btn:hover {
+  background: var(--pe-hover);
+}
+
+.v2-row-btn[aria-current='true'] {
+  background: var(--pv-accent-bg);
+}
+
+.v2-switches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin-bottom: 10px;
+}
+
+.v2-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ── settings: notification matrix, inherited values ── */
+.v2-scroll {
+  overflow-x: auto;
+}
+
+.v2-matrix th[scope='row'] {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  height: auto;
+  padding: 8px 12px;
+  text-align: left;
+  font-weight: 400;
+  color: var(--pv-text);
+}
+
+.v2-matrix td,
+.v2-matrix thead th {
+  text-align: center;
+}
+
+.v2-matrix-label {
+  font-weight: 550;
+}
+
+.v2-setting {
+  align-items: flex-start;
+}
+
+@media (max-width: 900px) {
+  .v2-split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.pv-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── the pages built before sat on the gradient band of the v1 shell; in the v2 shell they sit on the calm
+      surface, so what was white on the band reads in the text colours ── */
+.v2-classic .pe-page-title {
+  color: var(--pe-text);
+}
+
+.v2-classic .pe-eyebrow,
+.v2-classic .pe-page-subtitle,
+.v2-classic .pe-page > .pe-crumbs {
+  color: var(--pe-text-2);
+}
+
+.v2-classic .pe-eyebrow a:hover,
+.v2-classic .pe-page > .pe-crumbs a:hover {
+  color: var(--pe-text);
+}
+
+.v2-classic .pe-tab {
+  color: var(--pe-text-2);
+}
+
+.v2-classic .pe-tab:hover {
+  background: var(--pe-hover);
+  color: var(--pe-text);
+}
+
+.v2-classic .pe-tab[aria-current='page'] {
+  background: var(--pe-surface);
+  color: var(--pe-primary);
+  box-shadow: inset 0 0 0 1px var(--pe-border);
+}
+
+.v2-classic .pe-page-actions .pe-btn--primary {
+  background: var(--pe-primary);
+  color: var(--pe-primary-text);
+}
+
+.v2-classic .pe-page-actions .pe-btn--secondary {
+  background: var(--pe-secondary);
+  border-color: transparent;
+  color: var(--pe-secondary-text);
+}
+
+.v2-classic .pe-page-actions .pe-btn--secondary:hover {
+  background: var(--pe-secondary-hover);
+}
+
+.v2-classic .pe-item-main > .pe-field--title .pe-input--title {
+  color: var(--pe-text);
+}
+
+.v2-classic .pe-item-main > .pe-field--title .pe-input--title:hover:not(:disabled) {
+  border-color: var(--pe-border);
+}
+
+.v2-classic .pe-item-main > .pe-field--title .pe-input--title:focus {
+  border-color: var(--pe-primary);
+}
+
+/* ── [PCODE-166 | S15 | v0.1.0] the project's tabs and the live Planning tab ── */
+.v2-project-tabs {
+  margin: 0;
+  padding: 10px 28px 0;
+  background: var(--pv-bg);
+}
+
+.v2-project-tabs + .v2-classic > .pe-page,
+.v2-project-tabs ~ .pv-page {
+  padding-top: 16px;
+}
+
+.v2-grow {
+  flex: 1;
+  min-width: 160px;
+}
+
+.v2-num {
+  width: 84px;
+  text-align: right;
+}
+
+.v2-reason {
+  margin-top: 4px;
+  max-width: 420px;
+}
+
+.v2-chip-btn {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.v2-chip-btn:disabled {
+  cursor: default;
+}
+
+.pv-filter-chip {
+  height: 28px;
+  padding: 0 10px;
+  border: 1px solid var(--pv-line-strong);
+  border-radius: 999px;
+  background: var(--pv-card);
+  font-size: 12.5px;
+  cursor: pointer;
+}
+
+.pv-filter-chip[aria-pressed='true'] {
+  border-color: var(--pv-accent);
+  background: var(--pv-accent-bg);
+  color: var(--pv-accent);
+  font-weight: 600;
+}
+
+.v2-vote {
+  padding: 1px 8px;
+  border: 1px solid var(--pv-line);
+  border-radius: 999px;
+  background: var(--pv-card);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.v2-vote[aria-pressed='true'] {
+  border-color: var(--pv-accent);
+  color: var(--pv-accent);
+  font-weight: 600;
+}
+
+.v2-sticky-foot {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.v2-sticky-foot .pv-small {
+  flex: 1;
+}
+
+.v2-review {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px 24px;
+}
+
+.v2-h3 {
+  margin: 0 0 6px;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.v2-complete {
+  margin-top: 12px;
+  border-top: 1px solid var(--pv-line);
+}
+
+.v2-plain {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.pv-pre {
+  white-space: pre-wrap;
+  color: var(--pv-text-2);
+}
+
+@media (max-width: 700px) {
+  .v2-project-tabs {
+    padding: 8px 16px 0;
+  }
+}
+
+.pv-app.v2-part:has(> .v2-project-tabs) + .pv-app.v2-part > .pv-page,
+.pv-app.v2-part:has(> .v2-project-tabs) ~ .v2-classic > .pe-page {
+  padding-top: 16px;
+}
+
+/* the live board has as many columns as the project has states */
+.v2-board {
+  grid-template-columns: none;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(196px, 1fr);
+}
+
+.pv-props input[type='checkbox'] {
+  width: 18px;
+  height: 18px;
+  margin: 7px 0;
+}
+
+/* ── [PCODE-167 | S15 | v0.1.0] the Canvas ── */
+.v2-deps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.v2-dep {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 4px 1px 8px;
+  border: 1px solid var(--pv-line);
+  border-radius: 999px;
+  font-size: 12px;
+}
+
+/* ── [PCODE-170 | S15 | v0.1.0] Ideation ── */
+.v2-row-off td {
+  color: var(--pv-text-2);
+  text-decoration: line-through;
+}
+
+.v2-cite {
+  display: block;
+  margin-top: 4px;
+  padding-left: 8px;
+  border-left: 2px solid var(--pv-line-strong);
+  color: var(--pv-text-2);
+  font-size: 12px;
+  font-style: italic;
+}
+
+.v2-input--sm {
+  min-height: 28px;
+  padding: 3px 6px;
+  font-size: 12.5px;
+}
+
+.v2-question {
+  align-items: flex-start;
+}
+
+.v2-answer {
+  display: block;
+  margin-top: 4px;
+  padding: 6px 8px;
+  border-radius: var(--pv-radius-sm);
+  background: var(--pv-ok-bg);
+  font-size: 12.5px;
+}
+
+.v2-matrix5 {
+  display: grid;
+  gap: 3px;
+  padding: 12px 16px;
+}
+
+.v2-matrix5-row {
+  display: grid;
+  grid-template-columns: 20px repeat(5, minmax(0, 1fr));
+  gap: 3px;
+}
+
+.v2-matrix5-cell {
+  display: grid;
+  place-items: center;
+  height: 26px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.v2-heat-lo {
+  background: var(--pv-ok-bg);
+}
+
+.v2-heat-mid {
+  background: var(--pv-warn-bg);
+}
+
+.v2-heat-hi {
+  background: var(--pv-bad-bg);
+}
+
+.v2-center {
+  text-align: center;
+}
+
+.v2-spread {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--pv-line);
+}
+
+.v2-scorers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin: 6px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ── [PCODE-171 | S15 | v0.1.0] Documents ── */
+.pv-docs.v2-docs {
+  grid-template-columns: 260px minmax(0, 1fr);
+}
+
+.v2-docs .pv-doc-main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0;
+  background: none;
+  border: 0;
+}
+
+.v2-doc {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 16px;
+  align-items: start;
+}
+
+.v2-doc-page {
+  min-width: 0;
+  padding: 20px 28px 28px;
+  background: var(--pv-card);
+  border: 1px solid var(--pv-line);
+  border-radius: var(--pv-radius);
+}
+
+.v2-depth-1 {
+  padding-left: 18px;
+}
+
+.v2-depth-2,
+.v2-depth-3,
+.v2-depth-4 {
+  padding-left: 30px;
+}
+
+.v2-editor-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.v2-editor-text {
+  min-height: 460px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.v2-editor-preview {
+  max-height: 520px;
+  overflow: auto;
+  padding: 0 4px;
+  border-left: 1px solid var(--pv-line);
+  padding-left: 16px;
+}
+
+.v2-md {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.v2-md h2 {
+  margin: 20px 0 8px;
+  font-size: 18px;
+}
+
+.v2-md h3 {
+  margin: 16px 0 6px;
+  font-size: 15.5px;
+}
+
+.v2-md h4 {
+  margin: 14px 0 4px;
+  font-size: 14px;
+}
+
+.v2-md p,
+.v2-md ul,
+.v2-md ol,
+.v2-md blockquote {
+  margin: 0 0 10px;
+}
+
+.v2-md ul,
+.v2-md ol {
+  padding-left: 22px;
+}
+
+.v2-md blockquote {
+  padding: 6px 12px;
+  border-left: 3px solid var(--pv-accent);
+  background: var(--pv-accent-bg);
+  border-radius: 0 var(--pv-radius-sm) var(--pv-radius-sm) 0;
+}
+
+.v2-md code {
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: var(--pe-surface-3);
+  font-family: var(--pe-font-mono);
+  font-size: 0.9em;
+}
+
+.pv-app .v2-md a {
+  color: var(--pe-link);
+  text-decoration: underline;
+}
+
+.v2-doc .pv-side-tabs {
+  flex-wrap: wrap;
+}
+
+.v2-md-code {
+  margin: 0 0 12px;
+}
+
+.v2-md-code figcaption {
+  font-size: 11.5px;
+  color: var(--pv-text-2);
+}
+
+.v2-md-code pre {
+  margin: 4px 0 0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: var(--pv-radius-sm);
+  background: var(--pe-surface-3);
+}
+
+.v2-md-code pre code {
+  padding: 0;
+  background: none;
+}
+
+.v2-md-task {
+  list-style: none;
+  margin-left: -20px;
+}
+
+.v2-md-task input {
+  margin-right: 6px;
+}
+
+.v2-md-missing {
+  color: var(--pv-bad);
+  text-decoration: underline dotted;
+}
+
+.v2-thread {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--pv-line);
+}
+
+.v2-thread--done {
+  opacity: 0.6;
+}
+
+.v2-diff-same {
+  color: var(--pv-text-2);
+  white-space: pre-wrap;
+}
+
+.v2-props-col {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* [PCODE-270 | S15 | v0.1.0] the same width at which the side panel moves below the page */
+@media (max-width: 1280px) {
+  .v2-doc,
+  .v2-editor-split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .pv-docs.v2-docs {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.v2-left {
+  text-align: left;
+}
+
+/* ── [PCODE-172 | S15 | v0.1.0] UI kit ── */
+.v2-thumb {
+  display: block;
+  width: 100%;
+  max-height: 120px;
+  object-fit: cover;
+  border-radius: 6px;
+  background: var(--pe-surface-3);
+}
+
+.v2-compare {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 12px;
+}
+
+.v2-pinned {
+  margin: 0;
+}
+
+.v2-pinned-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--pv-line);
+  border-radius: var(--pv-radius-sm);
+  background: var(--pe-surface-3);
+}
+
+.v2-pinned-svg--place {
+  cursor: crosshair;
+}
+
+.v2-pin circle {
+  fill: var(--pv-accent);
+  stroke: #fff;
+  stroke-width: 3;
+}
+
+.v2-pin text {
+  fill: #fff;
+  font-weight: 700;
+}
+
+.v2-pin--done {
+  opacity: 0.45;
+}
+
+.v2-pin-draft {
+  fill: none;
+  stroke: var(--pv-accent);
+  stroke-width: 4;
+  stroke-dasharray: 6 4;
+}
+
+.v2-pins {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.v2-pins li {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: start;
+}
+
+.v2-mt {
+  margin-top: 12px;
+}
+
+.v2-assets {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.v2-asset {
+  display: grid;
+  gap: 6px;
+  justify-items: start;
+}
+
+.v2-asset-img {
+  width: 100%;
+  max-height: 120px;
+  object-fit: contain;
+  border-radius: 6px;
+  background: var(--pe-surface-3);
+}
+
+.v2-swatch-none {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border: 1px dashed var(--pv-line-strong);
+  border-radius: 5px;
+}
+
+@media (max-width: 1100px) {
+  .pv-mock.v2-mock,
+  .v2-compare {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.v2-pin-num {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: var(--pv-accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* [PCODE-178 | S15 | v0.1.0] the release that is open in the Versions tab */
+.v2-row-on td {
+  background: var(--pe-hover);
+}
+
+/* [PCODE-178 | S15 | v0.1.0] a row title that is a button reads like the other row titles */
+.pv-app .pv-row-main > .pv-link-btn {
+  align-self: flex-start;
+  text-align: left;
+}
+
+/* [PCODE-179 | S15 | v0.1.0] a file input that lives inside its button */
+.v2-file-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* [PCODE-179 | S15 | v0.1.0] short table values stay on one line */
+.v2-nowrap {
+  white-space: nowrap;
+}
+
+/* [PCODE-180 | S15 | v0.1.0] an agent's live work reads as a list; the instructions take the card's width */
+.pv-app .pv-agent-live .pv-link-btn {
+  text-align: left;
+}
+
+.v2-block {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* [PCODE-183 | S15 | v0.1.0] an event's time stays on one line */
+.pv-app .pv-ev-time {
+  white-space: nowrap;
+}
+
+/* [PCODE-186 | S15 | v0.1.0] a signature row wraps on a phone instead of running out of its card */
+.pv-app .pv-sign .pv-ask {
+  flex-wrap: wrap;
+}
+.pv-app .pv-sign .pv-ask input {
+  min-width: 0;
+  flex: 1 1 12rem;
+}
+
+/* [PCODE-191 | S15 | v0.1.0] a day without probes on the status page */
+.pv-app .pv-up--none {
+  fill: var(--pv-line-strong);
+}
+
+/* [PCODE-200 | S15 | v0.1.0] a handover checklist item: box, then its label and who ticked it */
+.v2-check,
+.pv-row-main.v2-check {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+}
+.v2-check > span {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.v2-check input {
+  margin-top: 3px;
+}
+
+/* [PCODE-202 | S15 | v0.1.0] one quiet tab bar: no leftover margin above it, no native scrollbar under it
+   (it still scrolls by wheel, touch and keyboard); the bar fades at the edge when more tabs follow */
+.pv-app.v2-part > .pv-tabs.v2-project-tabs {
+  margin: 0;
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent);
+  mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent);
+}
+.pv-app .pv-tabs,
+.pe-tabbar {
+  scrollbar-width: none;
+}
+.pv-app .pv-tabs::-webkit-scrollbar,
+.pe-tabbar::-webkit-scrollbar {
+  display: none;
+}
+.pv-app .pv-tab {
+  flex: none;
+  white-space: nowrap;
+}
+
+/* [PCODE-202 | S15 | v0.1.0] the sidebar scrolls on short windows with a thin bar, no arrow buttons */
+@supports not selector(::-webkit-scrollbar) {
+  .pv-app .pv-nav-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: var(--pv-line-strong) transparent;
+  }
+}
+.pv-app .pv-nav-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.pv-app .pv-nav-scroll::-webkit-scrollbar-button {
+  display: none;
+}
+.pv-app .pv-nav-scroll::-webkit-scrollbar-thumb {
+  background: var(--pv-line-strong);
+  border-radius: 3px;
+}
+
+/* [PCODE-202 | S15 | v0.1.0] the overview's four tiles: four in a row, two by two on tablets, two small ones a row on
+   phones (no lone tile in a row, no phone screen filled by one number) */
+.v2-classic .pe-stats {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+@media (max-width: 1100px) {
+  .v2-classic .pe-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 560px) {
+  .v2-classic .pe-stats {
+    gap: 12px;
+  }
+  .v2-classic .pe-stat {
+    min-height: 0;
+    padding: 14px;
+  }
+  .v2-classic .pe-stat .pe-stat-value {
+    font-size: 26px;
+  }
+}
+
+/* [PCODE-202 | S15 | v0.1.0] a task number never breaks across lines */
+.v2-classic td.pe-mono,
+.v2-classic .pe-mono {
+  white-space: nowrap;
+}
+
+/* ── [PCODE-210 | S15 | v0.1.0] the command center: lanes, cards with faces, heatmap cells, replay bar ── */
+.v2-cc .v2-cc-replay {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  border: 1px solid var(--pv-line);
+  border-radius: var(--pv-radius);
+  background: var(--pv-card);
+}
+.v2-cc-slider {
+  flex: 1;
+  min-width: 120px;
+  accent-color: var(--pv-accent);
+}
+.v2-cc-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 12px;
+  align-items: start;
+}
+@media (max-width: 1100px) {
+  .v2-cc-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.v2-cc-lanes {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.v2-cc-lane {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 10px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--pv-line);
+  border-left: 3px solid transparent;
+}
+.v2-cc-lane:last-child {
+  border-bottom: 0;
+}
+.v2-cc-lane--at-risk {
+  border-left-color: var(--pv-warn);
+}
+.v2-cc-lane--critical {
+  border-left-color: var(--pv-bad);
+}
+.v2-cc-lane-head {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.v2-cc-why {
+  color: var(--pv-text-2);
+  font-size: 11.5px;
+}
+.v2-cc-cards {
+  display: flex;
+  gap: 6px;
+  margin: 0;
+  padding: 0 0 2px;
+  list-style: none;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+.v2-cc-card {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 2px;
+  flex: none;
+  width: 168px;
+  min-height: 64px;
+  padding: 6px 8px;
+  border: 1px solid var(--pv-line);
+  border-radius: 5px;
+  background: var(--pv-bg);
+  font-size: 12px;
+}
+.v2-cc-ref {
+  color: var(--pv-text-2);
+  font-family: var(--pe-font-mono);
+  font-size: 10.5px;
+}
+.v2-cc-title {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-height: 1.3;
+}
+.v2-cc-faces {
+  display: flex;
+  gap: 3px;
+}
+.v2-cc-face {
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--pe-surface-3);
+  color: var(--pv-text);
+  font-size: 9px;
+  font-weight: 650;
+}
+.v2-cc-face--here {
+  background: var(--pv-ok-bg);
+  color: var(--pv-ok);
+  box-shadow: 0 0 0 1.5px var(--pv-ok);
+}
+.v2-cc-face--agent {
+  border-radius: 4px;
+  background: var(--pv-agent-bg);
+  color: var(--pv-agent);
+}
+.v2-cc-none {
+  align-self: center;
+}
+.v2-cc-spark {
+  width: 96px;
+  height: 16px;
+}
+.v2-cc-spark rect {
+  fill: var(--pv-line);
+}
+.v2-cc-spark .v2-cc-spark-on {
+  fill: var(--pv-accent);
+  opacity: 0.6;
+}
+.v2-cc-spark .v2-cc-spark-mark {
+  fill: var(--pv-bad);
+  opacity: 1;
+}
+.v2-cc-cell {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 11.5px;
+  white-space: nowrap;
+}
+.v2-cc-cell--ok {
+  background: var(--pv-ok-bg);
+  color: var(--pv-ok);
+}
+.v2-cc-cell--warn {
+  background: var(--pv-warn-bg);
+  color: var(--pv-warn);
+}
+.v2-cc-cell--bad {
+  background: var(--pv-bad-bg);
+  color: var(--pv-bad);
+}
+.v2-cc-cell--none {
+  color: var(--pv-text-2);
+}
+.v2-cc-gate {
+  display: inline-block;
+  padding: 0 4px;
+  border-radius: 3px;
+  font-family: var(--pe-font-mono);
+  font-size: 10.5px;
+}
+.v2-cc-gate.v2-cc-cell--none {
+  border: 1px solid var(--pv-line);
+}
+@media (max-width: 640px) {
+  .v2-cc-lane {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .v2-cc .v2-cc-replay {
+    flex-wrap: wrap;
+  }
+}
+
+/* [PCODE-242 | S15 | v0.1.0] "Read again" after a file's read note */
+.pv-app .pv-row-sub .pv-link-btn {
+  margin-left: 8px;
+}
+
+/* [PCODE-246 | S15 | v0.1.0] the agent webhook: a long address wraps on a phone */
+.ag-webhook {
+  margin-top: 12px;
+}
+.ag-webhook code {
+  overflow-wrap: anywhere;
+}
+
+/* [PCODE-247 | S15 | v0.1.0] the web reading switch under the scope fields */
+.ag-web {
+  margin-top: 10px;
+}
+
+/* [PCODE-252 | S15 | v0.1.0] estimation in the task drawer: suggestion and planning poker */
+.es-panel {
+  display: grid;
+  gap: 8px;
+  margin: 10px 0;
+}
+.es-hint,
+.es-poker {
+  padding: 8px 10px;
+  border: 1px solid var(--pe-border);
+  border-radius: var(--pv-radius-sm);
+  background: var(--pe-surface-2);
+}
+.es-similar {
+  margin: 6px 0 0;
+  padding-left: 16px;
+}
+.es-deck {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 6px 0;
+}
+.es-card {
+  position: relative;
+  min-width: 34px;
+  height: 44px;
+  padding: 0 6px;
+  border: 1px solid var(--pe-border);
+  border-radius: 6px;
+  background: var(--pe-surface);
+  color: inherit;
+  font: inherit;
+  font-weight: 600;
+  display: inline-grid;
+  place-items: center;
+  cursor: pointer;
+}
+.es-card--mine {
+  border-color: var(--pe-primary);
+  background: var(--pe-primary-container);
+}
+.es-card--shown {
+  cursor: default;
+  height: 52px;
+  align-content: start;
+  padding-top: 6px;
+}
+.es-who {
+  font-size: 10px;
+  font-weight: 400;
+  opacity: 0.7;
+  max-width: 64px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* [PCODE-254 | S15 | v0.1.0] links, definitions and warnings */
+.fl-block {
+  display: grid;
+  gap: 4px;
+  margin: 10px 0;
+}
+.fl-links {
+  margin: 0;
+  padding-left: 16px;
+  font-size: 13px;
+}
+.fl-done {
+  text-decoration: line-through;
+}
+.fl-warn {
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: var(--pv-bad-bg);
+  color: var(--pv-bad, #b42318);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* [PCODE-255 | S15 | v0.1.0] keys, selection, bulk bar, undo note, fix times, history */
+.pk-focus {
+  outline: 2px solid var(--pe-primary);
+  outline-offset: 1px;
+}
+.pk-selected {
+  background: var(--pe-primary-container) !important;
+}
+/* [PCODE-269 | S15 | v0.1.0] an epic chip that opens the epic */
+button.pv-epic--open {
+  border: 0;
+  font: inherit;
+  cursor: pointer;
+}
+button.pv-epic--open:hover,
+button.pv-epic--open:focus-visible {
+  text-decoration: underline;
+}
+/* [PCODE-271 | S15 | v0.1.0] the project tab bar fades where more tabs are */
+.v2-tabs--more-right {
+  mask-image: linear-gradient(to right, #000 calc(100% - 48px), transparent);
+}
+.v2-tabs--more-left {
+  mask-image: linear-gradient(to right, transparent, #000 48px);
+}
+.v2-tabs--more-left.v2-tabs--more-right {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 48px,
+    #000 calc(100% - 48px),
+    transparent
+  );
+}
+.pk-bulk {
+  position: sticky;
+  /* [PCODE-268 | S15 | v0.1.0] below the app's top bar, not over it */
+  top: calc(var(--pv-top, 48px) + 4px);
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid var(--pe-primary);
+  border-radius: var(--pv-radius-sm);
+  background: var(--pe-surface);
+}
+.pk-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 20px;
+  z-index: 50;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: var(--pe-text, #1c1b3a);
+  color: var(--pe-surface, #fff);
+  max-width: calc(100vw - 32px);
+}
+.pk-toast .pv-link-btn,
+.pk-toast .pv-mini-btn {
+  color: inherit;
+}
+.pk-help {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgb(0 0 0 / 35%);
+}
+.pk-help-card {
+  display: grid;
+  gap: 10px;
+  max-width: 440px;
+  width: 100%;
+  padding: 16px;
+  border-radius: 10px;
+  background: var(--pe-surface);
+}
+.pk-kbd {
+  font-family: var(--pe-font-mono);
+  font-size: 12px;
+  padding: 1px 6px;
+  border: 1px solid var(--pe-border);
+  border-radius: 4px;
+}
+.pk-sla {
+  font-size: 11px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--pe-surface-3);
+  white-space: nowrap;
+}
+.pk-sla--over {
+  background: var(--pv-bad-bg);
+  color: var(--pv-bad);
+}
+.pk-history-list {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  font-size: 13px;
+}
+.pk-history {
+  padding: 14px 16px;
+}
+
+/* [PCODE-256 | S15 | v0.1.0] the planning charts */
+.fc-figure {
+  margin: 0;
+}
+.fc-figure svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.fc-axes line {
+  stroke: var(--pe-border);
+}
+.fc-axes .fc-grid {
+  stroke-dasharray: 2 4;
+}
+.fc-axes text {
+  font-size: 10px;
+  fill: var(--pv-muted, #6b6a8a);
+}
+.fc-line {
+  fill: none;
+  stroke-width: 2.5;
+}
+.fc-scope,
+.fc-ideal,
+.fc-mean {
+  stroke: #9a99b8;
+  background: #9a99b8;
+}
+.fc-mean {
+  stroke-dasharray: 4 4;
+}
+.fc-done,
+.fc-g-completed {
+  stroke: #12a150;
+  fill: #12a150;
+  background: #12a150;
+}
+.fc-remaining,
+.fc-g-started,
+.fc-dot,
+.fc-bar {
+  stroke: var(--pe-primary);
+  fill: var(--pe-primary);
+  background: var(--pe-primary);
+}
+.fc-line.fc-done,
+.fc-line.fc-remaining,
+.fc-line.fc-scope,
+.fc-line.fc-ideal {
+  fill: none;
+}
+.fc-band {
+  stroke: none;
+  opacity: 0.85;
+}
+.fc-g-unstarted {
+  fill: #a6a2e6;
+  background: #a6a2e6;
+}
+.fc-g-backlog {
+  fill: #d6d4ee;
+  background: #d6d4ee;
+}
+.fc-p85 {
+  stroke: var(--pv-bad);
+  background: var(--pv-bad);
+  stroke-dasharray: 2 3;
+}
+.fc-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 12px;
+  opacity: 0.8;
+}
+.fc-key {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  vertical-align: middle;
+}
+
+/* [PCODE-257 | S15 | v0.1.0] initiatives, types and fields */
+.hu-init .hu-progress {
+  display: grid;
+  gap: 4px;
+  min-width: 180px;
+}
+.hu-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  vertical-align: middle;
+}
+.hu-settings {
+  display: grid;
+  gap: 16px;
+  margin-top: 16px;
+}
+.hu-shape {
+  margin-top: 8px;
+}
+
+/* [PCODE-260 | S15 | v0.1.0] the interactive Gantt: folds, grips, link dots, split pieces */
+.pv-gantt-pick {
+  min-width: 0;
+  min-height: 24px; /* [PCODE-358 | S15 | v0.1.0] */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.pv-gantt-pick:focus-visible,
+.pv-fold:focus-visible {
+  outline: 2px solid var(--pe-primary);
+  outline-offset: 1px;
+}
+.pv-fold {
+  flex: none;
+  width: 24px; /* [PCODE-358 | S15 | v0.1.0] 24 px targets */
+  min-height: 24px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--pv-text-2);
+  font-size: 11px;
+  cursor: pointer;
+}
+.pv-gantt-item--edit .pv-task-bar,
+.pv-gantt-item--edit .pv-milestone {
+  cursor: grab;
+}
+.pv-gantt--drag,
+.pv-gantt--drag * {
+  cursor: grabbing !important;
+  user-select: none;
+}
+.pv-bar-grip {
+  fill: transparent;
+  cursor: ew-resize;
+}
+.pv-gantt-item--edit:hover .pv-bar-grip {
+  fill: color-mix(in srgb, var(--pe-text) 25%, transparent);
+}
+.pv-link-dot {
+  fill: var(--pv-card);
+  stroke: var(--pv-text-2);
+  stroke-width: 1.2;
+  opacity: 0;
+  cursor: crosshair;
+}
+.pv-gantt-item--edit:hover .pv-link-dot,
+.pv-gantt--drag .pv-link-dot {
+  opacity: 1;
+}
+.pv-gantt-item--target .pv-task-bar,
+.pv-gantt-item--target .pv-milestone {
+  stroke: var(--pe-primary);
+  stroke-width: 2;
+}
+.pv-link-line {
+  stroke: var(--pe-primary);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 3;
+  pointer-events: none;
+}
+.pv-split-gap {
+  stroke: var(--pv-text-2);
+  stroke-width: 1.2;
+  stroke-dasharray: 2 3;
+}
+.pv-bar-flag {
+  fill: var(--pv-bad);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* [PCODE-261 | S15 | v0.1.0] the grid as a spreadsheet */
+.pv-grid-tools {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--pv-line);
+}
+.pv-sheet-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 220px;
+}
+.pv-sheet-title .pv-cell-input {
+  flex: 1;
+  text-align: left;
+}
+.pv-cell-input--date {
+  width: 104px;
+}
+.pv-cell-input--preds {
+  width: 110px;
+  text-align: left;
+}
+.pv-cell-input--sel {
+  background: var(--pv-accent-bg);
+  box-shadow: inset 0 0 0 1px var(--pe-primary);
+}
+.pv-cell-input--bad {
+  box-shadow: inset 0 0 0 1.5px var(--pv-bad);
+}
+.pv-sheet .pv-cell-input {
+  min-width: 0;
+}
+.pv-sheet td:nth-child(7) .pv-cell-input {
+  width: 130px;
+}
+
+/* [PCODE-262 | S15 | v0.1.0] timeline, mind map, portfolio, heat map, commit marks */
+.pv-commit--pr {
+  fill: var(--pv-card);
+  stroke: var(--pe-accent);
+  stroke-width: 1.5;
+}
+.pv-tl-lane {
+  fill: var(--pv-text-2);
+  font-size: 11.5px;
+  font-weight: 600;
+}
+.pv-tl-bar {
+  fill: color-mix(in srgb, var(--pe-primary) 20%, var(--pv-card));
+}
+.pv-tl-bar--crit {
+  stroke: var(--pv-bad);
+  stroke-width: 1;
+}
+.pv-tl-done {
+  fill: var(--pe-primary);
+  opacity: 0.85;
+  pointer-events: none;
+}
+.pv-tl-part {
+  fill: var(--pv-text-2);
+  opacity: 0.45;
+}
+.pv-tl-part--done {
+  fill: var(--pv-good, #2f9e6a);
+  opacity: 0.9;
+}
+.pv-mind-link {
+  fill: none;
+  stroke: var(--pv-line-strong);
+  stroke-width: 1.4;
+}
+.pv-mind-box {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 0 6px;
+  border: 1px solid var(--pv-line-strong);
+  border-left: 4px solid var(--pe-primary);
+  border-radius: 6px;
+  background: var(--pv-card);
+  font-size: 12.5px;
+}
+.pv-mind-box--root {
+  border-left-color: var(--pe-text);
+  font-weight: 650;
+}
+.pv-mind-box--epic,
+.pv-mind-box--initiative {
+  border-left-color: #7a5cc0;
+  font-weight: 600;
+}
+.pv-mind-box--bug {
+  border-left-color: var(--pv-bad);
+}
+.pv-mind-box--milestone {
+  border-left-color: var(--pe-text);
+}
+.pv-mind-title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.pv-mind-pct {
+  color: var(--pv-text-2);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+.pv-mind-add {
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 1px solid var(--pv-line);
+  border-radius: 50%;
+  background: var(--pv-card);
+  color: var(--pv-text-2);
+  line-height: 1;
+  cursor: pointer;
+}
+.pv-mind-add:hover,
+.pv-mind-add:focus-visible {
+  border-color: var(--pe-primary);
+  color: var(--pe-primary);
+}
+.pv-portfolio td {
+  vertical-align: middle;
+}
+.pv-heatmap {
+  border-collapse: separate;
+  border-spacing: 2px;
+  margin: 8px 12px;
+  font-size: 12px;
+}
+.pv-heatmap-day {
+  width: 14px;
+  min-width: 14px;
+  max-width: 14px;
+  color: var(--pv-text-2);
+  font-weight: 500;
+  font-size: 10.5px;
+  text-align: left;
+  white-space: nowrap;
+}
+.pv-heatmap-who {
+  padding-right: 10px;
+  text-align: left;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.pv-heatmap-cell {
+  width: 14px;
+  height: 18px;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px var(--pv-line);
+}
+.pv-heatmap-cell--over {
+  box-shadow: inset 0 0 0 1px var(--pv-bad);
+}
+.pv-heatmap-day span {
+  display: inline-block;
+  width: 0;
+  overflow: visible;
+}
+/* [PCODE-263 | S15 | v0.1.0] the export menu and the import preview */
+.pv-menu-wrap {
+  position: relative;
+  display: inline-flex;
+}
+.pv-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  min-width: 170px;
+  padding: 4px;
+  border: 1px solid var(--pv-line);
+  border-radius: 8px;
+  background: var(--pv-card);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 12%);
+}
+.pv-menu-item {
+  padding: 6px 10px;
+  border-radius: 5px;
+  color: var(--pv-text);
+  font-size: 13px;
+  text-decoration: none;
+}
+.pv-menu-item:hover,
+.pv-menu-item:focus-visible {
+  background: var(--pe-hover);
+}
+.pv-import-preview {
+  max-height: 320px;
+  margin: 8px 0;
+  overflow: auto;
+}
+/* [PCODE-264 | S15 | v0.1.0] the picture menu, a fresh share link, the shared page */
+.pv-menu--wide {
+  min-width: 260px;
+  gap: 6px;
+  padding: 8px;
+}
+.pv-menu button.pv-menu-item {
+  border: 0;
+  background: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.pv-menu-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+}
+.pv-share-fresh {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid var(--pv-line);
+  border-radius: 8px;
+  background: var(--pv-accent-bg);
+}
+.pv-share-fresh input {
+  flex: 1;
+  min-width: 0;
+}
+.pv-shared {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 16px;
+}
+.pv-shared-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 12px;
+  font-size: 15px;
+}
+/* [PCODE-266 | S15 | v0.1.0] the start date keeps its width when the grid is narrow */
+.pv-sheet .pv-cell-input--date {
+  min-width: 100px;
+}
+
+/* ── [PCODE-274 | S15 | v0.1.0] T28.3 Stories with Given/When/Then and personas; value/effort matrix, evidence library, compare ── */
+.pv-ix-story-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.pv-ix-story {
+  padding: 10px 12px;
+  border-top: 1px solid var(--pv-line);
+}
+.pv-ix-story:first-child {
+  border-top: 0;
+}
+.pv-ix-story-head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.pv-ix-story-text {
+  flex: 1 1 260px;
+  min-width: 0;
+}
+.pv-select--sm {
+  height: 26px;
+  font-size: 12px;
+}
+.pv-ix-scenarios {
+  margin: 8px 0 4px;
+  padding: 0 0 0 18px;
+  display: grid;
+  gap: 6px;
+}
+.pv-ix-scenario {
+  position: relative;
+  padding: 6px 28px 6px 8px;
+  border-left: 2px solid var(--pv-accent);
+  background: var(--pv-accent-bg);
+  border-radius: 0 var(--pv-radius-sm) var(--pv-radius-sm) 0;
+}
+.pv-ix-scenario p {
+  margin: 0;
+}
+.pv-ix-scenario .pv-mini-btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+.pv-ix-scenario-form {
+  display: grid;
+  gap: 6px;
+  margin-top: 8px;
+}
+.pv-ix-kv {
+  grid-template-columns: 64px 1fr;
+}
+.pv-ix-persona-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  align-items: start;
+}
+.pv-ix-persona-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.pv-ix-quote {
+  margin: 0 12px 12px;
+  padding: 6px 10px;
+  border-left: 2px solid var(--pv-line-strong);
+  color: var(--pv-text-2);
+  font-style: italic;
+}
+.pv-ix-matrix-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 420px) minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+.pv-ix-matrix {
+  width: 420px;
+  max-width: 100%;
+  height: auto;
+}
+.pv-ix-matrix-q {
+  fill: var(--pv-card);
+  stroke: var(--pv-line);
+}
+.pv-ix-matrix-q--win {
+  fill: var(--pv-ok-bg);
+}
+.pv-ix-matrix-q--pit {
+  fill: var(--pv-bad-bg);
+}
+.pv-ix-matrix-label,
+.pv-ix-matrix-axis {
+  font-size: 11px;
+  fill: var(--pv-text-2);
+}
+.pv-ix-matrix-dot {
+  cursor: pointer;
+}
+.pv-ix-matrix-dot circle {
+  fill: var(--pv-accent);
+  fill-opacity: 0.75;
+  stroke: var(--pv-card);
+  stroke-width: 2;
+}
+.pv-ix-matrix-dot text {
+  font-size: 11px;
+  fill: var(--pv-text);
+}
+.pv-ix-matrix-dot:focus-visible circle,
+.pv-ix-matrix-dot:hover circle {
+  fill-opacity: 1;
+  stroke: var(--pv-text);
+}
+.pv-ix-row-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.pv-ix-compare th[scope='row'] {
+  width: 140px;
+  color: var(--pv-text-2);
+  font-weight: 500;
+}
+.pv-ix-compare td {
+  vertical-align: top;
+}
+@media (max-width: 760px) {
+  .pv-ix-matrix-wrap {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ── [PCODE-277 | S15 | v0.1.0] T28.6 PRD approval by named approvers, reopen on edit, promote to an epic with stories, client in ideation ── */
+.pv-prd-read {
+  max-height: 60vh;
+  overflow: auto;
+  margin-top: 12px;
+  padding: 12px 16px;
+  border: 1px solid var(--pv-line);
+  border-radius: var(--pv-radius-sm);
+}
+.pv-question .pv-ask {
+  margin-top: 6px;
+}
+
+/* ── [PCODE-279 | S15 | v0.1.0] T29.1 Document blocks: callouts, math and Mermaid diagrams rendered by our own code ── */
+.v2-callout {
+  margin: 10px 0;
+  padding: 8px 12px;
+  border-left: 3px solid var(--pv-info);
+  border-radius: 0 var(--pv-radius-sm) var(--pv-radius-sm) 0;
+  background: var(--pv-info-bg);
+}
+.v2-callout-title {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--pv-info);
+}
+.v2-callout--tip {
+  border-left-color: var(--pv-ok);
+  background: var(--pv-ok-bg);
+}
+.v2-callout--tip .v2-callout-title {
+  color: var(--pv-ok);
+}
+.v2-callout--important {
+  border-left-color: var(--pv-agent);
+  background: var(--pv-agent-bg);
+}
+.v2-callout--important .v2-callout-title {
+  color: var(--pv-agent);
+}
+.v2-callout--warning {
+  border-left-color: var(--pv-warn);
+  background: var(--pv-warn-bg);
+}
+.v2-callout--warning .v2-callout-title {
+  color: var(--pv-warn);
+}
+.v2-callout--caution {
+  border-left-color: var(--pv-bad);
+  background: var(--pv-bad-bg);
+}
+.v2-callout--caution .v2-callout-title {
+  color: var(--pv-bad);
+}
+.v2-math--block {
+  overflow-y: hidden;
+  padding: 4px 0;
+  display: block;
+  margin: 10px 0;
+  overflow-x: auto;
+}
+.v2-math math {
+  font-size: 1.05em;
+}
+.v2-math-error {
+  border-bottom: 1px dashed var(--pv-bad);
+  cursor: help;
+}
+.v2-md-diagram {
+  padding: 8px;
+}
+.v2-dia {
+  max-width: 100%;
+  height: auto;
+  font-size: 13px;
+}
+.v2-dia-box rect,
+.v2-dia-box polygon,
+.v2-dia-box ellipse {
+  fill: var(--pv-card);
+  stroke: var(--pv-line-strong);
+  stroke-width: 1.2;
+}
+.v2-dia-box text,
+.v2-dia-label {
+  fill: var(--pv-text);
+}
+.v2-dia-box rect.v2-dia-note {
+  fill: var(--pv-warn-bg);
+  stroke: var(--pv-warn);
+}
+.v2-dia-box rect.v2-dia-actor {
+  fill: var(--pv-accent-bg);
+}
+.v2-dia-line polyline {
+  fill: none;
+  stroke: var(--pv-text-2);
+  stroke-width: 1.3;
+}
+.v2-dia-line--dotted polyline {
+  stroke-dasharray: 3 3;
+}
+.v2-dia-line--dashed polyline {
+  stroke-dasharray: 6 4;
+}
+.v2-dia-line--thick polyline {
+  stroke-width: 2.6;
+}
+.v2-dia-head {
+  fill: var(--pv-text-2);
+}
+.v2-dia-life {
+  stroke: var(--pv-line-strong);
+  stroke-dasharray: 4 4;
+}
+.v2-dia-label-bg {
+  fill: var(--pv-card);
+}
+.v2-dia-label {
+  font-size: 12px;
+}
+
+/* ── [PCODE-280 | S15 | v0.1.0] T29.2 Block editor for documents: edit in place, insert menu, drag to reorder, paste images ── */
+.v2-editor-mode {
+  width: max-content;
+  margin-bottom: 10px;
+}
+.v2-blocks {
+  display: grid;
+  gap: 2px;
+}
+.v2-blk {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 4px;
+  border-radius: var(--pv-radius-sm);
+}
+.v2-blk--drop {
+  box-shadow: inset 0 2px 0 var(--pv-accent);
+}
+.v2-blk-gutter {
+  display: flex;
+  align-items: flex-start;
+  gap: 2px;
+  padding-top: 6px;
+  opacity: 0;
+  transition: opacity 0.1s;
+}
+.v2-blk:hover .v2-blk-gutter,
+.v2-blk:focus-within .v2-blk-gutter,
+.v2-blk--editing .v2-blk-gutter {
+  opacity: 1;
+}
+.v2-blk-handle,
+.v2-blk-add {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 20px;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: none;
+  color: var(--pv-text-2);
+  font-size: 11px;
+  letter-spacing: -2px;
+  cursor: grab;
+}
+.v2-blk-add {
+  cursor: pointer;
+}
+.v2-blk-handle:hover,
+.v2-blk-add:hover {
+  background: var(--pv-accent-bg);
+  color: var(--pv-accent);
+}
+.v2-blk-body {
+  position: relative;
+  min-width: 0;
+}
+.v2-blk-view {
+  padding: 2px 6px;
+  border-radius: var(--pv-radius-sm);
+  cursor: text;
+}
+.v2-blk-view:hover {
+  background: var(--pv-bg);
+}
+.v2-blk-view:focus-visible {
+  outline: 2px solid var(--pv-accent);
+}
+.v2-blk-view .v2-md > :first-child {
+  margin-top: 0;
+}
+.v2-blk-view .v2-md > :last-child {
+  margin-bottom: 0;
+}
+.v2-blk-field {
+  width: 100%;
+  min-height: 34px;
+  resize: none;
+  overflow: hidden;
+  line-height: 1.5;
+}
+.v2-blk-help {
+  margin: 2px 0 6px;
+  color: var(--pv-text-2);
+  font-size: 11px;
+}
+.v2-blk-menu {
+  position: absolute;
+  z-index: 20;
+  left: 0;
+  top: 100%;
+  width: 280px;
+  max-height: 320px;
+  overflow: auto;
+  margin: 4px 0 0;
+  padding: 4px;
+  list-style: none;
+  border: 1px solid var(--pv-line);
+  border-radius: var(--pv-radius-sm);
+  background: var(--pv-card);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 12%);
+}
+.v2-blk-menu button {
+  display: grid;
+  width: 100%;
+  padding: 5px 8px;
+  border: 0;
+  border-radius: 4px;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.v2-blk-menu button:hover,
+.v2-blk-menu button:focus-visible {
+  background: var(--pv-accent-bg);
+}
+.v2-blk-menu button span {
+  color: var(--pv-text-2);
+  font-size: 11px;
+}
+.v2-blk-menu-none {
+  padding: 6px 8px;
+  color: var(--pv-text-2);
+}
+.v2-blk-end {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 8px 0 0 44px;
+}
+.v2-md-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--pv-radius-sm);
+}
+
+/* ── [PCODE-281 | S15 | v0.1.0] T29.3 Document embeds: live task lists, designs, Gantt, repo code; README import ── */
+.v2-embed {
+  margin: 10px 0;
+  padding: 8px 12px;
+  border: 1px solid var(--pv-line);
+  border-radius: var(--pv-radius-sm);
+  background: var(--pv-card);
+}
+.v2-embed figcaption {
+  margin-bottom: 6px;
+}
+.v2-embed-tasks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+}
+.v2-embed-tasks li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+.v2-embed-tasks a {
+  flex: 1 1 200px;
+  min-width: 0;
+  color: inherit;
+}
+.v2-embed-gantt {
+  font-size: 11.5px;
+}
+.v2-embed-gantt text {
+  fill: var(--pv-text);
+}
+.v2-embed-sum {
+  font-weight: 600;
+}
+.v2-embed-bar {
+  fill: var(--pv-accent);
+  fill-opacity: 0.45;
+}
+.v2-embed-bar--crit {
+  fill: var(--pv-bad);
+}
+.v2-embed-bar--sum {
+  fill: var(--pv-text-2);
+}
+.v2-embed-done {
+  fill: var(--pv-accent);
+  fill-opacity: 0.9;
+}
+.v2-embed-ms {
+  fill: var(--pv-text);
+}
+.v2-embed-today {
+  stroke: var(--pv-warn);
+  stroke-dasharray: 3 3;
+}
+.v2-embed-code {
+  margin: 0;
+  max-height: 420px;
+  overflow: auto;
+  font-size: 12px;
+}
+.v2-embed-line {
+  display: block;
+}
+.v2-embed-n {
+  display: inline-block;
+  width: 4ch;
+  margin-right: 12px;
+  color: var(--pv-text-2);
+  text-align: right;
+  user-select: none;
+}
+
+/* ── [PCODE-282 | S15 | v0.1.0] T29.4 Live co-editing of documents with our own three-way merge ── */
+.v2-live-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.v2-live-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: var(--pv-ok);
+  vertical-align: 0;
+}
+.v2-live-clash {
+  color: var(--pv-warn);
+}
+
+/* ── [PCODE-283 | S15 | v0.1.0] T29.5 Documents: named versions in the screen, visual diff, mentions in comments, page search and Cmd-K ── */
+.v2-doc-hits {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid var(--pv-line);
+}
+.v2-doc-hits ul {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+}
+.v2-doc-hits button {
+  display: grid;
+  gap: 2px;
+  width: 100%;
+  padding: 5px 6px;
+  border: 0;
+  border-radius: var(--pv-radius-sm);
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.v2-doc-hits button:hover,
+.v2-doc-hits button[aria-current='true'] {
+  background: var(--pv-accent-bg);
+}
+.v2-doc-hits span {
+  color: var(--pv-text-2);
+  font-size: 11.5px;
+}
+.v2-doc-hits mark {
+  background: var(--pv-warn-bg);
+  color: inherit;
+}
+.v2-diff-panel {
+  position: fixed;
+  z-index: 40;
+  inset: 64px max(16px, calc(50vw - 460px)) 24px;
+  overflow: auto;
+  padding: 16px 20px;
+  border: 1px solid var(--pv-line);
+  border-radius: var(--pv-radius);
+  background: var(--pv-card);
+  box-shadow: 0 16px 48px rgb(0 0 0 / 18%);
+}
+.v2-diff-head {
+  position: sticky;
+  top: -16px;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin: -16px -20px 12px;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--pv-line);
+  background: var(--pv-card);
+}
+.v2-diff-head strong {
+  flex: 1 1 auto;
+}
+.v2-rdiff > div {
+  padding: 2px 10px;
+  border-left: 3px solid transparent;
+}
+.v2-rdiff-same {
+  opacity: 0.75;
+}
+.v2-rdiff-add {
+  border-left-color: var(--pv-ok) !important;
+  background: var(--pv-ok-bg);
+}
+.v2-rdiff-del {
+  border-left-color: var(--pv-bad) !important;
+  background: var(--pv-bad-bg);
+  text-decoration: line-through;
+  opacity: 0.8;
+}
+.v2-rdiff-change {
+  border-left-color: var(--pv-warn) !important;
+}
+.v2-rdiff-words {
+  white-space: pre-wrap;
+}
+.v2-rdiff ins {
+  background: var(--pv-ok-bg);
+  text-decoration: none;
+}
+.v2-rdiff del {
+  background: var(--pv-bad-bg);
+}
+
+/* ── [PCODE-284 | S15 | v0.1.0] T29.6 Documents: tree drag and drop, files, image annotation, read analytics, per-task knowledge, checked citations ── */
+.v2-tree-drop--inside {
+  outline: 2px solid var(--pv-accent);
+  outline-offset: -2px;
+}
+.v2-tree-drop--before {
+  box-shadow: inset 0 2px 0 var(--pv-accent);
+}
+.v2-tree-files {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.v2-tree-files a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px 2px 28px;
+  color: var(--pv-text-2);
+  font-size: 12px;
+  text-decoration: none;
+}
+.v2-tree-files a:hover {
+  color: var(--pv-text);
+}
+.v2-file-pick {
+  position: relative;
+  width: max-content;
+  overflow: hidden;
+}
+.v2-file-pick input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.v2-task-knowledge {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--pv-line);
+}
+.v2-task-knowledge ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+}
+.v2-md-img {
+  cursor: zoom-in;
+}
+.v2-annotate-src {
+  display: none;
+}
+.v2-annotate-canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  cursor: crosshair;
+  touch-action: none;
+  border: 1px solid var(--pv-line);
+}
+.v2-annotate-label {
+  margin-bottom: 8px;
+}
+.v2-cite--wrong {
+  color: var(--pv-bad);
+  text-decoration: line-through;
+}
+
+/* ── [PCODE-285 | S15 | v0.1.0] T29.7 Documents import (Markdown, Notion, Confluence) and export (Markdown, HTML, PDF, ZIP) ── */
+.v2-doc-io {
+  justify-content: flex-end;
+  margin: -4px 0 8px;
+}
+.v2-import {
+  position: relative;
+}
+.v2-import-panel {
+  position: absolute;
+  z-index: 30;
+  right: 0;
+  top: 100%;
+  width: min(560px, 92vw);
+  margin-top: 6px;
+  padding: 12px;
+  border: 1px solid var(--pv-line);
+  border-radius: var(--pv-radius-sm);
+  background: var(--pv-card);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 12%);
+}
+.v2-import-panel .v2-inline {
+  flex-wrap: wrap;
+}
+.v2-exports {
+  gap: 8px;
+}
+.v2-exports button.pv-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+@media print {
+  body.v2-print-doc * {
+    visibility: hidden;
+  }
+  body.v2-print-doc .v2-doc-page,
+  body.v2-print-doc .v2-doc-page * {
+    visibility: visible;
+  }
+  body.v2-print-doc .v2-doc-page {
+    position: absolute;
+    inset: 0 0 auto 0;
+  }
+  body.v2-print-doc .pv-page-actions,
+  body.v2-print-doc .v2-live-bar {
+    display: none;
+  }
+}
+
+/* ── [PCODE-287 | S15 | v0.1.0] T30.1 Design tokens: themes and modes, aliases, W3C import, iOS and Android export ── */
+.v2-theme-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--pv-line);
+}
+.v2-theme-bar form {
+  margin-left: auto;
+}
+.v2-theme-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.v2-token-import {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+.v2-token-import-result {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--pv-line);
+  border-radius: var(--pv-radius-sm);
+  background: var(--pv-card);
+}
+.v2-token-import-result p {
+  margin: 0 0 6px;
+}
+
+/* ── [PCODE-288 | S15 | v0.1.0] T30.2 Design tokens exported as a pull request (GitHub, Gitea) ── */
+.v2-token-actions {
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.v2-token-actions > * {
+  flex: 1 1 320px;
+}
+.v2-token-pr {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+.v2-token-pr-form {
+  flex-wrap: wrap;
+}
+.v2-token-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+.v2-token-pulls {
+  margin: 8px 0 0;
+  padding-left: 18px;
+}
+
+/* ── [PCODE-289 | S15 | v0.1.0] T30.3 Brand pages: colour, type, voice, logo use, do and don't ── */
+.v2-brand-head {
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.v2-brand-head nav {
+  gap: 14px;
+}
+.v2-brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.v2-brand-group {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--pv-text-2);
+}
+.v2-brand-palette {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.v2-brand-swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+}
+.v2-brand-swatch {
+  margin: 0;
+  border: 1px solid var(--pv-line);
+  border-radius: var(--pv-radius-sm);
+  overflow: hidden;
+  background: var(--pv-card);
+}
+.v2-brand-swatch svg {
+  display: block;
+  width: 100%;
+  height: 72px;
+  border-bottom: 1px solid var(--pv-line);
+}
+.v2-brand-swatch figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px 8px;
+  font-size: 12px;
+}
+.v2-brand-type figure {
+  margin: 0 0 10px;
+}
+.v2-brand-specimen {
+  display: block;
+  width: 100%;
+  max-width: 720px;
+  height: auto;
+  overflow: hidden;
+  color: var(--pv-text);
+}
+.v2-brand-text {
+  width: 100%;
+  font-family: ui-monospace, monospace;
+}
+.v2-brand-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.v2-brand-logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.v2-brand-logos figure {
+  margin: 0;
+  padding: 12px;
+  border: 1px solid var(--pv-line);
+  border-radius: var(--pv-radius-sm);
+}
+.v2-brand-logos img {
+  display: block;
+  max-height: 64px;
+  max-width: 200px;
+}
+.v2-brand-examples {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+.v2-brand-example {
+  margin: 0;
+  border: 2px solid var(--pv-line);
+  border-radius: var(--pv-radius-sm);
+  overflow: hidden;
+}
+.v2-brand-example img {
+  display: block;
+  width: 100%;
+  max-height: 180px;
+  object-fit: contain;
+  background: var(--pv-bg);
+}
+.v2-brand-example figcaption {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px;
+  font-size: 13px;
+}
+.v2-brand-example--do {
+  border-color: var(--pv-ok);
+}
+.v2-brand-example--do strong {
+  color: var(--pv-ok);
+}
+.v2-brand-example--dont {
+  border-color: var(--pv-bad);
+}
+.v2-brand-example--dont strong {
+  color: var(--pv-bad);
+}
+.v2-brand-add {
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+/* ── [PCODE-290 | S15 | v0.1.0] T30.4 UI kit in the code: component usage, a lint for non-token values, the agent rule ── */
+.v2-kit-file {
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+}
+.v2-kit-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0 0 0 8px;
+  list-style: none;
+  font-size: 12px;
+}
+.v2-kit-lines li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── [PCODE-291 | S15 | v0.1.0] T30.5 Live component preview with the project's tokens and themes ── */
+.v2-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 4px 0 8px;
+}
+.v2-preview-bar {
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.v2-preview-frame {
+  width: 100%;
+  height: 180px;
+  border: 1px solid var(--pv-line);
+  border-radius: var(--pv-radius-sm);
+  background: #fff;
+  resize: vertical;
+}
+.v2-preview-edit {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.v2-preview-edit label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.v2-preview-edit > span {
+  grid-column: 1 / -1;
+}
+.v2-preview-toggle {
+  margin-right: 8px;
+}
+@media (max-width: 760px) {
+  .v2-preview-edit {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* [PCODE-292 | S15 | v0.1.0] T30.6 handoff specs: measures and export areas on the image, the spec beside it */
+.v2-mockup-modes {
+  gap: 4px;
+}
+
+.v2-handoff-measure line {
+  stroke: var(--pv-accent);
+}
+
+.v2-handoff-measure text {
+  fill: var(--pv-accent);
+  font-weight: 700;
+  paint-order: stroke;
+  stroke: #fff;
+  stroke-width: 4px;
+}
+
+.v2-handoff-measure--off line {
+  stroke: var(--pv-warn);
+}
+
+.v2-handoff-measure--off text {
+  fill: var(--pv-warn);
+}
+
+.v2-handoff-area rect {
+  fill: none;
+  stroke: var(--pv-info);
+  stroke-dasharray: 8 6;
+}
+
+.v2-handoff-area text {
+  fill: var(--pv-info);
+  font-weight: 600;
+  paint-order: stroke;
+  stroke: #fff;
+  stroke-width: 4px;
+}
+
+.v2-handoff-h {
+  margin: 14px 0 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--pv-text-2);
+}
+
+.v2-handoff-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.v2-handoff-list {
+  display: grid;
+  gap: 4px;
+  margin: 0 0 6px;
+  padding: 0;
+  list-style: none;
+}
+
+.v2-handoff-pair {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+  gap: 4px;
+  align-items: center;
+}
+
+.v2-handoff-list .v2-handoff-pair {
+  grid-template-columns: minmax(0, 1fr) 72px auto;
+}
+
+/* the note of a breakpoint takes its own line under name, width and remove */
+.v2-handoff-wide {
+  grid-column: 1 / -1;
+  order: 1;
+}
+
+.v2-handoff-num {
+  width: 72px;
+}
+
+.v2-handoff-scales {
+  width: 72px;
+}
+
+.v2-handoff-export {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.v2-handoff-notes {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* [PCODE-293 | S15 | v0.1.0] T30.7 an asset's sizes under the grid */
+.v2-asset-sizes .pv-rows {
+  max-width: 720px;
+}
+
+/* [PCODE-294 | S15 | v0.1.0] T30.8a Overlay compare of mockup versions, client pins in the portal */
+.v2-compare-svg {
+  isolation: isolate;
+}
+
+.v2-blend-diff {
+  mix-blend-mode: difference;
+}
+
+.v2-swipe-line {
+  stroke: var(--pv-accent);
+}
+
+/* [PCODE-295 | S15 | v0.1.0] T30.8b screenshots of the visual checks */
+.v2-visual-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--pv-line);
+  border-radius: var(--pv-radius-sm);
+}
+
+/* [PCODE-297 | S15 | v0.1.0] T30.10 the Figma sync above the tokens */
+.v2-figma-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--pv-line);
+}
+
+.v2-figma-diff {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.v2-figma-side {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ── [PCODE-302 | S15 | v0.1.0] T31.3 PR review queue (riskiest first) and side-by-side diff with fingerprints and viewed files ── */
+.v2-pr-queue .pv-row-main {
+  min-width: 0;
+}
+.v2-pr-actions {
+  display: inline-flex;
+  gap: 6px;
+}
+.v2-pr-layout {
+  display: grid;
+  grid-template-columns: minmax(180px, 240px) minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+}
+.v2-pr-files {
+  position: sticky;
+  top: 8px;
+  max-height: calc(100vh - 120px);
+  overflow: auto;
+  border: 1px solid var(--pv-line);
+  border-radius: var(--pv-radius-sm);
+  background: var(--pv-card);
+  padding: 6px;
+}
+.v2-pr-files ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.v2-pr-files li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 0;
+  min-width: 0;
+}
+.v2-pr-files .pv-link-btn {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+}
+.v2-pr-diffs {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+.v2-pr-file {
+  padding: 0;
+  overflow: hidden;
+}
+.v2-pr-file-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--pv-line);
+}
+.v2-pr-path {
+  overflow-wrap: anywhere;
+  font-weight: 600;
+}
+.v2-pr-viewed {
+  margin-left: auto;
+}
+.v2-pr-note {
+  padding: 8px 12px;
+  margin: 0;
+}
+.v2-pr-scroll {
+  overflow-x: auto;
+}
+.v2-pr-diff {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.v2-pr-diff--split {
+  table-layout: fixed;
+}
+.v2-pr-numcol {
+  width: 44px;
+}
+.v2-pr-num {
+  width: 44px;
+  padding: 0 6px;
+  text-align: right;
+  color: var(--pv-text-2);
+  user-select: none;
+  vertical-align: top;
+}
+.v2-pr-code {
+  padding: 0 8px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  vertical-align: top;
+}
+.v2-pr-add {
+  background: var(--pv-ok-bg);
+}
+.v2-pr-del {
+  background: var(--pv-bad-bg);
+}
+.v2-pr-empty {
+  background: var(--pv-bg);
+}
+.v2-pr-mark {
+  background: var(--pv-info-bg);
+  box-shadow: inset 3px 0 0 var(--pv-info);
+}
+.v2-pr-hunk td {
+  padding: 2px 8px;
+  color: var(--pv-text-2);
+  background: var(--pv-accent-bg);
+}
+@media (max-width: 900px) {
+  .v2-pr-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .v2-pr-files {
+    position: static;
+    max-height: 220px;
+  }
+}
+
+/* ── [PCODE-303 | S15 | v0.1.0] T31.4 Line comments from people and the AI, posted to the host with approve or request changes ── */
+.v2-pr-numbtn {
+  color: inherit;
+  font: inherit;
+}
+.v2-pr-numbtn:hover,
+.v2-pr-numbtn:focus-visible {
+  color: var(--pv-accent);
+  text-decoration: underline;
+}
+.v2-pr-thread td {
+  padding: 6px 8px 8px 52px;
+  background: var(--pv-bg);
+  border-top: 1px solid var(--pv-line);
+  border-bottom: 1px solid var(--pv-line);
+  font-family: var(--pe-font);
+}
+.v2-pr-comment,
+.v2-pr-composer {
+  display: grid;
+  gap: 4px;
+  max-width: 760px;
+  padding: 6px 10px;
+  margin-bottom: 6px;
+  border: 1px solid var(--pv-line);
+  border-radius: 6px;
+  background: var(--pv-card);
+  white-space: normal;
+}
+.v2-pr-comment--ai {
+  border-color: var(--pv-info);
+  box-shadow: inset 3px 0 0 var(--pv-info);
+}
+.v2-pr-comment-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+}
+.v2-pr-comment-body {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.v2-pr-comment-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.v2-pr-reviews {
+  margin: 8px 0 0;
+  padding-left: 18px;
+}
+@media (max-width: 900px) {
+  .v2-pr-thread td {
+    padding-left: 8px;
+  }
+}
+/* [PCODE-303 | S15 | v0.1.0] the comment and summary boxes take the card's width */
+.v2-pr-composer textarea,
+.v2-pr-summary {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ── [PCODE-304 | S15 | v0.1.0] T31.5a Conflicts, stacked pull requests, and merge policies the host enforces through a commit status ── */
+.v2-policy {
+  padding: 12px 16px;
+}
+.v2-policy summary {
+  cursor: pointer;
+}
+.v2-policy-rules {
+  display: grid;
+  gap: 6px;
+  margin: 10px 0;
+  padding: 0;
+  border: 0;
+}
+.v2-policy .pv-switch {
+  align-items: flex-start;
+}
+.v2-policy-list {
+  margin: 4px 0 8px;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 2px;
+}
+
+/* ── [PCODE-305 | S15 | v0.1.0] T31.5b The merge queue: in order per branch, merged through the host when the policy passes ── */
+.v2-mq-lane + .v2-mq-lane {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--pv-line);
+}
+.v2-mq-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.v2-mq-list {
+  margin: 6px 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 4px;
+}
+.v2-mq-recent {
+  margin: 12px 0 0;
+}
+.v2-mq-add {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+.v2-mq-add select {
+  width: auto;
+}
+
+/* ── [PCODE-306 | S15 | v0.1.0] T31.6 Versions from commits: conventional commits, tags and components per path ── */
+.v2-vp-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+.v2-vp-item + .v2-vp-item {
+  padding-top: 10px;
+  border-top: 1px solid var(--pv-line);
+}
+.v2-vp-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+}
+.v2-vp-item p {
+  margin: 4px 0;
+}
+.v2-vp-log {
+  margin: 6px 0 0;
+  padding: 8px 10px;
+  max-height: 260px;
+  overflow: auto;
+  background: var(--pv-bg);
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.v2-vp-components {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--pv-line);
+}
+.v2-vp-clist {
+  margin: 6px 0;
+  padding-left: 18px;
+}
+.v2-vp-form {
+  flex-wrap: wrap;
+}
+
+/* ── [PCODE-307 | S15 | v0.1.0] T31.7 Environment config diff: variables, secrets, settings, flags and versions side by side ── */
+.v2-ec-pick {
+  flex-wrap: wrap;
+  align-items: center;
+}
+.v2-ec-scroll {
+  overflow-x: auto;
+  margin-top: 6px;
+}
+.v2-ec-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.v2-ec-table th,
+.v2-ec-table td {
+  padding: 5px 8px;
+  border-bottom: 1px solid var(--pv-line);
+  text-align: left;
+  vertical-align: top;
+}
+.v2-ec-table td.pv-mono {
+  overflow-wrap: anywhere;
+  max-width: 280px;
+}
+.v2-ec-table thead th {
+  color: var(--pv-text-2);
+  font-weight: 550;
+}
+.v2-ec-expected {
+  opacity: 0.7;
+}
+.v2-ec-vars {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--pv-line);
+}
+.v2-ec-list {
+  margin: 4px 0 8px;
+  padding-left: 18px;
+}
+.v2-ec-form {
+  flex-wrap: wrap;
+}
+
+/* ── [PCODE-308 | S15 | v0.1.0] T31.8a Code map by feature, sprint and version, and its time-lapse ── */
+.v2-cw-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 2px;
+  max-height: 420px;
+  overflow: auto;
+}
+.v2-cw-row {
+  display: grid;
+  gap: 2px;
+  width: 100%;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.v2-cw-row:hover,
+.v2-cw-row[aria-pressed='true'] {
+  background: var(--pv-accent-bg);
+}
+.v2-cw-label {
+  font-weight: 550;
+}
+.v2-cw-bar {
+  display: block;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--pv-line);
+  overflow: hidden;
+}
+.v2-cw-fill {
+  display: block;
+  height: 100%;
+  background: var(--pv-accent);
+}
+.v2-cw-w0 {
+  width: 0%;
+}
+.v2-cw-w1 {
+  width: 10%;
+}
+.v2-cw-w2 {
+  width: 20%;
+}
+.v2-cw-w3 {
+  width: 30%;
+}
+.v2-cw-w4 {
+  width: 40%;
+}
+.v2-cw-w5 {
+  width: 50%;
+}
+.v2-cw-w6 {
+  width: 60%;
+}
+.v2-cw-w7 {
+  width: 70%;
+}
+.v2-cw-w8 {
+  width: 80%;
+}
+.v2-cw-w9 {
+  width: 90%;
+}
+.v2-cw-w10 {
+  width: 100%;
+}
+.v2-cw-frame input[type='range'] {
+  width: 100%;
+}
+
+/* ── [PCODE-309 | S15 | v0.1.0] T31.8b Architecture graph, change coupling and bus factor on the code map ── */
+.v2-ca-scroll {
+  overflow-x: auto;
+}
+.v2-ca-graph {
+  display: block;
+  width: 100%;
+  min-width: 520px;
+  height: auto;
+}
+.v2-ca-edge {
+  fill: none;
+  stroke: var(--pv-text-2);
+  opacity: 0.55;
+}
+.v2-ca-w1 {
+  stroke-width: 1;
+}
+.v2-ca-w2 {
+  stroke-width: 2;
+}
+.v2-ca-w3 {
+  stroke-width: 3.5;
+}
+.v2-ca-cyclic {
+  stroke: var(--pv-bad);
+  opacity: 0.9;
+}
+.v2-ca-head {
+  fill: var(--pv-text-2);
+}
+.v2-ca-node {
+  fill: var(--pv-accent-bg);
+  stroke: var(--pv-accent);
+  stroke-width: 1.5;
+}
+.v2-ca-node--cycle {
+  fill: var(--pv-bad-bg);
+  stroke: var(--pv-bad);
+}
+.v2-ca-label {
+  fill: var(--pv-text);
+  font-size: 12px;
+  text-anchor: middle;
+  paint-order: stroke;
+  stroke: var(--pv-card);
+  stroke-width: 3px;
+}
+.v2-ca-label--start {
+  text-anchor: start;
+}
+.v2-ca-label--end {
+  text-anchor: end;
+}
+.v2-ca-list {
+  margin: 6px 0;
+  padding-left: 18px;
+}
+
+/* ── [PCODE-313 | S15 | v0.1.0] T32.1 Test repository: shared steps, parameters in the screen, structured BDD ── */
+.v2-td-params {
+  display: grid;
+  gap: 6px;
+  margin-top: 10px;
+}
+.v2-td-pname {
+  width: 9em;
+}
+.v2-td-gherkin {
+  width: 100%;
+  font-size: 12.5px;
+  line-height: 1.5;
+  white-space: pre;
+}
+.v2-td-sets {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ── [PCODE-314 | S15 | v0.1.0] T32.2 Runs: assignment and workload, keyboard entry, timers, reopen when the defect is done ── */
+.v2-tr-bar {
+  min-width: 120px;
+}
+
+/* ── [PCODE-315 | S15 | v0.1.0] T32.3a Cypress and Allure import, defects in the trace, leakage and burndown ── */
+.v2-tq-chart {
+  margin: 0;
+}
+.v2-tq-chart svg {
+  width: 100%;
+  max-width: 720px;
+  height: auto;
+}
+.v2-tq-axis {
+  stroke: var(--pv-line-strong);
+}
+.v2-tq-chart polyline {
+  fill: none;
+  stroke-width: 2;
+}
+.v2-tq-left {
+  stroke: var(--pv-accent);
+}
+.v2-tq-failed {
+  stroke: var(--pv-bad);
+}
+.v2-tq-ideal {
+  stroke: var(--pv-text-2);
+  stroke-dasharray: 4 4;
+}
+.v2-tq-key {
+  display: inline-block;
+  width: 14px;
+  height: 3px;
+  vertical-align: middle;
+}
+.v2-tq-key--left {
+  background: var(--pv-accent);
+}
+.v2-tq-key--failed {
+  background: var(--pv-bad);
+}
+.v2-tq-key--ideal {
+  background: var(--pv-text-2);
+}
+.v2-tq-note {
+  padding: 8px 14px;
+}
+
+/* ── [PCODE-316 | S15 | v0.1.0] T32.3b Named run sign-off with a frozen snapshot, and a release gate on tests ── */
+.v2-so-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.v2-so-run {
+  display: grid;
+  gap: 6px;
+}
+.v2-so-snap summary {
+  cursor: pointer;
+  font-size: 12.5px;
+}
+
+/* ── [PCODE-317 | S15 | v0.1.0] T32.4a AI triage of test failures and impacted tests first ── */
+.v2-tt-note {
+  display: grid;
+  gap: 4px;
+  margin: 8px 0;
+  padding: 8px 10px;
+  border: 1px solid var(--pv-line);
+  border-radius: var(--pv-radius-sm);
+  background: var(--pv-agent-bg);
+}
+.v2-tt-note p {
+  margin: 0;
+}
+.v2-tt-impact {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  padding-left: 18px;
+}
+
+/* ── [PCODE-318 | S15 | v0.1.0] T32.4b Masking of personal data in test results and the test-data vault ── */
+.v2-td-ref {
+  padding: 0 6px;
+  border: 1px dashed var(--pv-line-strong);
+  border-radius: var(--pv-radius-sm);
+  background: var(--pv-warn-bg);
+  color: var(--pv-text);
+  font: inherit;
+  font-family: ui-monospace, monospace;
+  font-size: 0.92em;
+  cursor: pointer;
+}
+.v2-td-value {
+  padding: 0 4px;
+  border-radius: var(--pv-radius-sm);
+  background: var(--pv-ok-bg);
+}
+
+/* ── [PCODE-320 | S15 | v0.1.0] T32.5b The bug-capture browser extension for Chrome and Firefox ── */
+.v2-desc-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+.v2-desc-images img {
+  display: block;
+  max-width: min(100%, 420px);
+  max-height: 260px;
+  border: 1px solid var(--pv-line);
+  border-radius: var(--pv-radius-sm);
+}
+
+/* ── [PCODE-321 | S15 | v0.1.0] T32.6 Secrets in the Git history, SARIF upload in the web app, dependency facts on findings ── */
+.v2-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ── [PCODE-329 | S15 | v0.1.0] T33.2 Agent playground: rerun with other settings, compare runs, A/B experiments ── */
+.pv-play-answers {
+  display: grid;
+  gap: 8px;
+  padding: 10px 16px 14px;
+  border-top: 1px solid var(--pv-line);
+}
+.pv-play-answer p {
+  margin: 4px 0 0;
+  white-space: pre-wrap;
+}
+.pv-play-variants td {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+.pv-compare {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+.pv-compare-col {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  min-width: 0;
+}
+.pv-compare-col .pv-prompt {
+  max-height: 420px;
+  overflow: auto;
+  white-space: pre-wrap;
+}
+
+/* ── [PCODE-330 | S15 | v0.1.0] T33.3a Run quality: annotations, judge scores, outcomes ── */
+.pv-runq {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--pv-line);
+}
+.pv-runq-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 16px;
+}
+.pv-runq-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.pv-runq-form .v2-input {
+  flex: 1 1 200px;
+}
+.pv-runq-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.pv-runq-tag {
+  padding: 2px 8px;
+  border: 1px solid var(--pv-line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--pv-text-2);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.pv-runq-tag--on {
+  border-color: var(--pv-accent);
+  background: var(--pv-agent-bg);
+  color: var(--pv-accent);
+}
+
+/* ── [PCODE-331 | S15 | v0.1.0] T33.3b Evals: saved cases with checks, eval runs per model or prompt version, pass rates over time ── */
+.pv-eval-cases {
+  display: grid;
+  gap: 10px;
+  padding: 0 16px 14px;
+}
+.pv-eval-case {
+  display: grid;
+  gap: 4px;
+  padding-top: 10px;
+  border-top: 1px solid var(--pv-line);
+}
+.pv-eval-case p {
+  margin: 0;
+  white-space: pre-wrap;
+}
+.pv-eval-checks {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 12px;
+}
+.pv-eval-ok {
+  color: var(--pv-ok);
+}
+.pv-eval-bad {
+  color: var(--pv-bad);
+}
+.pv-eval-rate {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.pv-eval-rate .pv-bar {
+  flex: 1 1 auto;
+}
+
+/* ── [PCODE-332 | S15 | v0.1.0] T33.4a Nested traces with latency and commits, agent rate limits, provider limits and health ── */
+.pv-trace-row--nested .pv-trace-name {
+  padding-left: 18px;
+}
+.pv-trace-commits {
+  display: grid;
+  gap: 2px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ── [PCODE-333 | S15 | v0.1.0] T33.4b Sandbox per run with repo tools, pull requests by a bot Git identity ── */
+.pv-sandbox {
+  display: grid;
+  gap: 6px;
+  margin-top: 10px;
+}
+.pv-sandbox-files {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.pv-sandbox .pv-prompt {
+  max-height: 360px;
+  overflow: auto;
+  white-space: pre-wrap;
+}
+
+/* ── [PCODE-334 | S15 | v0.1.0] T33.4c MCP servers per agent: registry, our own MCP client, tools in runs under the agent's rules ── */
+.ag-mcp {
+  display: grid;
+  gap: 4px;
+  margin: 8px 0 0;
+  padding: 0;
+  border: 0;
+}
+
+/* ── [PCODE-336 | S15 | v0.1.0] T34.1a Portal home with health, milestone, release and budget; release deliverables and demos; client sign-off per release; files on acceptance results ── */
+.pv-deliverables {
+  display: grid;
+  gap: 6px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.pv-demo {
+  display: block;
+  width: 100%;
+  max-width: 560px;
+  margin-top: 6px;
+  border-radius: 6px;
+  border: 1px solid var(--pv-line);
+}
+.pv-file-link {
+  margin-right: 8px;
+}
+
+/* ── [PCODE-337 | S15 | v0.1.0] T34.1b Request votes and duplicate merge, NPS survey, embeddable feedback widget ── */
+.pv-req-voice {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.pv-nps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.pv-nps-btn {
+  min-width: 32px;
+  padding: 6px 0;
+  border: 1px solid var(--pv-line);
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.pv-nps-btn--on {
+  border-color: var(--pv-accent);
+  background: var(--pv-agent-bg);
+  color: var(--pv-accent);
+}
+.pv-nps-comments {
+  display: grid;
+  gap: 4px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.pv-widget {
+  display: grid;
+  gap: 4px;
+  margin: 6px 0;
+}
+.pv-widget-snippet {
+  display: block;
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: var(--pv-bg);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+/* ── [PCODE-338 | S15 | v0.1.0] T34.1c Meeting notes and actions into tasks; the team's client overview with health, revenue, activity and people ── */
+.pv-glance-list {
+  display: grid;
+  gap: 3px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.pv-meeting {
+  display: grid;
+  gap: 6px;
+  padding: 8px 16px 12px;
+}
+.pv-pre {
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+/* ── [PCODE-340 | S15 | v0.1.0] T34.2a Automatic alerts from probes and failed deploys; Sentry and Alertmanager sources with signed webhooks ── */
+.pv-snippet {
+  margin: 0 0 8px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: var(--pv-bg);
+  font: 12px/1.5 var(--pe-font-mono);
+  white-space: pre;
+  overflow-x: auto;
+}
+.pv-cell-wrap {
+  overflow-wrap: anywhere;
+  max-width: 360px;
+}
+
+/* ── [PCODE-342 | S15 | v0.1.0] T34.2c AI postmortems and runbooks matched to incidents ── */
+.pv-runbook {
+  padding: 6px 0;
+  border-bottom: 1px solid var(--pe-border);
+}
+.pv-runbook .pv-link {
+  border: 0;
+  background: none;
+  padding: 0;
+  font-weight: 600;
+  cursor: pointer;
+}
+li.pv-runbook {
+  list-style: none;
+}
+.pv-runbook:last-child {
+  border-bottom: 0;
+}
+.pv-runbook-actions {
+  margin-left: auto;
+  display: inline-flex;
+  gap: 4px;
+}
+
+/* ── [PCODE-343 | S15 | v0.1.0] T34.3a Hour budgets with alerts, time reports by person, sprint and task, DATEV export ── */
+.pv-tbreak-bar {
+  width: 30%;
+  min-width: 80px;
+}
+.pv-tbreak-bar .pv-bar {
+  width: 100%;
+  max-width: 220px;
+  height: 6px;
+  vertical-align: middle;
+}
+.pv-datev-accounts {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 6px 16px;
+  margin-top: 8px;
+}
+.pv-datev-accounts label {
+  justify-content: space-between;
+}
+
+/* ── [PCODE-344 | S15 | v0.1.0] T34.3b Timer idle detection, time reminders, correction reasons for locked weeks ── */
+.pv-grow {
+  flex: 1;
+  min-width: 0;
+}
+.pv-corrections {
+  margin: 4px 0 0;
+  padding-left: 18px;
+}
+
+/* ── [PCODE-346 | S15 | v0.1.0] T35.1a Cmd-K over agents, runs, people and settings; keyboard shortcut sheet ── */
+.pk-help-card--wide {
+  max-width: 560px;
+  max-height: 85vh;
+  overflow: auto;
+}
+
+/* ── [PCODE-347 | S15 | v0.1.0] T35.1b Homes for developers and testers with widgets the person chooses ── */
+.pv-home-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 12px;
+}
+.pv-home-actions {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.pv-home-pick {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+}
+
+/* ── [PCODE-348 | S15 | v0.1.0] T35.2a Integrations hub; email-in for replies to messages and ideas by email ── */
+.pv-integration {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto 84px;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border: 0;
+  border-bottom: 1px solid var(--pe-border);
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+.pv-integration:last-child {
+  border-bottom: 0;
+}
+.pv-integration .pv-row-main {
+  display: grid;
+  gap: 2px;
+}
+.pv-break {
+  display: block;
+  word-break: break-all;
+  margin-top: 4px;
+}
+
+/* ── [PCODE-350 | S15 | v0.1.0] T35.3a Templates library for projects, PRDs, sprints and agents ── */
+.pv-library {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.pv-library-row {
+  border-bottom: 1px solid var(--pe-border);
+}
+.pv-library-row:last-child {
+  border-bottom: 0;
+}
+.pv-library-row .pv-integration {
+  border-bottom: 0;
+  /* [PCODE-425 | S15 | v0.1.0] room for a row's buttons, however many */
+  grid-template-columns: minmax(0, 1fr) auto auto;
+}
+@media (max-width: 640px) {
+  .pv-library-row .pv-integration {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .pv-library-row .pv-home-actions {
+    grid-column: 1 / -1;
+    margin-left: 0;
+    flex-wrap: wrap;
+  }
+}
+
+/* ── [PCODE-353 | S15 | v0.1.0] T35.4a System health page with backup, restore and upgrade wizards ── */
+.pv-wizard {
+  display: grid;
+  gap: 12px;
+  margin: 0 0 12px;
+}
+.pv-step {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+  line-height: 1.6;
+}
+.pv-step-n {
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--pe-border);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ── [PCODE-355 | S15 | v0.1.0] T35.4c Activity: query autocomplete, columns, group-by, drag to zoom, heat map ── */
+.pv-query {
+  position: relative;
+}
+.pv-suggest {
+  position: absolute;
+  top: 100%;
+  left: 24px;
+  z-index: 20;
+  margin: 4px 0 0;
+  padding: 4px;
+  list-style: none;
+  min-width: 220px;
+  background: var(--pe-surface);
+  border: 1px solid var(--pe-border);
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgb(0 0 0 / 12%);
+}
+.pv-suggest button {
+  width: 100%;
+  padding: 4px 8px;
+  border: 0;
+  background: none;
+  text-align: left;
+  font-family: var(--pe-font-mono);
+  font-size: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.pv-suggest li[aria-selected='true'] button {
+  background: var(--pe-border);
+}
+.pv-columns {
+  position: relative;
+}
+.pv-columns-menu {
+  position: absolute;
+  right: 0;
+  z-index: 20;
+  display: grid;
+  gap: 4px;
+  padding: 8px 10px;
+  background: var(--pe-surface);
+  border: 1px solid var(--pe-border);
+  border-radius: 8px;
+}
+.pv-groups {
+  max-height: 560px;
+  overflow: auto;
+}
+.pv-group summary {
+  padding: 6px 14px;
+  cursor: pointer;
+  background: var(--pe-canvas);
+  border-bottom: 1px solid var(--pe-border);
+}
+.pv-heat-wrap {
+  margin-top: 8px;
+}
+.pv-heat {
+  display: grid;
+  gap: 2px;
+  margin-top: 6px;
+}
+.pv-heat-row {
+  display: grid;
+  grid-template-columns: 24px repeat(24, minmax(0, 1fr));
+  gap: 2px;
+  align-items: center;
+}
+.pv-heat-cell {
+  height: 14px;
+  border-radius: 2px;
+  background: var(--pe-border);
+}
+.pv-heat-cell--1 {
+  background: color-mix(in srgb, var(--pe-accent) 25%, var(--pe-surface));
+}
+.pv-heat-cell--2 {
+  background: color-mix(in srgb, var(--pe-accent) 50%, var(--pe-surface));
+}
+.pv-heat-cell--3 {
+  background: color-mix(in srgb, var(--pe-accent) 75%, var(--pe-surface));
+}
+.pv-heat-cell--4 {
+  background: var(--pe-accent);
+}
+
+/* [PCODE-358 | S15 | v0.1.0] small text buttons and table links: at least 24 px high (WCAG 2.5.8) */
+.pv-app .pv-link-btn,
+.pv-app .msg-ref,
+.pv-app .msg-replies,
+.pv-app .msg-reaction,
+.pv-app .pv-doc-head .pv-link,
+.pv-app .pv-table td > a,
+.pe-table td > a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+}
+.pv-app .pv-doc-head .pv-link {
+  justify-content: center;
+  min-width: 24px;
+}
+
+/* [PCODE-408 | S15 | v0.1.0] found by the click-through: links in the task tables are 24 px targets; a field
+   that grows in a wrapping row moves to the next line instead of shrinking to nothing */
+.pe-grid-table td > a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+}
+.v2-inline > .pv-grow {
+  min-width: 12rem;
+}
+
+/* [PCODE-416 | S15 | v0.1.0] switching workspaces from the sidebar's header */
+.pv-ws {
+  position: relative;
+}
+.pv-ws-switch {
+  margin-left: auto;
+}
+.pv-ws-switch > summary {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  color: var(--pv-text-2);
+  cursor: pointer;
+  list-style: none;
+}
+.pv-ws-switch > summary::-webkit-details-marker {
+  display: none;
+}
+.pv-ws-switch > summary:hover {
+  background: var(--pe-hover);
+}
+.pv-ws-list {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 8px;
+  right: 8px;
+  z-index: 30;
+  display: grid;
+  gap: 2px;
+  padding: 4px;
+  border: 1px solid var(--pv-line);
+  border-radius: 8px;
+  background: var(--pv-card);
+  box-shadow: var(--pe-shadow-2);
+}
+.pv-ws-choice {
+  display: grid;
+  gap: 1px;
+  min-height: 32px;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}
+.pv-ws-choice:hover,
+.pv-ws-choice[aria-current='true'] {
+  background: var(--pe-hover);
+}
+
+/* [PCODE-432 | S15 | v0.1.0] the first steps of a new workspace */
+.v2-start-steps {
+  display: grid;
+  gap: 8px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.v2-start-step {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.v2-start-text {
+  display: grid;
+  gap: 2px;
+}
+.v2-start-text a {
+  font-weight: 600;
+}
+.v2-start-step--done .v2-start-text a {
+  color: var(--pv-text-2);
+  text-decoration: line-through;
+}
+.v2-start-step--done > svg {
+  color: var(--pv-ok);
+}
+
+/* [PCODE-427 | S15 | v0.1.0] the survey's reason field takes the card's width */
+.pv-nps-reason {
+  width: 100%;
+}
+
+/* [PCODE-430 | S15 | v0.1.0] the board on a phone: one column fills the screen, the next one peeks in,
+   and a swipe snaps to it */
+/* html in front: the base sheets are bundled after this one */
+@media (max-width: 640px) {
+  html .pe-board,
+  html .v2-board {
+    grid-auto-columns: 85%;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 0;
+  }
+  html .pe-board > *,
+  html .v2-board > * {
+    scroll-snap-align: start;
+  }
+}
+
+/* [PCODE-431 | S15 | v0.1.0] the Time page on a phone: the week's title on its own line, the add fields one under the other */
+@media (max-width: 640px) {
+  html .v2-week-card > .pv-card-head {
+    flex-wrap: wrap;
+  }
+  html .v2-week-card > .pv-card-head > .pv-card-title {
+    flex: 1 1 100%;
+  }
+  html .v2-week-add > * {
+    flex: 1 1 100%;
+  }
+}
+
+/* [PCODE-435 | S15 | v0.1.0] a bar with its number beside it */
+.pv-bar-with-value {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.pv-bar-with-value > .pv-bar {
+  flex: 1;
+  min-width: 48px;
+}
+
+/* [PCODE-434 | S15 | v0.1.0] the WIP limit field in a column's head */
+.pv-wip-input {
+  width: 64px;
+}

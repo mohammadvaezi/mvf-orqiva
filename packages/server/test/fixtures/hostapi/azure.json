@@ -1,0 +1,109 @@
+{
+  "/contoso/Shop/_apis/git/repositories/shop-web": {
+    "id": "7f2d3b6a-1c4e-4f9b-9a2d-5e8c1b0a7d33",
+    "name": "shop-web",
+    "url": "https://dev.azure.com/contoso/a7573007-bbb3-4341-b726-0c4148a07853/_apis/git/repositories/7f2d3b6a-1c4e-4f9b-9a2d-5e8c1b0a7d33",
+    "project": {
+      "id": "a7573007-bbb3-4341-b726-0c4148a07853",
+      "name": "Shop",
+      "state": "wellFormed"
+    },
+    "defaultBranch": "refs/heads/main",
+    "remoteUrl": "https://contoso@dev.azure.com/contoso/Shop/_git/shop-web",
+    "webUrl": "https://dev.azure.com/contoso/Shop/_git/shop-web",
+    "isDisabled": false
+  },
+  "/contoso/Shop/_apis/git/repositories/shop-web/refs?filter=heads/": {
+    "value": [
+      {
+        "name": "refs/heads/feature/shop-3-search",
+        "objectId": "3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c",
+        "creator": { "displayName": "Grace Hopper", "uniqueName": "grace@contoso.example" },
+        "url": "https://dev.azure.com/contoso/_apis/git/repositories/7f2d3b6a/refs?filter=heads%2Ffeature%2Fshop-3-search"
+      },
+      {
+        "name": "refs/heads/main",
+        "objectId": "2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b",
+        "creator": { "displayName": "Grace Hopper", "uniqueName": "grace@contoso.example" },
+        "url": "https://dev.azure.com/contoso/_apis/git/repositories/7f2d3b6a/refs?filter=heads%2Fmain"
+      }
+    ],
+    "count": 2
+  },
+  "/contoso/Shop/_apis/git/repositories/shop-web/refs?filter=tags/": {
+    "value": [
+      {
+        "name": "refs/tags/v1.0.0",
+        "objectId": "9e9e9e9e9e9e9e9e9e9e9e9e9e9e9e9e9e9e9e9e",
+        "peeledObjectId": "1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a",
+        "creator": { "displayName": "Grace Hopper", "uniqueName": "grace@contoso.example" }
+      }
+    ],
+    "count": 1
+  },
+  "/contoso/Shop/_apis/git/repositories/shop-web/commits": {
+    "count": 2,
+    "value": [
+      {
+        "commitId": "2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b",
+        "author": {
+          "name": "Grace Hopper",
+          "email": "grace@contoso.example",
+          "date": "2026-10-11T15:02:00Z"
+        },
+        "committer": {
+          "name": "Grace Hopper",
+          "email": "grace@contoso.example",
+          "date": "2026-10-11T15:02:00Z"
+        },
+        "comment": "Merged PR 4: SHOP-2 Totals round to cents",
+        "changeCounts": { "Add": 0, "Edit": 2, "Delete": 0 },
+        "url": "https://dev.azure.com/contoso/_apis/git/repositories/7f2d3b6a/commits/2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b",
+        "remoteUrl": "https://dev.azure.com/contoso/Shop/_git/shop-web/commit/2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b"
+      },
+      {
+        "commitId": "1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a",
+        "author": {
+          "name": "Grace Hopper",
+          "email": "grace@contoso.example",
+          "date": "2026-10-10T09:15:31Z"
+        },
+        "committer": {
+          "name": "Grace Hopper",
+          "email": "grace@contoso.example",
+          "date": "2026-10-10T09:15:31Z"
+        },
+        "comment": "SHOP-1 Cart keeps items between visits",
+        "changeCounts": { "Add": 1, "Edit": 1, "Delete": 0 },
+        "url": "https://dev.azure.com/contoso/_apis/git/repositories/7f2d3b6a/commits/1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a",
+        "remoteUrl": "https://dev.azure.com/contoso/Shop/_git/shop-web/commit/1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a"
+      }
+    ]
+  },
+  "/contoso/Shop/_apis/git/repositories/shop-web/pullrequests": {
+    "value": [
+      {
+        "repository": {
+          "id": "7f2d3b6a-1c4e-4f9b-9a2d-5e8c1b0a7d33",
+          "name": "shop-web",
+          "project": { "id": "a7573007-bbb3-4341-b726-0c4148a07853", "name": "Shop" }
+        },
+        "pullRequestId": 4,
+        "codeReviewId": 4,
+        "status": "completed",
+        "createdBy": { "displayName": "Grace Hopper", "uniqueName": "grace@contoso.example" },
+        "creationDate": "2026-10-10T16:00:00Z",
+        "closedDate": "2026-10-11T15:02:00Z",
+        "title": "SHOP-2 Totals round to cents",
+        "description": "Closes SHOP-2.",
+        "sourceRefName": "refs/heads/feature/shop-2",
+        "targetRefName": "refs/heads/main",
+        "mergeStatus": "succeeded",
+        "isDraft": false,
+        "lastMergeSourceCommit": { "commitId": "4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d" },
+        "reviewers": [{ "displayName": "Ada Lovelace", "vote": 10 }]
+      }
+    ],
+    "count": 1
+  }
+}

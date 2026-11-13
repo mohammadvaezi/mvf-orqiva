@@ -1,0 +1,8 @@
+{
+  "workspace": "prodsystem",
+  "project_id": "00000000-0000-4000-8000-000000000000",
+  "identifier": "FIX",
+  "name": "Fixture Project",
+  "version": "0.1.0",
+  "fixture": true
+}

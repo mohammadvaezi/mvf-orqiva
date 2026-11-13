@@ -1,0 +1,102 @@
+{
+  "/projects/acme%2Fweb%2Fshop": {
+    "id": 15,
+    "name": "shop",
+    "path_with_namespace": "acme/web/shop",
+    "default_branch": "main",
+    "web_url": "https://gitlab.example.com/acme/web/shop",
+    "visibility": "private"
+  },
+  "/projects/acme%2Fweb%2Fshop/repository/branches": [
+    {
+      "name": "main",
+      "merged": false,
+      "protected": true,
+      "default": true,
+      "commit": {
+        "id": "2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b",
+        "short_id": "2b2b2b2b",
+        "title": "SHOP-2 Totals round to cents",
+        "committed_date": "2026-10-11T15:02:00.000+00:00"
+      },
+      "web_url": "https://gitlab.example.com/acme/web/shop/-/tree/main"
+    },
+    {
+      "name": "feature/shop-3-search",
+      "merged": false,
+      "protected": false,
+      "default": false,
+      "commit": {
+        "id": "3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c",
+        "short_id": "3c3c3c3c",
+        "title": "SHOP-3 Search by name",
+        "committed_date": "2026-10-12T08:00:00.000+00:00"
+      },
+      "web_url": "https://gitlab.example.com/acme/web/shop/-/tree/feature/shop-3-search"
+    }
+  ],
+  "/projects/acme%2Fweb%2Fshop/repository/tags": [
+    {
+      "name": "v1.0.0",
+      "message": "First release",
+      "target": "9e9e9e9e9e9e9e9e9e9e9e9e9e9e9e9e9e9e9e9e",
+      "commit": {
+        "id": "1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a",
+        "short_id": "1a1a1a1a",
+        "title": "SHOP-1 Cart keeps items between visits",
+        "committed_date": "2026-10-10T09:15:31.000+00:00"
+      },
+      "release": null,
+      "protected": false
+    }
+  ],
+  "/projects/acme%2Fweb%2Fshop/repository/commits": [
+    {
+      "id": "2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b",
+      "short_id": "2b2b2b2b",
+      "title": "SHOP-2 Totals round to cents",
+      "message": "SHOP-2 Totals round to cents\n",
+      "author_name": "Ada Lovelace",
+      "author_email": "ada@example.com",
+      "authored_date": "2026-10-11T15:02:00.000+00:00",
+      "committed_date": "2026-10-11T15:02:00.000+00:00",
+      "created_at": "2026-10-11T15:02:00.000+00:00",
+      "parent_ids": ["1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a"],
+      "web_url": "https://gitlab.example.com/acme/web/shop/-/commit/2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b"
+    },
+    {
+      "id": "1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a",
+      "short_id": "1a1a1a1a",
+      "title": "SHOP-1 Cart keeps items between visits",
+      "message": "SHOP-1 Cart keeps items between visits\n",
+      "author_name": "Ada Lovelace",
+      "author_email": "ada@example.com",
+      "authored_date": "2026-10-10T09:15:31.000+00:00",
+      "committed_date": "2026-10-10T09:15:31.000+00:00",
+      "created_at": "2026-10-10T09:15:31.000+00:00",
+      "parent_ids": [],
+      "web_url": "https://gitlab.example.com/acme/web/shop/-/commit/1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a"
+    }
+  ],
+  "/projects/acme%2Fweb%2Fshop/merge_requests": [
+    {
+      "id": 9002,
+      "iid": 4,
+      "project_id": 15,
+      "title": "SHOP-2 Totals round to cents",
+      "description": "Closes SHOP-2.",
+      "state": "merged",
+      "created_at": "2026-10-10T16:00:00.000Z",
+      "updated_at": "2026-10-11T15:02:00.000Z",
+      "merged_at": "2026-10-11T15:02:00.000Z",
+      "closed_at": null,
+      "target_branch": "main",
+      "source_branch": "feature/shop-2",
+      "author": { "id": 4, "username": "ada", "name": "Ada Lovelace" },
+      "draft": false,
+      "work_in_progress": false,
+      "sha": "4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d",
+      "web_url": "https://gitlab.example.com/acme/web/shop/-/merge_requests/4"
+    }
+  ]
+}

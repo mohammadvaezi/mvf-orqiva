@@ -1,0 +1,12 @@
+{
+  "//": "[PCODE-90 | S15 | v0.1.0] [PCODE-97 | S15 | v0.1.0] Test accounts for a LOCAL development database only (never a real server): the first is used in the browser, the second edits through the API to check live updates.",
+  "name": "Dev Tester",
+  "email": "dev.tester@example.test",
+  "password": "local-dev-only-7Q2x",
+  "workspaceName": "Dev Workspace",
+  "second": {
+    "name": "Bob Builder",
+    "email": "bob.builder@example.test",
+    "password": "local-dev-only-9K4m"
+  }
+}

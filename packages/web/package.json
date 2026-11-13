@@ -1,0 +1,24 @@
+{
+  "name": "@orqiva/web",
+  "version": "0.1.0",
+  "license": "SEE LICENSE IN LICENSE",
+  "private": true,
+  "description": "The Orqiva web app (command center). PCODE-90 adds the shell and the design system.",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "lint": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "i18n:extract": "node scripts/i18n.mjs",
+    "i18n:check": "node scripts/i18n.mjs --check"
+  },
+  "dependencies": {
+    "@orqiva/shared": "0.1.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0"
+  }
+}

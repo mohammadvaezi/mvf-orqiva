@@ -1,0 +1,31 @@
+{
+  "//": "[PCODE-85 | S08 | v0.1.0] The ownership and licence policy as data (docs/strategy/orqiva-2027-plan.md). Anything not in 'accepted' is denied. An exception names one exact package version, the licence found by hand, and who checked it.",
+  "accepted": [
+    "MIT",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "Apache-2.0",
+    "ISC",
+    "0BSD",
+    "Unlicense",
+    "CC0-1.0",
+    "PostgreSQL",
+    "BlueOak-1.0.0",
+    "OFL-1.1",
+    "CC-BY-4.0"
+  ],
+  "shipped": [
+    { "workspace": "packages/shared", "bundles": ["dist"] },
+    { "workspace": "packages/server", "bundles": ["dist"] },
+    { "workspace": "packages/cli", "bundles": ["dist", "dist-single"] },
+    { "workspace": "packages/web", "bundles": ["dist"] },
+    {
+      "workspace": "packages/extension",
+      "bundles": ["dist"],
+      "exclude": ["dist/test"],
+      "provided": ["vscode"]
+    },
+    { "workspace": "packages/mobile", "bundles": ["dist"], "app": true }
+  ],
+  "exceptions": {}
+}

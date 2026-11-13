@@ -1,0 +1,139 @@
+# [PCODE-192 | S15 | v0.1.0] Rebrand ProdEngine and PlaneCode to Orqiva everywhere, with compatibility for existing installs
+# ── [PCODE-5 | S01 | v0.1.0] Add GitHub Actions CI building the .vsix on Windows and Ubuntu ──
+#    Why:  the .vsix built here from main is the artifact that gets installed; no hand-built releases (rules.md).
+#          No secrets: every test runs against the fake engine and the vscode mock.
+# ── [PCODE-84 | S08 | v0.1.0] Set up the platform monorepo with npm workspaces, own build scripts and CI ──
+#    The repository is a workspace root now: one `npm run check` lints, tests and builds every package
+#    (shared, server, cli, web, extension). The extension's packaging and e2e run in its own workspace.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ── [PCODE-5 | S01 | v0.1.0] lint + unit + build + package on both platforms; e2e under xvfb on Ubuntu ──
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    # [PCODE-87 | S15 | v0.1.0] a real PostgreSQL for the row-level security tests (service containers
+    #    run on Linux only; on Windows those suites skip and say so)
+    services:
+      postgres:
+        image: ${{ matrix.os == 'ubuntu-latest' && 'postgres:17' || '' }}
+        env:
+          POSTGRES_USER: orqiva
+          POSTGRES_PASSWORD: ci-only-password
+          POSTGRES_DB: orqiva
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U orqiva" --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      ORQIVA_TEST_DATABASE_URL: ${{ matrix.os == 'ubuntu-latest' && 'postgres://orqiva:ci-only-password@localhost:5432/orqiva' || '' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      # [PCODE-226 | S15 | v0.1.0] the phone app has its own install; `npm run check` bundles it for Android
+      #    and iOS, and the licence gate reads what the bundles hold
+      - run: npm ci --prefix packages/mobile
+      - run: npm run check
+      - run: npm run package --workspace packages/extension
+      - name: version
+        id: version
+        shell: bash
+        run: echo "v=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: orqiva-${{ steps.version.outputs.v }}-${{ matrix.os }}
+          path: 'packages/extension/*.vsix'
+          if-no-files-found: error
+      # [PCODE-85 | S08 | v0.1.0] the licence gate ran inside `npm run check`; keep what it wrote
+      - uses: actions/upload-artifact@v4
+        with:
+          name: licences-${{ steps.version.outputs.v }}-${{ matrix.os }}
+          path: out/licences/
+          if-no-files-found: error
+      # [PCODE-211 | S15 | v0.1.0] the timing tests run alone, after the others: latency and the command center at scale
+      - name: perf (latency, scale)
+        if: runner.os == 'Linux'
+        run: npm run perf --workspace packages/server
+      # [PCODE-98 | S15 | v0.1.0] the latency report of the database tests (Linux runs them)
+      - uses: actions/upload-artifact@v4
+        if: runner.os == 'Linux'
+        with:
+          name: latency-${{ steps.version.outputs.v }}
+          path: |
+            out/latency.json
+            out/scale.json
+          if-no-files-found: error
+      # [PCODE-366 | S15 | v0.1.0] journeys for every role in a real browser (Chrome on the runner)
+      - name: browser journeys
+        if: runner.os == 'Linux'
+        run: npm run e2e --workspace packages/server
+      - uses: actions/upload-artifact@v4
+        if: failure() && runner.os == 'Linux'
+        with:
+          name: journeys-${{ steps.version.outputs.v }}
+          path: out/e2e/
+          if-no-files-found: ignore
+      - name: e2e (xvfb)
+        if: runner.os == 'Linux'
+        run: xvfb-run -a npm run test:e2e --workspace packages/extension
+      # ── [PCODE-63 | S12 | v0.1.0] the offline scenarios run on both platforms ──
+      #    Windows is where the engine is actually installed, and where PLANE_CLAUDE_HOME, short paths
+      #    and the shell differ; a suite that only ever ran under xvfb would not have seen any of it.
+      - name: e2e (windows)
+        if: runner.os == 'Windows'
+        run: npm run test:e2e --workspace packages/extension
+
+  # ── [PCODE-61 | S12 | v0.1.0] macOS: lint and unit tests only ──
+  #    No .vsix is built here - the artifact is platform-independent and comes from the matrix above.
+  #    What this run is for is the POSIX side: python3 rather than `py -3`, forward slashes, a
+  #    case-sensitive file system, and a default shell that is not PowerShell.
+  unit-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+
+  # ── [PCODE-91 | S15 | v0.1.0] Package the server as a Docker Compose install started by `orq install` ──
+  #    The T01 exit check on a clean machine: a fresh Ubuntu 24.04 runner with Docker, `orq install`
+  #    builds the image and starts the stack, and the login page and a sign-up must answer.
+  install-smoke:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build --workspace packages/shared --workspace packages/cli
+      - run: node packages/cli/dist/main.js install --dir "$RUNNER_TEMP/orqiva" --port 8080 --build .
+      - name: login page and first account
+        run: |
+          curl -fsS http://127.0.0.1:8080/login | grep -q '<title>Orqiva</title>'
+          curl -fsS -o /dev/null -H 'content-type: application/json' \
+            -d '{"email":"ci@example.test","name":"CI","password":"ci-smoke-password","workspaceName":"CI"}' \
+            http://127.0.0.1:8080/auth/signup
+      - name: server log on failure
+        if: failure()
+        run: docker compose --project-directory "$RUNNER_TEMP/orqiva" logs --tail 100

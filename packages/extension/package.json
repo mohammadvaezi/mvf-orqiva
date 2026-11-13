@@ -1,0 +1,1170 @@
+{
+  "name": "orqiva",
+  "displayName": "Orqiva",
+  "description": "Your Orqiva tasks, inbox, agents and code findings in VS Code: the task loop with fingerprints, live from your own Orqiva server.",
+  "version": "0.1.0",
+  "license": "SEE LICENSE IN LICENSE",
+  "publisher": "broszio",
+  "icon": "media/icon.png",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other",
+    "SCM Providers"
+  ],
+  "keywords": [
+    "orqiva",
+    "claude",
+    "claude code",
+    "project management",
+    "sprint",
+    "kanban",
+    "agent"
+  ],
+  "galleryBanner": {
+    "color": "#3F76FF",
+    "theme": "dark"
+  },
+  "extensionKind": [
+    "workspace"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Farivarz/Orqiva.git",
+    "directory": "packages/extension"
+  },
+  "bugs": {
+    "url": "https://github.com/Farivarz/Orqiva/issues"
+  },
+  "homepage": "https://github.com/Farivarz/Orqiva/tree/main/packages/extension#readme",
+  "qna": false,
+  "private": true,
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "onStartupFinished",
+    "workspaceContains:.plane/project.json"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "orqiva.openActivityItem",
+        "title": "Open task from activity",
+        "category": "Orqiva"
+      },
+      {
+        "command": "orqiva.hello",
+        "title": "Hello",
+        "category": "Orqiva"
+      },
+      {
+        "command": "orqiva.openHome",
+        "title": "Open Home",
+        "category": "Orqiva",
+        "icon": "$(home)"
+      },
+      {
+        "command": "orqiva.checkForUpdates",
+        "title": "Check for updates",
+        "category": "Orqiva",
+        "icon": "$(cloud-download)"
+      },
+      {
+        "command": "orqiva.sync",
+        "title": "Sync",
+        "category": "Orqiva",
+        "icon": "$(sync)"
+      },
+      {
+        "command": "orqiva.startTask",
+        "title": "Start",
+        "category": "Orqiva",
+        "icon": "$(play)"
+      },
+      {
+        "command": "orqiva.doneTask",
+        "title": "Done",
+        "category": "Orqiva",
+        "icon": "$(check)"
+      },
+      {
+        "command": "orqiva.setStatus",
+        "title": "Status…",
+        "category": "Orqiva"
+      },
+      {
+        "command": "orqiva.addNote",
+        "title": "Note…",
+        "category": "Orqiva"
+      },
+      {
+        "command": "orqiva.openInPlane",
+        "title": "Open in the web app",
+        "category": "Orqiva",
+        "icon": "$(link-external)"
+      },
+      {
+        "command": "orqiva.newTask",
+        "title": "New task",
+        "category": "Orqiva",
+        "icon": "$(add)"
+      },
+      {
+        "command": "orqiva.linkProject",
+        "title": "Link this folder to an Orqiva project",
+        "category": "Orqiva"
+      },
+      {
+        "command": "orqiva.copyFingerprint",
+        "title": "Copy fingerprint",
+        "category": "Orqiva",
+        "icon": "$(fingerprint)"
+      },
+      {
+        "command": "orqiva.openTask",
+        "title": "Open active task",
+        "category": "Orqiva"
+      },
+      {
+        "command": "orqiva.startDevelopment",
+        "title": "Start development",
+        "category": "Orqiva",
+        "icon": "$(terminal)",
+        "enablement": "orqiva.linked"
+      },
+      {
+        "command": "orqiva.checkEnvironment",
+        "title": "Check this computer",
+        "category": "Orqiva"
+      },
+      {
+        "command": "orqiva.openSetup",
+        "title": "Open setup",
+        "category": "Orqiva"
+      },
+      {
+        "command": "orqiva.connect",
+        "title": "Sign in",
+        "category": "Orqiva"
+      },
+      {
+        "command": "orqiva.signIn",
+        "title": "Sign in to the Orqiva server",
+        "category": "Orqiva"
+      },
+      {
+        "command": "orqiva.openProjectOnline",
+        "title": "Open the project in Orqiva",
+        "category": "Orqiva"
+      },
+      {
+        "command": "orqiva.newProject",
+        "title": "New project",
+        "category": "Orqiva"
+      },
+      {
+        "command": "orqiva.installHooks",
+        "title": "Install Claude Code hooks",
+        "category": "Orqiva"
+      },
+      {
+        "command": "orqiva.forgetKey",
+        "title": "Forget the legacy tracker key",
+        "category": "Orqiva"
+      },
+      {
+        "command": "orqiva.openPlanPanel",
+        "title": "Plan the project",
+        "category": "Orqiva",
+        "icon": "$(checklist)"
+      },
+      {
+        "command": "orqiva.openDescription",
+        "title": "Open project description",
+        "category": "Orqiva"
+      },
+      {
+        "command": "orqiva.draftPlan",
+        "title": "Draft the plan with Claude",
+        "category": "Orqiva",
+        "icon": "$(sparkle)"
+      },
+      {
+        "command": "orqiva.publishPlan",
+        "title": "Publish the plan",
+        "category": "Orqiva"
+      },
+      {
+        "command": "orqiva.docsRefresh",
+        "title": "Refresh docs",
+        "category": "Orqiva",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "orqiva.openDocSource",
+        "title": "Open source",
+        "category": "Orqiva",
+        "icon": "$(edit)"
+      },
+      {
+        "command": "orqiva.insertFingerprint",
+        "title": "Insert fingerprint for the active task",
+        "category": "Orqiva",
+        "icon": "$(fingerprint)"
+      },
+      {
+        "command": "orqiva.generateDocs",
+        "title": "Generate code documentation",
+        "category": "Orqiva",
+        "icon": "$(book)"
+      },
+      {
+        "command": "orqiva.openVersionPanel",
+        "title": "Version and release",
+        "category": "Orqiva",
+        "icon": "$(tag)"
+      },
+      {
+        "command": "orqiva.bumpVersion",
+        "title": "Bump the version",
+        "category": "Orqiva"
+      },
+      {
+        "command": "orqiva.openDockerPanel",
+        "title": "Docker",
+        "category": "Orqiva",
+        "icon": "$(server-environment)"
+      },
+      {
+        "command": "orqiva.generateDockerFiles",
+        "title": "Generate Dockerfile and compose with Claude",
+        "category": "Orqiva"
+      },
+      {
+        "command": "orqiva.openDeployPanel",
+        "title": "Deploy",
+        "category": "Orqiva",
+        "icon": "$(rocket)"
+      },
+      {
+        "command": "orqiva.openSecurityPanel",
+        "title": "Security checklist",
+        "category": "Orqiva",
+        "icon": "$(shield)"
+      },
+      {
+        "command": "orqiva.openDashboard",
+        "title": "Projects dashboard",
+        "category": "Orqiva",
+        "icon": "$(dashboard)"
+      },
+      {
+        "command": "orqiva.openRecentProject",
+        "title": "Open a recent project",
+        "category": "Orqiva",
+        "icon": "$(history)"
+      },
+      {
+        "command": "orqiva.inbox.open",
+        "title": "Open in Orqiva",
+        "category": "Orqiva",
+        "icon": "$(link-external)"
+      },
+      {
+        "command": "orqiva.inbox.done",
+        "title": "Done",
+        "category": "Orqiva",
+        "icon": "$(check)"
+      },
+      {
+        "command": "orqiva.inbox.snooze",
+        "title": "Snooze for an hour",
+        "category": "Orqiva",
+        "icon": "$(clock)"
+      },
+      {
+        "command": "orqiva.inbox.approve",
+        "title": "Approve",
+        "category": "Orqiva",
+        "icon": "$(pass)"
+      },
+      {
+        "command": "orqiva.inbox.decline",
+        "title": "Decline",
+        "category": "Orqiva",
+        "icon": "$(circle-slash)"
+      },
+      {
+        "command": "orqiva.inbox.refresh",
+        "title": "Refresh inbox",
+        "category": "Orqiva",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "orqiva.messages.open",
+        "title": "Open conversation",
+        "category": "Orqiva",
+        "icon": "$(comment-discussion)"
+      },
+      {
+        "command": "orqiva.messages.refresh",
+        "title": "Refresh messages",
+        "category": "Orqiva",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "orqiva.agents.ask",
+        "title": "Ask an agent",
+        "category": "Orqiva",
+        "icon": "$(sparkle)"
+      },
+      {
+        "command": "orqiva.agents.cancel",
+        "title": "Stop the run",
+        "category": "Orqiva",
+        "icon": "$(debug-stop)"
+      },
+      {
+        "command": "orqiva.agents.open",
+        "title": "Open the run in the web app",
+        "category": "Orqiva",
+        "icon": "$(link-external)"
+      },
+      {
+        "command": "orqiva.agents.pause",
+        "title": "Pause all agents",
+        "category": "Orqiva",
+        "icon": "$(debug-pause)"
+      },
+      {
+        "command": "orqiva.agents.resume",
+        "title": "Resume all agents",
+        "category": "Orqiva",
+        "icon": "$(play)"
+      },
+      {
+        "command": "orqiva.agents.refresh",
+        "title": "Refresh agents",
+        "category": "Orqiva",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "orqiva.findings.makeTask",
+        "title": "Make a task for this finding",
+        "category": "Orqiva"
+      },
+      {
+        "command": "orqiva.findings.refresh",
+        "title": "Read the code findings again",
+        "category": "Orqiva"
+      },
+      {
+        "command": "orqiva.codeMap.open",
+        "title": "Open the file on the code map",
+        "category": "Orqiva"
+      },
+      {
+        "command": "orqiva.runTests",
+        "title": "Run the tests and report them",
+        "category": "Orqiva",
+        "icon": "$(beaker)"
+      },
+      {
+        "command": "orqiva.ideas.new",
+        "title": "Note an idea",
+        "category": "Orqiva",
+        "icon": "$(lightbulb)"
+      },
+      {
+        "command": "orqiva.ideas.interview",
+        "title": "Idea interview",
+        "category": "Orqiva",
+        "icon": "$(comment-discussion)"
+      },
+      {
+        "command": "orqiva.ideas.addSource",
+        "title": "Add a source to an idea",
+        "category": "Orqiva",
+        "icon": "$(references)"
+      },
+      {
+        "command": "orqiva.docs.rebuild",
+        "title": "Rebuild docs from code",
+        "category": "Orqiva",
+        "icon": "$(book)"
+      },
+      {
+        "command": "orqiva.handover",
+        "title": "Handover status",
+        "category": "Orqiva",
+        "icon": "$(package)"
+      },
+      {
+        "command": "orqiva.review",
+        "title": "Review pull requests",
+        "category": "Orqiva",
+        "icon": "$(git-pull-request)"
+      },
+      {
+        "command": "orqiva.review.files",
+        "title": "Files of this pull request",
+        "category": "Orqiva",
+        "icon": "$(list-flat)"
+      },
+      {
+        "command": "orqiva.review.submit",
+        "title": "Submit the review",
+        "category": "Orqiva",
+        "icon": "$(check-all)"
+      },
+      {
+        "command": "orqiva.review.comment",
+        "title": "Add draft comment",
+        "category": "Orqiva"
+      },
+      {
+        "command": "orqiva.review.accept",
+        "title": "Accept suggestion",
+        "category": "Orqiva",
+        "icon": "$(check)"
+      },
+      {
+        "command": "orqiva.review.dismiss",
+        "title": "Dismiss suggestion",
+        "category": "Orqiva",
+        "icon": "$(close)"
+      },
+      {
+        "command": "orqiva.review.delete",
+        "title": "Delete draft",
+        "category": "Orqiva",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "orqiva.releases",
+        "title": "Releases and environments",
+        "category": "Orqiva",
+        "icon": "$(rocket)"
+      },
+      {
+        "command": "orqiva.timerToggle",
+        "title": "Start or stop the timer",
+        "category": "Orqiva"
+      }
+    ],
+    "configuration": {
+      "title": "Orqiva",
+      "properties": {
+        "orqiva.engineHome": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Folder of the legacy Python engine, for folders not yet on Orqiva. Empty = the folder that the engine's install.py set."
+        },
+        "orqiva.pythonPath": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Python 3 executable used to run the engine. Empty = try `py -3`, `python3`, `python` (the Microsoft Store stub is skipped)."
+        },
+        "orqiva.plane.baseUrl": {
+          "type": "string",
+          "default": "https://plan.broszio.com",
+          "description": "Address of the legacy tracker, for folders not yet on Orqiva."
+        },
+        "orqiva.plane.workspace": {
+          "type": "string",
+          "default": "prodsystem",
+          "description": "Workspace of the legacy tracker."
+        },
+        "orqiva.update.repository": {
+          "type": "string",
+          "default": "Farivarz/Orqiva",
+          "description": "The GitHub repository (owner/name) whose release carries the newest build of the extension."
+        },
+        "orqiva.update.release": {
+          "type": "string",
+          "default": "ide-latest",
+          "description": "The release tag in that repository that GitHub Actions publishes the extension to."
+        },
+        "orqiva.update.checkOnStartup": {
+          "type": "boolean",
+          "default": true,
+          "description": "Look for a newer build on GitHub when VS Code starts, and offer it."
+        },
+        "orqiva.claudeCommand": {
+          "type": "string",
+          "default": "claude",
+          "description": "Command sent to the integrated terminal by Start development."
+        },
+        "orqiva.codeLens.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show a CodeLens (task title and state) and a hover above every fingerprint line."
+        },
+        "orqiva.docs.outputFolder": {
+          "type": "string",
+          "default": "docs/generated",
+          "markdownDescription": "Where `Generate code documentation` writes its pages, relative to the project root. A path outside the project falls back to `docs/generated`."
+        },
+        "orqiva.docs.postToPlane": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "After generating, post a `Docs — …` comment on every task whose page changed."
+        },
+        "orqiva.docker.healthUrl": {
+          "type": "string",
+          "default": "http://localhost:8000/health",
+          "markdownDescription": "URL the Docker panel checks after `Run`. A project can override it with `healthUrl` in `.plane/deploy.json`."
+        },
+        "orqiva.docker.healthTimeoutSeconds": {
+          "type": "number",
+          "default": 10,
+          "minimum": 1,
+          "description": "How long a health request may take before it counts as failed."
+        },
+        "orqiva.home.openOnStartup": {
+          "type": "boolean",
+          "default": true,
+          "description": "Open the Orqiva Home tab when VS Code starts: the guided setup steps and the task board."
+        }
+      }
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "orqiva",
+          "title": "Orqiva",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "orqiva": [
+        {
+          "id": "orqiva.sprints",
+          "name": "Sprints",
+          "icon": "media/icon.svg",
+          "contextualTitle": "Orqiva"
+        },
+        {
+          "id": "orqiva.inbox",
+          "name": "Inbox",
+          "icon": "media/icon.svg",
+          "contextualTitle": "Orqiva inbox"
+        },
+        {
+          "id": "orqiva.messages",
+          "name": "Messages",
+          "icon": "media/icon.svg",
+          "contextualTitle": "Orqiva messages"
+        },
+        {
+          "id": "orqiva.agents",
+          "name": "Agents",
+          "icon": "media/icon.svg",
+          "contextualTitle": "Orqiva agents"
+        },
+        {
+          "id": "orqiva.docs",
+          "name": "Docs",
+          "icon": "media/icon.svg",
+          "contextualTitle": "Orqiva docs"
+        },
+        {
+          "id": "orqiva.activity",
+          "name": "Activity",
+          "icon": "media/icon.svg",
+          "contextualTitle": "Orqiva activity"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "orqiva.activity",
+        "when": "!orqiva.onServer",
+        "contents": "The activity feed shows, live, what your team and its AI agents do on this project. It needs a folder linked to an Orqiva server: run orq login and orq link in the terminal."
+      },
+      {
+        "view": "orqiva.activity",
+        "when": "orqiva.onServer",
+        "contents": "Nothing has happened in this project yet."
+      },
+      {
+        "view": "orqiva.sprints",
+        "when": "true",
+        "contents": "[Open Orqiva Home](command:orqiva.openHome)"
+      },
+      {
+        "view": "orqiva.sprints",
+        "when": "!isWorkspaceTrusted && orqiva.linked",
+        "contents": "This folder is in Restricted Mode. Orqiva runs its loop commands and Claude Code inside the workspace, so it stays read-only until you trust it.\n[Manage Workspace Trust](command:workbench.trust.manage)"
+      },
+      {
+        "view": "orqiva.sprints",
+        "when": "orqiva.welcome == 'setup'",
+        "contents": "Set up Orqiva: check the helpers it needs on this computer.\n[Open setup](command:orqiva.openSetup)"
+      },
+      {
+        "view": "orqiva.sprints",
+        "when": "orqiva.welcome == 'connect'",
+        "contents": "Sign in to your Orqiva server once: its address, your e-mail and your password. This computer keeps a personal token, not the password.\n[Sign in](command:orqiva.signIn)"
+      },
+      {
+        "view": "orqiva.sprints",
+        "when": "orqiva.welcome == 'link'",
+        "contents": "Link this folder to an Orqiva project to see its sprints.\n[New project](command:orqiva.newProject)\n[Link project](command:orqiva.linkProject)"
+      },
+      {
+        "view": "orqiva.docs",
+        "when": "!orqiva.linked",
+        "contents": "The project's rules, architecture, design system and plan appear here once this folder is linked to an Orqiva project."
+      },
+      {
+        "view": "orqiva.sprints",
+        "when": "orqiva.welcome == 'link' && orqiva.hasRecentProjects",
+        "contents": "Or reopen a project you have worked on before.\n[Recent projects](command:orqiva.openRecentProject)"
+      },
+      {
+        "view": "orqiva.messages",
+        "when": "!orqiva.onServer",
+        "contents": "Messages are your team's conversations in Orqiva: channels, direct messages and threads. They need a folder linked to an Orqiva server: run orq login and orq link in the terminal."
+      },
+      {
+        "view": "orqiva.messages",
+        "when": "orqiva.onServer",
+        "contents": "No conversations yet. Open one in the web app: Messages."
+      },
+      {
+        "view": "orqiva.inbox",
+        "when": "!orqiva.onServer",
+        "contents": "Your inbox shows what waits for you: approvals your agents ask for, mentions, gates to sign and incidents. It needs a folder linked to an Orqiva server: run orq login and orq link in the terminal."
+      },
+      {
+        "view": "orqiva.inbox",
+        "when": "orqiva.onServer",
+        "contents": "Nothing waits for you."
+      },
+      {
+        "view": "orqiva.agents",
+        "when": "!orqiva.onServer",
+        "contents": "The Agents view shows your project's agents at work, each run with its steps. It needs a folder linked to an Orqiva server: run orq login and orq link in the terminal."
+      },
+      {
+        "view": "orqiva.agents",
+        "when": "orqiva.onServer",
+        "contents": "No agent has worked on this project yet.\n[Ask an agent](command:orqiva.agents.ask)"
+      }
+    ],
+    "menus": {
+      "comments/commentThread/context": [
+        {
+          "command": "orqiva.review.comment",
+          "when": "commentController == orqiva-review",
+          "group": "inline"
+        }
+      ],
+      "comments/comment/title": [
+        {
+          "command": "orqiva.review.accept",
+          "when": "commentController == orqiva-review && comment == suggested",
+          "group": "inline@1"
+        },
+        {
+          "command": "orqiva.review.dismiss",
+          "when": "commentController == orqiva-review && comment == suggested",
+          "group": "inline@2"
+        },
+        {
+          "command": "orqiva.review.delete",
+          "when": "commentController == orqiva-review && comment == draft",
+          "group": "inline@1"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "orqiva.review.files",
+          "when": "resourceScheme == orqiva-review",
+          "group": "navigation@1"
+        },
+        {
+          "command": "orqiva.review.submit",
+          "when": "resourceScheme == orqiva-review",
+          "group": "navigation@2"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "orqiva.openHome",
+          "when": "view == orqiva.sprints",
+          "group": "navigation@-1"
+        },
+        {
+          "command": "orqiva.startDevelopment",
+          "when": "view == orqiva.sprints && orqiva.linked",
+          "group": "navigation@0"
+        },
+        {
+          "command": "orqiva.sync",
+          "when": "view == orqiva.sprints && orqiva.linked",
+          "group": "navigation@1"
+        },
+        {
+          "command": "orqiva.newTask",
+          "when": "view == orqiva.sprints && orqiva.linked",
+          "group": "navigation@2"
+        },
+        {
+          "command": "orqiva.openPlanPanel",
+          "when": "view == orqiva.sprints && orqiva.linked",
+          "group": "navigation@3"
+        },
+        {
+          "command": "orqiva.openPlanPanel",
+          "when": "view == orqiva.docs && orqiva.linked",
+          "group": "navigation@0"
+        },
+        {
+          "command": "orqiva.docsRefresh",
+          "when": "view == orqiva.docs",
+          "group": "navigation@2"
+        },
+        {
+          "command": "orqiva.generateDocs",
+          "when": "view == orqiva.docs && orqiva.linked",
+          "group": "navigation@1"
+        },
+        {
+          "command": "orqiva.openDashboard",
+          "when": "view == orqiva.sprints",
+          "group": "navigation@4"
+        },
+        {
+          "command": "orqiva.inbox.refresh",
+          "when": "view == orqiva.inbox",
+          "group": "navigation"
+        },
+        {
+          "command": "orqiva.messages.refresh",
+          "when": "view == orqiva.messages",
+          "group": "navigation"
+        },
+        {
+          "command": "orqiva.agents.ask",
+          "when": "view == orqiva.agents",
+          "group": "navigation@1"
+        },
+        {
+          "command": "orqiva.agents.refresh",
+          "when": "view == orqiva.agents",
+          "group": "navigation@2"
+        },
+        {
+          "command": "orqiva.agents.pause",
+          "when": "view == orqiva.agents",
+          "group": "agents@1"
+        },
+        {
+          "command": "orqiva.agents.resume",
+          "when": "view == orqiva.agents",
+          "group": "agents@2"
+        },
+        {
+          "command": "orqiva.runTests",
+          "when": "view == orqiva.sprints && orqiva.onServer",
+          "group": "tests@1"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "orqiva.startTask",
+          "when": "view == orqiva.sprints && viewItem =~ /^item-(backlog|unstarted|started)$/",
+          "group": "inline@1"
+        },
+        {
+          "command": "orqiva.doneTask",
+          "when": "view == orqiva.sprints && viewItem =~ /^item-started/",
+          "group": "inline@2"
+        },
+        {
+          "command": "orqiva.openInPlane",
+          "when": "view == orqiva.sprints && viewItem =~ /^item-/",
+          "group": "inline@3"
+        },
+        {
+          "command": "orqiva.setStatus",
+          "when": "view == orqiva.sprints && viewItem =~ /^item-/",
+          "group": "1_state@1"
+        },
+        {
+          "command": "orqiva.addNote",
+          "when": "view == orqiva.sprints && viewItem =~ /^item-/",
+          "group": "1_state@2"
+        },
+        {
+          "command": "orqiva.openInPlane",
+          "when": "view == orqiva.sprints && viewItem =~ /^item-/",
+          "group": "2_open@1"
+        },
+        {
+          "command": "orqiva.copyFingerprint",
+          "when": "view == orqiva.sprints && viewItem =~ /^item-started-active/",
+          "group": "1_state@3"
+        },
+        {
+          "command": "orqiva.openDocSource",
+          "when": "view == orqiva.docs && viewItem == doc",
+          "group": "inline@1"
+        },
+        {
+          "command": "orqiva.inbox.approve",
+          "when": "view == orqiva.inbox && viewItem == inbox-approval",
+          "group": "inline@1"
+        },
+        {
+          "command": "orqiva.inbox.decline",
+          "when": "view == orqiva.inbox && viewItem == inbox-approval",
+          "group": "inline@2"
+        },
+        {
+          "command": "orqiva.inbox.done",
+          "when": "view == orqiva.inbox",
+          "group": "inline@3"
+        },
+        {
+          "command": "orqiva.inbox.snooze",
+          "when": "view == orqiva.inbox",
+          "group": "inline@4"
+        },
+        {
+          "command": "orqiva.agents.cancel",
+          "when": "view == orqiva.agents && viewItem == agent-run-active",
+          "group": "inline@1"
+        },
+        {
+          "command": "orqiva.agents.open",
+          "when": "view == orqiva.agents && viewItem =~ /^agent-run/",
+          "group": "inline@2"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "orqiva.review",
+          "when": "orqiva.onServer"
+        },
+        {
+          "command": "orqiva.review.files",
+          "when": "resourceScheme == orqiva-review"
+        },
+        {
+          "command": "orqiva.review.submit",
+          "when": "resourceScheme == orqiva-review"
+        },
+        {
+          "command": "orqiva.review.comment",
+          "when": "false"
+        },
+        {
+          "command": "orqiva.review.accept",
+          "when": "false"
+        },
+        {
+          "command": "orqiva.review.dismiss",
+          "when": "false"
+        },
+        {
+          "command": "orqiva.review.delete",
+          "when": "false"
+        },
+        {
+          "command": "orqiva.openActivityItem",
+          "when": "false"
+        },
+        {
+          "command": "orqiva.startTask",
+          "when": "orqiva.linked"
+        },
+        {
+          "command": "orqiva.doneTask",
+          "when": "orqiva.linked"
+        },
+        {
+          "command": "orqiva.setStatus",
+          "when": "orqiva.linked"
+        },
+        {
+          "command": "orqiva.addNote",
+          "when": "orqiva.linked"
+        },
+        {
+          "command": "orqiva.sync",
+          "when": "orqiva.linked"
+        },
+        {
+          "command": "orqiva.newTask",
+          "when": "orqiva.linked"
+        },
+        {
+          "command": "orqiva.copyFingerprint",
+          "when": "orqiva.linked"
+        },
+        {
+          "command": "orqiva.openTask",
+          "when": "orqiva.linked"
+        },
+        {
+          "command": "orqiva.startDevelopment",
+          "when": "orqiva.linked"
+        },
+        {
+          "command": "orqiva.openPlanPanel",
+          "when": "orqiva.linked"
+        },
+        {
+          "command": "orqiva.openDescription",
+          "when": "orqiva.linked"
+        },
+        {
+          "command": "orqiva.publishPlan",
+          "when": "orqiva.linked"
+        },
+        {
+          "command": "orqiva.docsRefresh",
+          "when": "false"
+        },
+        {
+          "command": "orqiva.openDocSource",
+          "when": "false"
+        },
+        {
+          "command": "orqiva.insertFingerprint",
+          "when": "orqiva.linked"
+        },
+        {
+          "command": "orqiva.generateDocs",
+          "when": "orqiva.linked"
+        },
+        {
+          "command": "orqiva.openVersionPanel",
+          "when": "orqiva.linked"
+        },
+        {
+          "command": "orqiva.bumpVersion",
+          "when": "orqiva.linked"
+        },
+        {
+          "command": "orqiva.openDockerPanel",
+          "when": "orqiva.linked"
+        },
+        {
+          "command": "orqiva.generateDockerFiles",
+          "when": "orqiva.linked"
+        },
+        {
+          "command": "orqiva.openDeployPanel",
+          "when": "orqiva.linked"
+        },
+        {
+          "command": "orqiva.openSecurityPanel",
+          "when": "orqiva.linked"
+        },
+        {
+          "command": "orqiva.openDashboard"
+        },
+        {
+          "command": "orqiva.openRecentProject",
+          "when": "orqiva.hasRecentProjects"
+        },
+        {
+          "command": "orqiva.inbox.open",
+          "when": "false"
+        },
+        {
+          "command": "orqiva.inbox.done",
+          "when": "false"
+        },
+        {
+          "command": "orqiva.inbox.snooze",
+          "when": "false"
+        },
+        {
+          "command": "orqiva.inbox.approve",
+          "when": "false"
+        },
+        {
+          "command": "orqiva.inbox.decline",
+          "when": "false"
+        },
+        {
+          "command": "orqiva.agents.cancel",
+          "when": "false"
+        },
+        {
+          "command": "orqiva.agents.open",
+          "when": "false"
+        },
+        {
+          "command": "orqiva.findings.makeTask",
+          "when": "false"
+        },
+        {
+          "command": "orqiva.codeMap.open",
+          "when": "false"
+        },
+        {
+          "command": "orqiva.runTests",
+          "when": "orqiva.onServer"
+        },
+        {
+          "command": "orqiva.ideas.new",
+          "when": "orqiva.onServer"
+        },
+        {
+          "command": "orqiva.ideas.interview",
+          "when": "orqiva.onServer"
+        },
+        {
+          "command": "orqiva.ideas.addSource",
+          "when": "orqiva.onServer"
+        },
+        {
+          "command": "orqiva.docs.rebuild",
+          "when": "orqiva.onServer"
+        },
+        {
+          "command": "orqiva.handover",
+          "when": "orqiva.onServer"
+        },
+        {
+          "command": "orqiva.releases",
+          "when": "orqiva.onServer"
+        },
+        {
+          "command": "orqiva.messages.open",
+          "when": "false"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "orqiva.insertFingerprint",
+          "when": "orqiva.linked && orqiva.hasActiveTask && !editorReadonly",
+          "group": "1_modification@9"
+        },
+        {
+          "command": "orqiva.ideas.addSource",
+          "when": "orqiva.onServer && editorHasSelection",
+          "group": "orqiva@1"
+        }
+      ]
+    },
+    "walkthroughs": [
+      {
+        "id": "orqiva.getStarted",
+        "title": "Get started with Orqiva",
+        "description": "Six steps from an empty folder to Claude Code working through one-day sprints.",
+        "steps": [
+          {
+            "id": "setup",
+            "title": "Set up this computer",
+            "description": "Node.js, Claude Code and git.\n[Check environment](command:orqiva.checkEnvironment)\n[Open setup](command:orqiva.openSetup)",
+            "media": {
+              "markdown": "media/walkthrough/setup.md"
+            },
+            "completionEvents": [
+              "onContext:orqiva.engineFound"
+            ]
+          },
+          {
+            "id": "connect",
+            "title": "Sign in to Orqiva",
+            "description": "Your server's address, your e-mail and your password; this computer keeps a personal token.\n[Sign in](command:orqiva.signIn)",
+            "media": {
+              "markdown": "media/walkthrough/connect.md"
+            },
+            "completionEvents": [
+              "onContext:orqiva.connected"
+            ]
+          },
+          {
+            "id": "link",
+            "title": "Link or create a project",
+            "description": "One folder, one Orqiva project; the link is committed with the repository.\n[New project](command:orqiva.newProject)\n[Link project](command:orqiva.linkProject)",
+            "media": {
+              "markdown": "media/walkthrough/link.md"
+            },
+            "completionEvents": [
+              "onContext:orqiva.linked"
+            ]
+          },
+          {
+            "id": "plan",
+            "title": "Plan the project",
+            "description": "Describe it; Claude drafts architecture, rules, design and one-day sprints; you publish.\n[Plan the project](command:orqiva.openPlanPanel)",
+            "media": {
+              "markdown": "media/walkthrough/plan.md"
+            },
+            "completionEvents": [
+              "onContext:orqiva.planned"
+            ]
+          },
+          {
+            "id": "develop",
+            "title": "Develop",
+            "description": "Open Claude Code in the project; it takes the next task and fingerprints what it writes.\n[Start development](command:orqiva.startDevelopment)",
+            "media": {
+              "markdown": "media/walkthrough/develop.md"
+            },
+            "completionEvents": [
+              "onContext:orqiva.developing"
+            ]
+          },
+          {
+            "id": "release",
+            "title": "Release",
+            "description": "Bump the version from the items done, build the image, deploy it and post it back to the board.\n[Version](command:orqiva.openVersionPanel)\n[Docker](command:orqiva.openDockerPanel)\n[Deploy](command:orqiva.openDeployPanel)",
+            "media": {
+              "markdown": "media/walkthrough/release.md"
+            },
+            "completionEvents": [
+              "onContext:orqiva.released"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "scripts": {
+    "build": "node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "lint": "tsc --noEmit && eslint . && prettier --check .",
+    "format": "prettier --write .",
+    "test": "vitest run",
+    "test:e2e": "npm run build && node ./dist/test/runTests.js",
+    "package": "vsce package --no-dependencies",
+    "check": "npm run lint && npm test && npm run build"
+  },
+  "devDependencies": {
+    "@types/mocha": "10.0.10",
+    "@types/node": "22.20.4",
+    "@types/vscode": "1.90.0",
+    "@vitest/coverage-v8": "5.0.1",
+    "@vscode/test-electron": "3.1.0",
+    "@vscode/vsce": "4.0.0",
+    "esbuild": "0.28.2",
+    "eslint": "10.11.0",
+    "eslint-config-prettier": "10.1.8",
+    "glob": "13.0.6",
+    "mocha": "12.0.2",
+    "prettier": "3.9.8",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.70.1",
+    "vitest": "5.0.1"
+  },
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": "limited",
+      "description": "In Restricted Mode Orqiva only shows the board from the last sync and the status bar. Trust the folder to run the loop commands and Claude Code in it."
+    }
+  },
+  "dependencies": {
+    "@vscode/codicons": "0.0.46-24"
+  }
+}

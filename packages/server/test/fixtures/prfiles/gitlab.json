@@ -1,0 +1,44 @@
+{
+  "/projects/acme%2Fweb%2Fshop/merge_requests/7/diffs": [
+    {
+      "old_path": "src/cart.ts",
+      "new_path": "src/cart.ts",
+      "a_mode": "100644",
+      "b_mode": "100644",
+      "new_file": false,
+      "renamed_file": false,
+      "deleted_file": false,
+      "diff": "@@ -1,4 +1,6 @@\n export const items = [];\n+// [SHOP-1 | S1 | v0.1.0] Cart keeps items between visits\n export function add(x) {\n   items.push(x);\n+  save(items);\n }\n"
+    },
+    {
+      "old_path": "server/migrations/0007_cart.sql",
+      "new_path": "server/migrations/0007_cart.sql",
+      "a_mode": "0",
+      "b_mode": "100644",
+      "new_file": true,
+      "renamed_file": false,
+      "deleted_file": false,
+      "diff": "@@ -0,0 +1 @@\n+CREATE TABLE cart (id int);\n"
+    },
+    {
+      "old_path": "README.md",
+      "new_path": "README.md",
+      "a_mode": "100644",
+      "b_mode": "100644",
+      "new_file": false,
+      "renamed_file": false,
+      "deleted_file": false,
+      "diff": "@@ -1 +1,3 @@\n # Shop\n+\n+A cart.\n"
+    },
+    {
+      "old_path": "assets/logo.png",
+      "new_path": "assets/logo.png",
+      "a_mode": "100644",
+      "b_mode": "100644",
+      "new_file": false,
+      "renamed_file": false,
+      "deleted_file": false,
+      "diff": "Binary files a/assets/logo.png and b/assets/logo.png differ\n"
+    }
+  ]
+}

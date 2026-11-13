@@ -1,0 +1,65 @@
+{
+  "subscriptionId": "00000000-0000-0000-0000-000000000000",
+  "notificationId": 3,
+  "id": "03c164c2-8912-4d5e-8009-3707d5f83734",
+  "eventType": "git.push",
+  "publisherId": "tfs",
+  "message": { "text": "Grace Hopper pushed updates to shop-web:feature/shop-2-checkout." },
+  "detailedMessage": {
+    "text": "Grace Hopper pushed a commit to shop-web:feature/shop-2-checkout."
+  },
+  "resource": {
+    "commits": [
+      {
+        "commitId": "33b55f7cb7e7e245323987634f960cf4a6e6bc74",
+        "author": {
+          "name": "Grace Hopper",
+          "email": "grace@contoso.example",
+          "date": "2026-10-12T08:40:12Z"
+        },
+        "committer": {
+          "name": "Grace Hopper",
+          "email": "grace@contoso.example",
+          "date": "2026-10-12T08:40:12Z"
+        },
+        "comment": "SHOP-2 Checkout asks for the address once",
+        "url": "https://dev.azure.com/contoso/_apis/git/repositories/7f2d3b6a-1c4e-4f9b-9a2d-5e8c1b0a7d33/commits/33b55f7cb7e7e245323987634f960cf4a6e6bc74"
+      }
+    ],
+    "refUpdates": [
+      {
+        "name": "refs/heads/feature/shop-2-checkout",
+        "oldObjectId": "0000000000000000000000000000000000000000",
+        "newObjectId": "33b55f7cb7e7e245323987634f960cf4a6e6bc74"
+      }
+    ],
+    "repository": {
+      "id": "7f2d3b6a-1c4e-4f9b-9a2d-5e8c1b0a7d33",
+      "name": "shop-web",
+      "url": "https://dev.azure.com/contoso/_apis/git/repositories/7f2d3b6a-1c4e-4f9b-9a2d-5e8c1b0a7d33",
+      "project": {
+        "id": "a7573007-bbb3-4341-b726-0c4148a07853",
+        "name": "Shop",
+        "url": "https://dev.azure.com/contoso/_apis/projects/a7573007-bbb3-4341-b726-0c4148a07853",
+        "state": "wellFormed"
+      },
+      "defaultBranch": "refs/heads/main",
+      "remoteUrl": "https://contoso@dev.azure.com/contoso/Shop/_git/shop-web"
+    },
+    "pushedBy": {
+      "displayName": "Grace Hopper",
+      "id": "00ca946b-2fe9-4f2a-ae2f-40d5c48001bc",
+      "uniqueName": "grace@contoso.example"
+    },
+    "pushId": 14,
+    "date": "2026-10-12T08:40:14Z",
+    "url": "https://dev.azure.com/contoso/_apis/git/repositories/7f2d3b6a-1c4e-4f9b-9a2d-5e8c1b0a7d33/pushes/14"
+  },
+  "resourceVersion": "1.0",
+  "resourceContainers": {
+    "collection": { "id": "c12d0eb8-e382-443b-9f9c-c52cba5014c2" },
+    "account": { "id": "f844ec47-a9db-4511-8281-8b63f4eaf94e" },
+    "project": { "id": "a7573007-bbb3-4341-b726-0c4148a07853" }
+  },
+  "createdDate": "2026-10-12T08:40:15.2Z"
+}

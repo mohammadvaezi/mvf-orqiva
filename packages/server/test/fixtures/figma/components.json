@@ -1,0 +1,61 @@
+{
+  "status": 200,
+  "error": false,
+  "meta": {
+    "components": [
+      {
+        "key": "4f2d9c1a7e3b5d8f0a6c2e4b9d1f3a5c7e9b0d2f",
+        "file_key": "Ab12Cd34Ef56Gh78Ij90",
+        "node_id": "12:345",
+        "thumbnail_url": "https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/0f1e2d3c-button-primary",
+        "name": "Variant=Primary, Size=Medium",
+        "description": "",
+        "created_at": "2026-09-01T09:12:44.118Z",
+        "updated_at": "2026-10-10T14:03:21.502Z",
+        "user": { "id": "1188921", "handle": "Designer", "img_url": "" },
+        "containing_frame": {
+          "name": "Buttons",
+          "nodeId": "12:300",
+          "pageId": "0:1",
+          "pageName": "Components",
+          "containingComponentSet": { "nodeId": "12:340", "name": "Button" }
+        }
+      },
+      {
+        "key": "5a3e0d2b8f4c6e9a1b7d3f5a0c2e4b6d8f1a3c5e",
+        "file_key": "Ab12Cd34Ef56Gh78Ij90",
+        "node_id": "12:346",
+        "thumbnail_url": "https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/1a2b3c4d-button-secondary",
+        "name": "Variant=Secondary, Size=Medium",
+        "description": "",
+        "created_at": "2026-09-01T09:12:44.118Z",
+        "updated_at": "2026-10-10T14:03:21.502Z",
+        "user": { "id": "1188921", "handle": "Designer", "img_url": "" },
+        "containing_frame": {
+          "name": "Buttons",
+          "nodeId": "12:300",
+          "pageId": "0:1",
+          "pageName": "Components",
+          "containingComponentSet": { "nodeId": "12:340", "name": "Button" }
+        }
+      },
+      {
+        "key": "6b4f1e3c9a5d7f0b2c8e4a6b1d3f5c7e9a0b2d4f",
+        "file_key": "Ab12Cd34Ef56Gh78Ij90",
+        "node_id": "20:11",
+        "thumbnail_url": "https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/2b3c4d5e-card",
+        "name": "Card",
+        "description": "A surface for one thing",
+        "created_at": "2026-09-03T11:40:02.004Z",
+        "updated_at": "2026-10-02T08:15:59.871Z",
+        "user": { "id": "1188921", "handle": "Designer", "img_url": "" },
+        "containing_frame": {
+          "name": "Surfaces",
+          "nodeId": "20:1",
+          "pageId": "0:1",
+          "pageName": "Components"
+        }
+      }
+    ]
+  }
+}

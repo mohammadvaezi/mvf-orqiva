@@ -1,0 +1,2 @@
+Created SBX-1 Add hello endpoint in Sprint 01 - 2026-09-22 -> https://plan.broszio.com/prodsystem/projects/da9ed6ea-6a4b-45ed-ab28-8433d8f301c9/issues/1aacf1d7-ed67-4b5e-9ace-a68cbc530539/
+Next: plane start SBX-1

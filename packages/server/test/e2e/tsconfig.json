@@ -1,0 +1,11 @@
+{
+  "//": "[PCODE-105 | S15 | v0.1.0] end-to-end tests that load other packages (the extension is CommonJS, the server ESM) are checked as a bundler sees them",
+  "extends": "../../../../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "rootDir": "../../.."
+  },
+  "include": ["*.ts"]
+}

@@ -1,0 +1,583 @@
+/* ── [PCODE-235 | S15 | v0.1.0] T23.2 Messages in the web app ──
+   Why: the conversations screen in the dense v2 style: three panes (list, conversation, thread) inside the
+   page, the composer at the bottom, hover actions on a message. On a phone the list and the conversation
+   take the screen in turn. Tokens only, light and dark. */
+
+.msg-layout {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  height: calc(100vh - 36px - var(--pv-top) - 110px);
+  min-height: 480px;
+  border: 1px solid var(--pv-line);
+  border-radius: var(--pv-radius);
+  background: var(--pv-card);
+  overflow: hidden;
+}
+.msg-layout--thread {
+  grid-template-columns: 240px minmax(0, 1fr) minmax(280px, 360px);
+}
+
+/* the list of conversations */
+.msg-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 10px 8px;
+  border-right: 1px solid var(--pv-line);
+  background: var(--pv-bg);
+  overflow-y: auto;
+}
+.msg-search {
+  margin: 0 2px 8px;
+  padding: 6px 9px;
+  border: 1px solid var(--pv-line);
+  border-radius: var(--pv-radius-sm);
+  background: var(--pv-card);
+  color: var(--pv-text);
+  font: inherit;
+  font-size: 13px;
+}
+.msg-list-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+  padding: 4px 8px;
+  color: var(--pe-text-2);
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.msg-list-sub {
+  padding: 8px 8px 2px;
+  color: var(--pe-text-2);
+  font-size: 11px;
+}
+.msg-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 30px;
+  padding: 3px 8px;
+  border-radius: var(--pv-radius-sm);
+  color: var(--pe-text-2);
+  font-size: 13.5px;
+  text-decoration: none;
+}
+.msg-link:hover {
+  background: var(--pe-hover);
+}
+.msg-link[aria-current='page'] {
+  background: var(--pv-accent-bg);
+  color: var(--pv-accent);
+}
+.msg-link--unread {
+  color: var(--pv-text);
+  font-weight: 650;
+}
+.msg-link--muted {
+  opacity: 0.6;
+}
+.msg-link-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.msg-hash {
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  color: var(--pe-text-2);
+  font-weight: 600;
+}
+.msg-badge {
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--pe-primary);
+  color: var(--pe-primary-text);
+  font-size: 11px;
+  font-weight: 650;
+  line-height: 18px;
+  text-align: center;
+}
+.msg-badge--mention {
+  background: var(--pv-bad);
+}
+.msg-quiet {
+  padding: 6px 10px;
+  color: var(--pe-text-2);
+  font-size: 12.5px;
+}
+
+/* the conversation */
+.msg-main,
+.msg-thread {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+.msg-thread {
+  border-left: 1px solid var(--pv-line);
+}
+.msg-head,
+.msg-thread-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--pv-line);
+}
+.msg-head-text {
+  flex: 1;
+  min-width: 0;
+}
+.msg-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 650;
+}
+.msg-topic {
+  margin: 1px 0 0;
+  overflow: hidden;
+  color: var(--pe-text-2);
+  font-size: 12.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.msg-members {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.msg-head-actions {
+  display: flex;
+  gap: 4px;
+}
+.msg-back {
+  display: none;
+  border: 0;
+  background: none;
+  color: var(--pv-accent);
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+}
+.msg-thread-head {
+  justify-content: space-between;
+}
+.msg-scroll {
+  flex: 1;
+  min-height: 0;
+  padding: 8px 0 12px;
+  overflow-y: auto;
+}
+.msg-older {
+  display: flex;
+  justify-content: center;
+  padding: 6px;
+}
+.msg-empty {
+  display: grid;
+  flex: 1;
+  place-items: center;
+  align-content: center;
+  gap: 6px;
+  padding: 24px;
+  color: var(--pe-text-2);
+  text-align: center;
+}
+.msg-day {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 14px 4px;
+  color: var(--pe-text-2);
+  font-size: 11.5px;
+  font-weight: 650;
+}
+.msg-day::before,
+.msg-day::after {
+  flex: 1;
+  height: 1px;
+  background: var(--pv-line);
+  content: '';
+}
+.msg-pad {
+  padding: 10px 14px;
+}
+
+/* one message */
+.msg {
+  position: relative;
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: 8px;
+  padding: 6px 14px 2px;
+}
+.msg--compact {
+  padding-top: 1px;
+}
+.msg:hover {
+  background: var(--pe-hover);
+}
+.msg--highlight {
+  background: var(--pv-warn-bg);
+}
+.msg-gutter {
+  display: flex;
+  justify-content: center;
+  padding-top: 2px;
+}
+.msg-time-hover {
+  visibility: hidden;
+  color: var(--pe-text-2);
+  font-size: 10.5px;
+  line-height: 20px;
+}
+.msg:hover .msg-time-hover {
+  visibility: visible;
+}
+.msg-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 13px;
+}
+.msg-body {
+  overflow-wrap: anywhere;
+  font-size: 14px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+}
+.msg-body code {
+  padding: 0 4px;
+  border-radius: 4px;
+  background: var(--pv-bg);
+  font-size: 12.5px;
+}
+/* the shell resets links and buttons; these must win over that */
+.pv-app .msg-body a {
+  color: var(--pv-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.msg-mention {
+  padding: 0 3px;
+  border-radius: 4px;
+  background: var(--pv-accent-bg);
+  color: var(--pv-accent);
+  font-weight: 600;
+}
+.msg-mention--me {
+  background: var(--pv-warn-bg);
+  color: var(--pv-text);
+}
+.pv-app .msg-ref {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--pv-accent);
+  font: inherit;
+  font-family: var(--pe-font-mono, monospace);
+  font-size: 13px;
+  cursor: pointer;
+}
+.pv-app .msg-ref:hover {
+  text-decoration: underline;
+}
+.msg-gone {
+  margin: 0;
+  color: var(--pe-text-2);
+  font-style: italic;
+  font-size: 13px;
+}
+.msg-files,
+.msg-reactions,
+.msg-attached {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+.msg-file {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border: 1px solid var(--pv-line);
+  border-radius: var(--pv-radius-sm);
+  background: var(--pv-card);
+  color: var(--pv-text);
+  font-size: 12.5px;
+  text-decoration: none;
+}
+.msg-image img {
+  display: block;
+  max-width: 260px;
+  max-height: 180px;
+  border: 1px solid var(--pv-line);
+  border-radius: var(--pv-radius-sm);
+}
+.pv-app .msg-task {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+  color: var(--pv-ok);
+  font-size: 12.5px;
+  text-decoration: none;
+}
+.msg-reaction {
+  padding: 1px 8px;
+  border: 1px solid var(--pv-line);
+  border-radius: 999px;
+  background: var(--pv-card);
+  color: var(--pv-text);
+  font: inherit;
+  font-size: 12.5px;
+  cursor: pointer;
+}
+.msg-reaction--mine {
+  border-color: var(--pv-accent);
+  background: var(--pv-accent-bg);
+}
+.pv-app .msg-replies {
+  margin-top: 3px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--pv-accent);
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.msg-confirm {
+  margin-top: 4px;
+  font-size: 12.5px;
+}
+.msg-actions {
+  position: absolute;
+  top: -10px;
+  right: 14px;
+  display: none;
+  gap: 2px;
+  padding: 2px;
+  border: 1px solid var(--pv-line);
+  border-radius: var(--pv-radius-sm);
+  background: var(--pv-card);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+.msg:hover .msg-actions,
+.msg:focus-within .msg-actions {
+  display: flex;
+}
+.msg-icon-btn {
+  display: inline-grid;
+  place-items: center;
+  min-width: 26px;
+  height: 26px;
+  border: 0;
+  border-radius: 5px;
+  background: none;
+  color: var(--pe-text-2);
+  font: inherit;
+  cursor: pointer;
+}
+.msg-icon-btn:hover {
+  background: var(--pe-hover);
+  color: var(--pv-text);
+}
+.msg-picker {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  z-index: 3;
+  display: flex;
+  gap: 2px;
+  padding: 4px;
+  border: 1px solid var(--pv-line);
+  border-radius: var(--pv-radius-sm);
+  background: var(--pv-card);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+.msg-picker button {
+  padding: 3px 5px;
+  border: 0;
+  border-radius: 4px;
+  background: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+.msg-picker button:hover {
+  background: var(--pe-hover);
+}
+.msg-editing {
+  display: grid;
+  gap: 4px;
+}
+.msg-thread-count {
+  margin: 6px 14px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--pv-line);
+  color: var(--pe-text-2);
+  font-size: 12px;
+}
+
+/* the composer */
+.msg-composer {
+  position: relative;
+  padding: 8px 12px 12px;
+  border-top: 1px solid var(--pv-line);
+}
+.msg-composer-note {
+  border-top: 1px solid var(--pv-line);
+  text-align: center;
+}
+.msg-compose-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+}
+.msg-input {
+  flex: 1;
+  min-height: 36px;
+  max-height: 160px;
+  padding: 8px 10px;
+  border: 1px solid var(--pv-line);
+  border-radius: var(--pv-radius-sm);
+  background: var(--pv-card);
+  color: var(--pv-text);
+  font: inherit;
+  font-size: 14px;
+  resize: vertical;
+}
+.msg-input:focus {
+  border-color: var(--pv-accent);
+  outline: none;
+}
+.msg-suggest {
+  position: absolute;
+  bottom: 100%;
+  left: 48px;
+  z-index: 3;
+  min-width: 240px;
+  margin: 0;
+  padding: 4px;
+  border: 1px solid var(--pv-line);
+  border-radius: var(--pv-radius-sm);
+  background: var(--pv-card);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  list-style: none;
+}
+.msg-suggest button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 5px 8px;
+  border: 0;
+  border-radius: 4px;
+  background: none;
+  color: var(--pv-text);
+  font: inherit;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+}
+.msg-suggest [aria-selected='true'] button,
+.msg-suggest button:hover {
+  background: var(--pv-accent-bg);
+}
+
+/* search results and dialogs */
+.msg-hit {
+  display: grid;
+  gap: 2px;
+  width: 100%;
+  padding: 8px 14px;
+  border: 0;
+  border-bottom: 1px solid var(--pv-line);
+  background: none;
+  color: var(--pv-text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.msg-hit:hover {
+  background: var(--pe-hover);
+}
+.msg-hit-text {
+  overflow: hidden;
+  font-size: 13.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.msg-people {
+  max-height: 300px;
+  margin: 8px 0 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+.msg-people label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 2px;
+  font-size: 13.5px;
+}
+
+/* a phone: the list, or the conversation */
+@media (max-width: 760px) {
+  .msg-layout,
+  .msg-layout--thread {
+    grid-template-columns: minmax(0, 1fr);
+    height: calc(100vh - var(--pv-top) - 120px);
+  }
+  .msg-layout .msg-main,
+  .msg-layout--open .msg-list,
+  .msg-layout--thread .msg-main {
+    display: none;
+  }
+  .msg-layout--open .msg-main {
+    display: flex;
+  }
+  /* an open thread takes the screen; closing it shows the conversation again */
+  .msg-layout--open.msg-layout--thread .msg-main {
+    display: none;
+  }
+  .msg-layout--thread .msg-thread {
+    border-left: 0;
+  }
+  .msg-back {
+    display: block;
+  }
+  /* no hover on a phone: a tap on a message shows its actions */
+  .msg-actions {
+    position: static;
+    grid-column: 2;
+    width: max-content;
+    margin-top: 2px;
+    box-shadow: none;
+  }
+  .msg:hover .msg-actions {
+    display: none;
+  }
+  .msg:focus-within .msg-actions {
+    display: flex;
+  }
+  /* keyboard hints mean nothing on a phone */
+  .pv-app .pv-page-actions .pv-hint {
+    display: none;
+  }
+  .msg-head-actions .pv-btn span {
+    display: none;
+  }
+}

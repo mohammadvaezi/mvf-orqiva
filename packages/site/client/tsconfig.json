@@ -1,0 +1,13 @@
+{
+  "//": "[PCODE-443 | S15 | v0.1.0] the landing page's browser script: DOM types, bundled by build-client.mjs",
+  "extends": "../../../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "rootDir": ".",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "types": []
+  },
+  "include": ["*.ts"]
+}

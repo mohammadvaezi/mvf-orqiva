@@ -1,0 +1,90 @@
+{
+  "/contoso/Shop/_apis/git/repositories/shop-web/pullRequests/7/iterations": {
+    "value": [
+      {
+        "id": 1,
+        "description": "first push",
+        "sourceRefCommit": {
+          "commitId": "c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0"
+        },
+        "commonRefCommit": {
+          "commitId": "b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8"
+        }
+      },
+      {
+        "id": 2,
+        "description": "second push",
+        "sourceRefCommit": {
+          "commitId": "a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7"
+        },
+        "commonRefCommit": {
+          "commitId": "b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8"
+        }
+      }
+    ],
+    "count": 2
+  },
+  "/contoso/Shop/_apis/git/repositories/shop-web/pullRequests/7/iterations/2/changes": {
+    "changeEntries": [
+      {
+        "changeTrackingId": 1,
+        "changeId": 1,
+        "item": {
+          "objectId": "x",
+          "gitObjectType": "blob",
+          "path": "/src/cart.ts",
+          "url": "https://dev.azure.com/contoso/_apis/git/repositories/7f2d/items/src/cart.ts"
+        },
+        "changeType": "edit"
+      },
+      {
+        "changeTrackingId": 1,
+        "changeId": 1,
+        "item": {
+          "objectId": "x",
+          "gitObjectType": "blob",
+          "path": "/server/migrations/0007_cart.sql",
+          "url": "https://dev.azure.com/contoso/_apis/git/repositories/7f2d/items/server/migrations/0007_cart.sql"
+        },
+        "changeType": "add"
+      },
+      {
+        "changeTrackingId": 1,
+        "changeId": 1,
+        "item": {
+          "objectId": "x",
+          "gitObjectType": "blob",
+          "path": "/README.md",
+          "url": "https://dev.azure.com/contoso/_apis/git/repositories/7f2d/items/README.md"
+        },
+        "changeType": "edit"
+      },
+      {
+        "changeTrackingId": 1,
+        "changeId": 1,
+        "item": {
+          "objectId": "x",
+          "gitObjectType": "blob",
+          "path": "/assets/logo.png",
+          "url": "https://dev.azure.com/contoso/_apis/git/repositories/7f2d/items/assets/logo.png"
+        },
+        "changeType": "edit"
+      },
+      {
+        "changeTrackingId": 9,
+        "item": {
+          "gitObjectType": "tree",
+          "path": "/assets"
+        },
+        "changeType": "edit"
+      }
+    ]
+  },
+  "/contoso/Shop/_apis/git/repositories/shop-web/items?path=src/cart.ts&version=b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8": "export const items = [];\nexport function add(x) {\n  items.push(x);\n}\n",
+  "/contoso/Shop/_apis/git/repositories/shop-web/items?path=src/cart.ts&version=a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7": "export const items = [];\n// [SHOP-1 | S1 | v0.1.0] Cart keeps items between visits\nexport function add(x) {\n  items.push(x);\n  save(items);\n}\n",
+  "/contoso/Shop/_apis/git/repositories/shop-web/items?path=server/migrations/0007_cart.sql&version=a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7": "CREATE TABLE cart (id int);\n",
+  "/contoso/Shop/_apis/git/repositories/shop-web/items?path=README.md&version=b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8": "# Shop\n",
+  "/contoso/Shop/_apis/git/repositories/shop-web/items?path=README.md&version=a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7": "# Shop\n\nA cart.\n",
+  "/contoso/Shop/_apis/git/repositories/shop-web/items?path=assets/logo.png&version=b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8": "PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR",
+  "/contoso/Shop/_apis/git/repositories/shop-web/items?path=assets/logo.png&version=a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7": "PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR2"
+}

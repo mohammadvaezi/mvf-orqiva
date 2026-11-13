@@ -1,0 +1,18 @@
+{
+  "GET /contoso/Shop/_apis/git/repositories/shop-web/pullRequests/7": {
+    "pullRequestId": 7,
+    "status": "active",
+    "sourceRefName": "refs/heads/feature/cart",
+    "targetRefName": "refs/heads/main",
+    "mergeStatus": "succeeded",
+    "lastMergeSourceCommit": { "commitId": "a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7" }
+  },
+  "PATCH /contoso/Shop/_apis/git/repositories/shop-web/pullRequests/7": {
+    "pullRequestId": 7,
+    "status": "completed",
+    "mergeStatus": "succeeded",
+    "lastMergeCommit": { "commitId": "3c4d5e6f708192a3b4c5d6e7f8091a2b3c4d5e6f" },
+    "completionOptions": { "mergeStrategy": "squash", "deleteSourceBranch": false },
+    "closedDate": "2026-10-14T13:20:11.42Z"
+  }
+}

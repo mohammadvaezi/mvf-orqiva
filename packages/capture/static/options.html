@@ -1,0 +1,25 @@
+<!doctype html>
+<!-- [PCODE-320 | S15 | v0.1.0] T32.5b The bug-capture browser extension for Chrome and Firefox -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Orqiva bug capture: options</title>
+    <link rel="stylesheet" href="capture.css" />
+  </head>
+  <body class="page">
+    <h1>Orqiva bug capture</h1>
+    <p>
+      Bugs go to your own Orqiva server. Make a personal API token there (Settings → API tokens) and
+      paste it here; it stays in this browser.
+    </p>
+    <form id="form">
+      <label
+        >Server address <input id="server" placeholder="https://orqiva.example.com" required
+      /></label>
+      <label>Personal API token <input id="token" type="password" autocomplete="off" /></label>
+      <button type="submit">Connect</button>
+    </form>
+    <p id="status" role="status"></p>
+    <script src="options.js"></script>
+  </body>
+</html>

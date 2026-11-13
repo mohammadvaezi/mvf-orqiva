@@ -1,0 +1,21 @@
+{
+  "GET /projects/acme%2Fweb%2Fshop/merge_requests/7": {
+    "id": 284113,
+    "iid": 7,
+    "state": "opened",
+    "sha": "a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7",
+    "source_branch": "feature/cart",
+    "target_branch": "main",
+    "merge_status": "can_be_merged",
+    "detailed_merge_status": "mergeable",
+    "has_conflicts": false
+  },
+  "PUT /projects/acme%2Fweb%2Fshop/merge_requests/7/merge": {
+    "id": 284113,
+    "iid": 7,
+    "state": "merged",
+    "merge_commit_sha": "9f1a7c2b3d4e5f60718293a4b5c6d7e8f9012345",
+    "squash_commit_sha": "9f1a7c2b3d4e5f60718293a4b5c6d7e8f9012345",
+    "merged_at": "2026-10-14T13:20:11.000Z"
+  }
+}

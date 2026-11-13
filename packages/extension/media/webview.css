@@ -1,0 +1,1269 @@
+/* [PCODE-467 | S15 | v0.1.0] A project is planned for a client, and every task traces back to the client request it serves */
+/* [PCODE-462 | S15 | v0.1.0] Tasks run in plan order, finish by themselves, and show the same state in VS Code and the portal */
+/* [PCODE-461 | S15 | v0.1.0] Planning in VS Code shows what Claude writes right now: file and size live, failed tools as steps */
+/* [PCODE-458 | S15 | v0.1.0] VS Code extension updates itself from GitHub: CI publishes the build, Update button installs it */
+/* [PCODE-457 | S15 | v0.1.0] VS Code planning as a conversation: Claude asks, the user answers with text and files, then the plan; replan and description change work; Home tab explains itself */
+/* [PCODE-192 | S15 | v0.1.0] Rebrand ProdEngine and PlaneCode to Orqiva everywhere, with compatibility for existing installs */
+/* ── [PCODE-19 | S04 | v0.1.0] Add the webview host helper with CSP nonce, theme CSS and a typed message bridge ── */
+/*    Why:  the shared tokens and component classes from design-system.md - VS Code variables only, so every
+      theme (light, dark, high contrast) renders natively. */
+:root {
+  --pc-space-1: 4px;
+  --pc-space-2: 8px;
+  --pc-space-3: 12px;
+  --pc-space-4: 16px;
+  --pc-space-6: 24px;
+  --pc-space-8: 32px;
+  --pc-radius: 4px;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  color: var(--vscode-foreground);
+  background: var(--vscode-editor-background);
+  font-family: var(--vscode-font-family);
+  font-size: var(--vscode-font-size);
+  font-weight: var(--vscode-font-weight);
+  line-height: 1.4;
+}
+
+#app {
+  max-width: 720px;
+  padding: var(--pc-space-4);
+}
+p,
+li {
+  max-width: 72ch;
+}
+a {
+  color: var(--vscode-textLink-foreground);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--vscode-textLink-activeForeground);
+  text-decoration: underline;
+}
+code,
+.pc-mono {
+  font-family: var(--vscode-editor-font-family);
+  font-size: var(--vscode-editor-font-size);
+  color: var(--vscode-textPreformat-foreground);
+  background: var(--vscode-textCodeBlock-background);
+  padding: 0 3px;
+  border-radius: var(--pc-radius);
+}
+pre {
+  background: var(--vscode-textCodeBlock-background);
+  padding: var(--pc-space-2);
+  border-radius: var(--pc-radius);
+  overflow: auto;
+}
+pre code {
+  background: none;
+  padding: 0;
+}
+
+/* ── [PCODE-19 | S04 | v0.1.0] header + sections ── */
+.pc-header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--vscode-editor-background);
+  border-bottom: 1px solid var(--vscode-widget-border, var(--vscode-panel-border));
+  padding: var(--pc-space-3) 0;
+  margin-bottom: var(--pc-space-6);
+  display: flex;
+  align-items: center;
+  gap: var(--pc-space-3);
+  flex-wrap: wrap;
+}
+.pc-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  flex: 1 1 auto;
+}
+.pc-title .pc-mono {
+  font-size: 13px;
+  margin-right: var(--pc-space-2);
+}
+.pc-actions {
+  display: flex;
+  gap: var(--pc-space-2);
+  flex-wrap: wrap;
+}
+.pc-section {
+  margin-bottom: var(--pc-space-6);
+}
+.pc-section h2 {
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0 0 var(--pc-space-2) 0;
+}
+.pc-muted {
+  color: var(--vscode-descriptionForeground);
+}
+.pc-row {
+  display: flex;
+  gap: var(--pc-space-2);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* ── [PCODE-19 | S04 | v0.1.0] buttons ── */
+.pc-btn {
+  font: inherit;
+  line-height: 1.4;
+  padding: var(--pc-space-1) var(--pc-space-3);
+  border: 1px solid transparent;
+  border-radius: var(--pc-radius);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pc-space-1);
+  background: var(--vscode-button-secondaryBackground);
+  color: var(--vscode-button-secondaryForeground);
+}
+.pc-btn:hover {
+  background: var(--vscode-button-secondaryHoverBackground);
+}
+.pc-btn--primary {
+  background: var(--vscode-button-background);
+  color: var(--vscode-button-foreground);
+}
+.pc-btn--primary:hover {
+  background: var(--vscode-button-hoverBackground);
+}
+.pc-btn--danger {
+  color: var(--vscode-errorForeground);
+}
+.pc-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+.pc-btn:focus-visible {
+  outline: 1px solid var(--vscode-focusBorder);
+  outline-offset: 1px;
+}
+.pc-btn .codicon {
+  font-size: 14px;
+}
+
+/* ── [PCODE-19 | S04 | v0.1.0] inputs ── */
+.pc-field {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: var(--pc-space-2) var(--pc-space-3);
+  align-items: start;
+  margin-bottom: var(--pc-space-3);
+}
+.pc-field > label {
+  padding-top: 5px;
+  color: var(--vscode-descriptionForeground);
+}
+.pc-input,
+.pc-textarea,
+.pc-select {
+  font: inherit;
+  width: 100%;
+  box-sizing: border-box;
+  padding: var(--pc-space-1) var(--pc-space-2);
+  color: var(--vscode-input-foreground);
+  background: var(--vscode-input-background);
+  border: 1px solid var(--vscode-input-border, transparent);
+  border-radius: var(--pc-radius);
+}
+.pc-input::placeholder,
+.pc-textarea::placeholder {
+  color: var(--vscode-input-placeholderForeground);
+}
+.pc-input:focus,
+.pc-textarea:focus,
+.pc-select:focus {
+  outline: 1px solid var(--vscode-focusBorder);
+  border-color: var(--vscode-focusBorder);
+}
+.pc-textarea {
+  min-height: 96px;
+  resize: vertical;
+}
+.pc-input--error,
+.pc-textarea--error {
+  border-color: var(--vscode-inputValidation-errorBorder);
+}
+.pc-hint {
+  font-size: 12px;
+  color: var(--vscode-descriptionForeground);
+}
+.pc-hint--error {
+  color: var(--vscode-errorForeground);
+}
+@media (max-width: 480px) {
+  .pc-field {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── [PCODE-19 | S04 | v0.1.0] badges, lists, alerts, log ── */
+.pc-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pc-space-1);
+  padding: 1px var(--pc-space-2);
+  border-radius: 10px;
+  font-size: 12px;
+  background: var(--vscode-badge-background);
+  color: var(--vscode-badge-foreground);
+}
+.pc-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.pc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.pc-list li {
+  padding: var(--pc-space-1) 0;
+  border-bottom: 1px solid var(--vscode-widget-border, transparent);
+}
+.pc-list li:last-child {
+  border-bottom: 0;
+}
+.pc-check {
+  display: flex;
+  gap: var(--pc-space-2);
+  align-items: baseline;
+}
+.pc-check .codicon {
+  flex: none;
+}
+.pc-check--done {
+  color: var(--vscode-descriptionForeground);
+}
+.pc-alert {
+  border-left: 3px solid var(--vscode-inputValidation-errorBorder);
+  background: var(--vscode-inputValidation-errorBackground);
+  padding: var(--pc-space-2) var(--pc-space-3);
+  margin-bottom: var(--pc-space-4);
+  border-radius: var(--pc-radius);
+}
+.pc-alert--info {
+  border-left-color: var(--vscode-inputValidation-infoBorder);
+  background: var(--vscode-inputValidation-infoBackground);
+}
+.pc-comment {
+  padding: var(--pc-space-2) 0;
+  border-bottom: 1px solid var(--vscode-widget-border, transparent);
+}
+.pc-comment time {
+  color: var(--vscode-descriptionForeground);
+  font-size: 12px;
+  margin-right: var(--pc-space-2);
+}
+.pc-empty {
+  color: var(--vscode-descriptionForeground);
+}
+.pc-log {
+  font-family: var(--vscode-editor-font-family);
+  font-size: var(--vscode-editor-font-size);
+  white-space: pre-wrap;
+  background: var(--vscode-textCodeBlock-background);
+  padding: var(--pc-space-2);
+  border-radius: var(--pc-radius);
+  max-height: 320px;
+  overflow: auto;
+}
+.pc-file {
+  cursor: pointer;
+}
+.pc-file:hover {
+  text-decoration: underline;
+}
+
+@keyframes pc-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.codicon-loading {
+  animation: pc-spin 1s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .codicon-loading {
+    animation: none;
+  }
+}
+
+/* ── [PCODE-31 | S06 | v0.1.0] plan panel: step headings with a status icon ── */
+.pc-step h2 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.pc-step h2 .codicon-pass-filled {
+  color: var(--vscode-testing-iconPassed);
+}
+.pc-step h2 .codicon-warning {
+  color: var(--vscode-editorWarning-foreground);
+}
+.pc-step .pc-list .codicon-error {
+  color: var(--vscode-errorForeground);
+}
+
+/* ── [PCODE-46 | S09 | v0.1.0] version panel: the current version, large ── */
+.pc-version {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.pc-version__number {
+  font-size: 2.2em;
+  font-weight: 600;
+  font-family: var(--vscode-editor-font-family);
+}
+
+/* ── [PCODE-51 | S10 | v0.1.0] docker panel: the log view ── */
+.pc-log--tall {
+  max-height: 400px;
+  overflow: auto;
+  white-space: pre-wrap;
+}
+
+/* ── [PCODE-60 | S12 | v0.1.0] security checklist: real checkboxes, no bullets ── */
+.pc-list--plain {
+  list-style: none;
+  padding-left: 0;
+}
+.pc-list--plain .pc-check {
+  align-items: flex-start;
+}
+.pc-list--plain input[type='checkbox'] {
+  margin-right: 6px;
+}
+
+/* ── [PCODE-65 | S13 | v0.1.0] dashboard: one table, numbers right-aligned ── */
+.pc-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+.pc-table th,
+.pc-table td {
+  text-align: left;
+  padding: 6px 10px 6px 0;
+  border-bottom: 1px solid var(--vscode-widget-border, rgba(128, 128, 128, 0.35));
+  vertical-align: top;
+}
+.pc-table th {
+  font-weight: 600;
+  color: var(--vscode-descriptionForeground);
+  white-space: nowrap;
+}
+.pc-table .pc-num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  width: 5em;
+}
+.pc-btn--small {
+  padding: 2px 8px;
+  font-size: 0.9em;
+}
+
+/* ── [PCODE-66 | S13 | v0.1.0] security checks: a button and its last result on one line ── */
+.pc-check-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 6px 0;
+  flex-wrap: wrap;
+}
+
+/* ── [PCODE-78 | S08 | v0.1.0] Add the Orqiva Home tab: guided setup steps and a visual task board ── */
+/*    Why:  the Home tab is wider than a form and made of big targets: steps, tiles, columns, cards. Theme
+      variables only, as everywhere else. */
+#app.pc-home {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.pc-home__header {
+  margin-bottom: var(--pc-space-4);
+}
+.pc-home__project {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pc-space-1);
+  color: var(--vscode-descriptionForeground);
+}
+.pc-btn--big {
+  padding: var(--pc-space-2) var(--pc-space-4);
+  font-size: 14px;
+}
+
+/* ── [PCODE-78 | S08 | v0.1.0] stepper ── */
+.pc-stepper {
+  list-style: none;
+  display: flex;
+  gap: var(--pc-space-2);
+  padding: 0;
+  margin: 0 0 var(--pc-space-6);
+  flex-wrap: wrap;
+}
+.pc-stepper__step {
+  flex: 1 1 140px;
+  display: flex;
+  align-items: center;
+  gap: var(--pc-space-2);
+  padding: var(--pc-space-2) var(--pc-space-3);
+  border-radius: var(--pc-radius);
+  border: 1px solid var(--vscode-widget-border, var(--vscode-panel-border));
+  color: var(--vscode-descriptionForeground);
+  max-width: none;
+}
+.pc-stepper__step--current {
+  border-color: var(--vscode-focusBorder);
+  color: var(--vscode-foreground);
+  background: var(--vscode-list-hoverBackground);
+}
+.pc-stepper__step--done {
+  color: var(--vscode-foreground);
+}
+/* [PCODE-454 | S15 | v0.1.0] finished steps open again; the one on screen is marked */
+.pc-stepper__step--link {
+  cursor: pointer;
+}
+.pc-stepper__step--link:hover,
+.pc-stepper__step--link:focus-visible {
+  background: var(--vscode-list-hoverBackground);
+  outline: none;
+  border-color: var(--vscode-focusBorder);
+}
+.pc-stepper__step--open {
+  border-color: var(--vscode-focusBorder);
+  box-shadow: inset 0 -2px 0 var(--vscode-focusBorder);
+}
+.pc-home__project {
+  background: none;
+  border: 1px solid transparent;
+  border-radius: var(--pc-radius);
+  padding: 2px var(--pc-space-2);
+  font: inherit;
+  cursor: pointer;
+}
+.pc-home__project:hover,
+.pc-home__project:focus-visible {
+  border-color: var(--vscode-focusBorder);
+  color: var(--vscode-foreground);
+  outline: none;
+}
+.pc-facts {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: var(--pc-space-1) var(--pc-space-4);
+  margin: 0 auto var(--pc-space-4);
+  text-align: left;
+  max-width: 560px;
+}
+.pc-facts dt {
+  color: var(--vscode-descriptionForeground);
+}
+.pc-facts dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.pc-stepper__dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  font-size: 12px;
+  flex: none;
+}
+.pc-stepper__step--done .pc-stepper__dot {
+  background: var(--vscode-testing-iconPassed, var(--vscode-charts-green));
+  border-color: transparent;
+  color: var(--vscode-editor-background);
+}
+.pc-stepper__step--current .pc-stepper__dot {
+  background: var(--vscode-button-background);
+  border-color: transparent;
+  color: var(--vscode-button-foreground);
+}
+.pc-stepper__label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pc-space-1);
+}
+
+/* ── [PCODE-78 | S08 | v0.1.0] hero: one step, one message, one obvious button ── */
+.pc-hero {
+  text-align: center;
+  padding: var(--pc-space-8) var(--pc-space-4);
+  border: 1px solid var(--vscode-widget-border, var(--vscode-panel-border));
+  border-radius: 8px;
+  margin-bottom: var(--pc-space-6);
+}
+.pc-hero__icon .codicon {
+  font-size: 40px;
+  color: var(--vscode-button-background);
+}
+.pc-hero__title {
+  font-size: 20px;
+  margin: var(--pc-space-3) 0 var(--pc-space-2);
+}
+.pc-hero__text {
+  margin: 0 auto var(--pc-space-6);
+  color: var(--vscode-descriptionForeground);
+  max-width: 60ch;
+}
+.pc-hero__actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--pc-space-3);
+  flex-wrap: wrap;
+}
+.pc-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--pc-space-4);
+  max-width: 640px;
+  margin: 0 auto;
+}
+.pc-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--pc-space-2);
+  padding: var(--pc-space-6) var(--pc-space-4);
+  border-radius: 8px;
+  border: 1px solid var(--vscode-widget-border, var(--vscode-panel-border));
+  background: var(--vscode-editorWidget-background);
+  color: var(--vscode-foreground);
+  font: inherit;
+  cursor: pointer;
+}
+.pc-tile:hover:not(:disabled),
+.pc-tile:focus-visible {
+  border-color: var(--vscode-focusBorder);
+  outline: none;
+}
+.pc-tile__icon .codicon {
+  font-size: 28px;
+  color: var(--vscode-button-background);
+}
+.pc-tile__title {
+  font-weight: 600;
+  font-size: 14px;
+}
+.pc-tile__text {
+  color: var(--vscode-descriptionForeground);
+}
+
+/* ── [PCODE-78 | S08 | v0.1.0] board ── */
+.pc-toolbar {
+  display: flex;
+  gap: var(--pc-space-2);
+  flex-wrap: wrap;
+  margin-bottom: var(--pc-space-4);
+}
+.pc-chips {
+  display: flex;
+  gap: var(--pc-space-2);
+  flex-wrap: wrap;
+  margin-bottom: var(--pc-space-2);
+}
+.pc-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pc-space-1);
+  padding: 2px var(--pc-space-3);
+  border-radius: 999px;
+  border: 1px solid var(--vscode-widget-border, var(--vscode-panel-border));
+  background: transparent;
+  color: var(--vscode-foreground);
+  font: inherit;
+  cursor: pointer;
+}
+.pc-chip--on {
+  background: var(--vscode-button-background);
+  color: var(--vscode-button-foreground);
+  border-color: transparent;
+}
+.pc-sprint-title {
+  font-size: 14px;
+  margin: var(--pc-space-2) 0 var(--pc-space-3);
+  color: var(--vscode-descriptionForeground);
+}
+.pc-board {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(200px, 1fr));
+  gap: var(--pc-space-3);
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .pc-board {
+    grid-template-columns: repeat(2, minmax(180px, 1fr));
+  }
+}
+.pc-column {
+  background: var(--vscode-sideBar-background, var(--vscode-editorWidget-background));
+  border-radius: 8px;
+  padding: var(--pc-space-2);
+  min-height: 120px;
+}
+.pc-column__title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: var(--pc-space-1) var(--pc-space-1) var(--pc-space-2);
+  color: var(--vscode-descriptionForeground);
+}
+.pc-column__count {
+  border-radius: 999px;
+  padding: 0 6px;
+  background: var(--vscode-badge-background);
+  color: var(--vscode-badge-foreground);
+}
+.pc-column__cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pc-space-2);
+}
+.pc-column__empty {
+  text-align: center;
+  margin: var(--pc-space-4) 0;
+}
+.pc-card {
+  background: var(--vscode-editor-background);
+  border: 1px solid var(--vscode-widget-border, var(--vscode-panel-border));
+  border-radius: 6px;
+  padding: var(--pc-space-2) var(--pc-space-3);
+}
+.pc-card--active {
+  border-color: var(--vscode-focusBorder);
+  box-shadow: 0 0 0 1px var(--vscode-focusBorder);
+}
+.pc-card--blocked {
+  border-left: 3px solid var(--vscode-editorWarning-foreground);
+}
+.pc-card__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--pc-space-2);
+  font-size: 11px;
+  color: var(--vscode-descriptionForeground);
+  flex-wrap: wrap;
+}
+.pc-card__title {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: var(--pc-space-1) 0 var(--pc-space-2);
+  color: var(--vscode-foreground);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.pc-card__title:hover {
+  color: var(--vscode-textLink-foreground);
+}
+.pc-card__actions {
+  display: flex;
+  gap: var(--pc-space-1);
+  flex-wrap: wrap;
+}
+.pc-badge--warn {
+  background: var(--vscode-editorWarning-foreground);
+  color: var(--vscode-editor-background);
+}
+.pc-prio {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--vscode-disabledForeground);
+}
+.pc-prio--urgent {
+  background: var(--vscode-errorForeground);
+}
+.pc-prio--high {
+  background: var(--vscode-editorWarning-foreground);
+}
+.pc-prio--medium {
+  background: var(--vscode-charts-blue);
+}
+
+/* ── [PCODE-79 | S08 | v0.1.0] Add the New project wizard: describe the idea, draft, review and publish the plan visually ── */
+.pc-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pc-space-4);
+  max-width: 420px;
+  margin: 0 auto var(--pc-space-6);
+  text-align: left;
+}
+.pc-field__label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: var(--pc-space-1);
+}
+.pc-form .pc-input {
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 14px;
+  padding: var(--pc-space-2);
+}
+.pc-form .pc-input--short {
+  width: 12ch;
+  letter-spacing: 0.1em;
+}
+.pc-textarea--big {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 240px;
+  font-size: 14px;
+  padding: var(--pc-space-3);
+  margin: var(--pc-space-3) 0;
+}
+.pc-hero__actions--end {
+  justify-content: flex-end;
+}
+.pc-stepper--small .pc-stepper__step {
+  flex-basis: 120px;
+  font-size: 12px;
+  padding: var(--pc-space-1) var(--pc-space-2);
+}
+.pc-plan {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--pc-space-3);
+  align-items: start;
+}
+.pc-plan__goal {
+  margin: 0 var(--pc-space-1) var(--pc-space-2);
+  font-size: 12px;
+}
+.pc-card__text {
+  padding-top: var(--pc-space-1);
+  font-weight: 600;
+}
+.pc-form .pc-field {
+  display: block;
+  margin: 0;
+}
+.pc-form .pc-hint {
+  display: block;
+  margin-top: var(--pc-space-1);
+}
+
+/* [PCODE-193 | S15 | v0.1.0] a comment the client reads too */
+.pc-comment .pc-badge {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 0 6px;
+  border-radius: 8px;
+  font-size: 0.85em;
+  background: var(--vscode-badge-background);
+  color: var(--vscode-badge-foreground);
+}
+
+/* ── [PCODE-194 | S15 | v0.1.0] a criterion's tests in the task panel ── */
+.pc-test {
+  margin-left: var(--pc-space-2);
+  padding: 0 6px;
+  border-radius: 8px;
+  font-size: 0.85em;
+  border: 1px solid var(--vscode-panel-border);
+  color: var(--vscode-descriptionForeground);
+}
+.pc-test--passing {
+  color: var(--vscode-testing-iconPassed);
+  border-color: var(--vscode-testing-iconPassed);
+}
+.pc-test--failing {
+  color: var(--vscode-testing-iconFailed);
+  border-color: var(--vscode-testing-iconFailed);
+}
+
+/* ── [PCODE-236 | S15 | v0.1.0] T23.3 Messages for clients, in VS Code and in the CLI ── */
+.pc-chat-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--vscode-panel-border);
+}
+.pc-chat-head h1 {
+  margin: 0;
+  font-size: 1.15em;
+}
+.pc-chat-head p {
+  margin: 2px 0 0;
+}
+.pc-chat-cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+}
+.pc-chat-cols--thread {
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 40%);
+}
+.pc-chat-thread {
+  padding-left: 12px;
+  border-left: 1px solid var(--vscode-panel-border);
+}
+.pc-chat-thread-head {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+}
+.pc-chat-list {
+  max-height: calc(100vh - 210px);
+  overflow-y: auto;
+}
+.pc-chat-day {
+  margin: 12px 0 4px;
+  color: var(--vscode-descriptionForeground);
+  font-size: 0.85em;
+  text-align: center;
+}
+.pc-chat-msg {
+  padding: 6px 4px 2px;
+  border-radius: 4px;
+}
+.pc-chat-msg--compact {
+  padding-top: 0;
+}
+.pc-chat-msg:hover {
+  background: var(--vscode-list-hoverBackground);
+}
+.pc-chat-meta {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+}
+.pc-chat-body {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  line-height: 1.45;
+}
+.pc-chat-mention {
+  padding: 0 2px;
+  border-radius: 3px;
+  background: var(--vscode-badge-background);
+  color: var(--vscode-badge-foreground);
+}
+.pc-chat-mention--me {
+  background: var(--vscode-editorWarning-foreground);
+  color: var(--vscode-editor-background);
+}
+.pc-chat-ref,
+.pc-chat-reply {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--vscode-textLink-foreground);
+  font: inherit;
+  cursor: pointer;
+}
+.pc-chat-ref:hover {
+  text-decoration: underline;
+}
+.pc-chat-url {
+  color: var(--vscode-textLink-foreground);
+}
+.pc-chat-files,
+.pc-chat-reactions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 3px;
+}
+.pc-chat-task {
+  color: var(--vscode-testing-iconPassed);
+  font-size: 0.9em;
+}
+.pc-chat-reaction,
+.pc-chat-add,
+.pc-chat-picker button {
+  padding: 0 7px;
+  border: 1px solid var(--vscode-panel-border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--vscode-foreground);
+  font: inherit;
+  font-size: 0.9em;
+  cursor: pointer;
+}
+.pc-chat-reaction--mine {
+  border-color: var(--vscode-focusBorder);
+  background: var(--vscode-list-activeSelectionBackground);
+  color: var(--vscode-list-activeSelectionForeground);
+}
+.pc-chat-picker {
+  display: inline-flex;
+  gap: 2px;
+}
+.pc-chat-composer {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+}
+.pc-chat-composer textarea {
+  flex: 1;
+  resize: vertical;
+}
+.pc-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--vscode-textLink-foreground);
+  font: inherit;
+  cursor: pointer;
+}
+.pc-link:hover {
+  text-decoration: underline;
+}
+
+/* ── [PCODE-457 | S15 | v0.1.0] setup done: one quiet line of links, not a second row of boxes ── */
+.pc-setup {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--pc-space-1) var(--pc-space-4);
+  margin: 0 0 var(--pc-space-4);
+  font-size: 12px;
+  color: var(--vscode-descriptionForeground);
+}
+.pc-setup__label {
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+.pc-setup__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pc-space-1);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--vscode-descriptionForeground);
+  font: inherit;
+  cursor: pointer;
+}
+.pc-setup__item .codicon {
+  color: var(--vscode-testing-iconPassed, var(--vscode-charts-green));
+}
+.pc-setup__item:hover,
+.pc-setup__item:focus-visible,
+.pc-setup__item--open {
+  color: var(--vscode-textLink-foreground);
+  text-decoration: underline;
+  outline: none;
+}
+
+/* ── [PCODE-457 | S15 | v0.1.0] planning progress: a track with labels; nothing on it looks clickable ── */
+.pc-planhead {
+  margin-bottom: var(--pc-space-4);
+}
+.pc-planhead__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--pc-space-3);
+}
+.pc-planhead__title {
+  font-size: 16px;
+  margin: 0 0 var(--pc-space-3);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pc-space-2);
+}
+.pc-planhead__help {
+  margin: var(--pc-space-3) 0 0;
+  color: var(--vscode-descriptionForeground);
+}
+.pc-track {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  cursor: default;
+}
+.pc-track__step {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--pc-space-1);
+  position: relative;
+  text-align: center;
+  font-size: 12px;
+  color: var(--vscode-descriptionForeground);
+}
+/* the line between two dots */
+.pc-track__step + .pc-track__step::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  right: 50%;
+  width: 100%;
+  height: 2px;
+  background: var(--vscode-widget-border, var(--vscode-panel-border));
+  z-index: 0;
+}
+.pc-track__step--done + .pc-track__step::before {
+  background: var(--vscode-testing-iconPassed, var(--vscode-charts-green));
+}
+.pc-track__dot {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--vscode-widget-border, var(--vscode-panel-border));
+  background: var(--vscode-editor-background);
+  font-size: 11px;
+}
+.pc-track__step--done .pc-track__dot {
+  background: var(--vscode-testing-iconPassed, var(--vscode-charts-green));
+  border-color: transparent;
+  color: var(--vscode-editor-background);
+}
+.pc-track__step--current {
+  color: var(--vscode-foreground);
+  font-weight: 600;
+}
+.pc-track__step--current .pc-track__dot {
+  background: var(--vscode-button-background);
+  border-color: transparent;
+  color: var(--vscode-button-foreground);
+}
+
+/* ── [PCODE-457 | S15 | v0.1.0] Claude's questions and the answers ── */
+.pc-talk {
+  max-width: 760px;
+  margin: 0 auto var(--pc-space-6);
+}
+.pc-understanding {
+  border-left: 3px solid var(--vscode-textLink-foreground);
+  background: var(--vscode-textBlockQuote-background, var(--vscode-editorWidget-background));
+  padding: var(--pc-space-2) var(--pc-space-3);
+  margin: var(--pc-space-3) auto var(--pc-space-4);
+  max-width: 760px;
+  border-radius: 0 var(--pc-radius) var(--pc-radius) 0;
+  text-align: left;
+}
+.pc-understanding__title {
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: var(--pc-space-1);
+}
+.pc-understanding p {
+  margin: var(--pc-space-1) 0 0;
+  white-space: pre-wrap;
+}
+.pc-question {
+  border: 1px solid var(--vscode-widget-border, var(--vscode-panel-border));
+  border-radius: 8px;
+  padding: var(--pc-space-3);
+  margin-bottom: var(--pc-space-3);
+  background: var(--vscode-editorWidget-background);
+  display: flex;
+  flex-direction: column;
+  gap: var(--pc-space-2);
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.pc-question--more {
+  background: transparent;
+  border-style: dashed;
+}
+.pc-question__head {
+  display: flex;
+  gap: var(--pc-space-2);
+  align-items: flex-start;
+}
+.pc-question__num {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--vscode-badge-background);
+  color: var(--vscode-badge-foreground);
+  font-size: 12px;
+}
+.pc-question__text {
+  margin: 0;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.pc-question__why {
+  margin: 0;
+  color: var(--vscode-descriptionForeground);
+  font-size: 12px;
+}
+.pc-question .pc-chips {
+  margin: 0;
+}
+.pc-question .pc-textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+.pc-attach {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--pc-space-2);
+}
+.pc-file {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pc-space-1);
+  padding: 1px var(--pc-space-1) 1px var(--pc-space-2);
+  border-radius: 999px;
+  background: var(--vscode-badge-background);
+  color: var(--vscode-badge-foreground);
+  font-size: 12px;
+}
+.pc-file__remove {
+  border: 0;
+  background: none;
+  color: inherit;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+}
+.pc-earlier {
+  max-width: 760px;
+  margin: var(--pc-space-4) auto;
+  text-align: left;
+}
+.pc-earlier summary {
+  cursor: pointer;
+  color: var(--vscode-textLink-foreground);
+}
+.pc-qa dt {
+  font-weight: 600;
+  margin-top: var(--pc-space-2);
+}
+.pc-qa dd {
+  margin: var(--pc-space-1) 0 0 var(--pc-space-4);
+  color: var(--vscode-descriptionForeground);
+  white-space: pre-wrap;
+}
+/* what Claude is doing right now */
+.pc-steps {
+  list-style: none;
+  padding: 0;
+  margin: var(--pc-space-3) auto var(--pc-space-4);
+  max-width: 560px;
+  text-align: left;
+  font-family: var(--vscode-editor-font-family);
+  font-size: 12px;
+  color: var(--vscode-descriptionForeground);
+}
+.pc-steps li {
+  display: flex;
+  align-items: center;
+  gap: var(--pc-space-1);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.pc-steps li:last-child {
+  color: var(--vscode-foreground);
+}
+/* [PCODE-457 | S15 | v0.1.0] the help line runs the full width; a hero's notes stay centred */
+.pc-planhead__help,
+.pc-steps li {
+  max-width: none;
+}
+.pc-hero > p {
+  margin-left: auto;
+  margin-right: auto;
+}
+/* [PCODE-458 | S15 | v0.1.0] the Update button in the header: quiet, after the project */
+.pc-home__update {
+  margin-left: var(--pc-space-2);
+  background: none;
+  border: 1px solid var(--vscode-widget-border, var(--vscode-panel-border));
+  border-radius: var(--pc-radius);
+  padding: 2px var(--pc-space-2);
+  color: var(--vscode-descriptionForeground);
+  font: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pc-space-1);
+}
+.pc-home__update:hover,
+.pc-home__update:focus-visible {
+  color: var(--vscode-foreground);
+  border-color: var(--vscode-focusBorder);
+  outline: none;
+}
+/* [PCODE-461 | S15 | v0.1.0] the step in progress, under the finished ones */
+.pc-steps li.pc-steps__now {
+  color: var(--vscode-textLink-foreground);
+}
+/* [PCODE-462 | S15 | v0.1.0] a task waiting for the ones before it: a note, not a button */
+.pc-card__waits {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pc-space-1);
+  font-size: 12px;
+  color: var(--vscode-descriptionForeground);
+  font-style: italic;
+}
+/* [PCODE-467 | S15 | v0.1.0] for which client: above the description, and on the board until it is chosen */
+.pc-bind {
+  border: 1px solid var(--vscode-widget-border, var(--vscode-panel-border));
+  border-radius: 8px;
+  padding: var(--pc-space-3);
+  margin: var(--pc-space-3) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--pc-space-2);
+}
+.pc-bind__title {
+  margin: 0;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: var(--pc-space-1);
+}
+.pc-bind p {
+  margin: 0;
+}
+.pc-bind__label {
+  font-weight: 600;
+}
+.pc-bind__request {
+  display: flex;
+  align-items: center;
+  gap: var(--pc-space-2);
+}

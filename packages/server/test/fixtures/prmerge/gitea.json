@@ -1,0 +1,12 @@
+{
+  "GET /repos/acme/shop/pulls/7": {
+    "id": 412,
+    "number": 7,
+    "state": "open",
+    "head": { "ref": "feature/cart", "sha": "a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7" },
+    "base": { "ref": "main" },
+    "mergeable": true,
+    "merged": false
+  },
+  "POST /repos/acme/shop/pulls/7/merge": null
+}
